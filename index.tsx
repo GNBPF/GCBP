@@ -10,14 +10,14 @@ if (!rootElement) {
 }
 
 try {
-  const root = ReactDOM.createRoot(rootElement);
-  root.render(
-    <React.StrictMode>
+const root = ReactDOM.createRoot(rootElement);
+root.render(
+  <React.StrictMode>
       <ErrorBoundary>
-        <App />
+    <App />
       </ErrorBoundary>
-    </React.StrictMode>
-  );
+  </React.StrictMode>
+);
 } catch (error) {
   console.error('Error rendering app:', error);
   rootElement.innerHTML = '<div style="padding: 20px; color: red;">Error loading application. Please check the console.</div>';

@@ -1,4 +1,5 @@
 import React, { useLayoutEffect, useRef, useState } from 'react';
+import { Link } from 'react-router-dom';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ChevronDown, Play, ArrowLeft, ArrowRight } from 'lucide-react';
@@ -291,43 +292,43 @@ export const Media: React.FC = () => {
   return (
     <div ref={rootRef} className="relative">
       {/* Hero Section */}
-      <section className="hero-section relative bg-gradient-to-b from-gcbp-primary to-white pt-32 pb-20 overflow-hidden">
+      <section className="hero-section relative bg-gradient-to-b from-gcbp-primary to-white pt-20 mobile-small:pt-24 xs:pt-28 sm:pt-32 md:pt-36 pb-12 mobile-small:pb-16 xs:pb-18 sm:pb-20 overflow-hidden">
         <div className="hero-gradient absolute inset-0 bg-gradient-to-b from-gcbp-primary via-blue-600 to-white opacity-100"></div>
-        <div className="relative z-10 max-w-4xl mx-auto px-6 text-center">
-          <h1 className="hero-title text-6xl md:text-7xl font-bold text-slate-900 mb-6">
+        <div className="relative z-10 max-w-4xl mx-auto px-4 mobile-small:px-5 xs:px-6 sm:px-8 md:px-10 text-center">
+          <h1 className="hero-title text-[clamp(2rem,6vw,3.5rem)] mobile-small:text-[clamp(2.5rem,7vw,4rem)] xs:text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold text-slate-900 mb-4 mobile-small:mb-5 xs:mb-6 sm:mb-8">
             Media & Events
           </h1>
-          <p className="hero-subtitle text-xl md:text-2xl text-slate-700 leading-relaxed">
+          <p className="hero-subtitle text-[clamp(0.875rem,2.5vw,1.125rem)] mobile-small:text-base xs:text-lg sm:text-xl md:text-2xl lg:text-3xl text-slate-700 leading-relaxed px-2">
             A global collective making community partners and programs for a sustainable future.
           </p>
         </div>
       </section>
 
       {/* Blogs & Insights Section */}
-      <section className="blogs-section py-24 px-6 md:px-12">
+      <section className="blogs-section min-h-screen flex flex-col justify-center py-8 mobile-small:py-10 xs:py-12 sm:py-14 md:py-16 lg:py-20 xl:py-24 px-4 mobile-small:px-5 xs:px-6 sm:px-8 md:px-12 lg:px-16">
         <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5 mobile-small:gap-6 xs:gap-7 sm:gap-8 md:gap-10">
             {blogPosts.map((post) => (
               <div
                 key={post.id}
                 className="blog-card group cursor-pointer"
               >
-                <div className="overflow-hidden rounded-lg mb-4 shadow-sm group-hover:shadow-lg transition-shadow duration-300">
+                <div className="overflow-hidden rounded-lg mb-3 mobile-small:mb-4 shadow-sm group-hover:shadow-lg transition-shadow duration-300">
                   <img
                     src={post.image}
                     alt={post.title}
-                    className="w-full h-64 object-cover group-hover:scale-104 transition-transform duration-500"
+                    className="w-full h-[180px] mobile-small:h-[200px] xs:h-[240px] sm:h-64 md:h-[280px] lg:h-[300px] object-cover group-hover:scale-104 transition-transform duration-500"
                     loading="lazy"
                   />
                   <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-all duration-500"></div>
                 </div>
-                <div className="text-xs uppercase tracking-wider text-slate-500 mb-2">
+                <div className="text-[10px] mobile-small:text-xs xs:text-sm uppercase tracking-wider text-slate-500 mb-2 mobile-small:mb-2.5">
                   {post.date} • {post.category}
                 </div>
-                <h3 className="text-xl font-bold text-slate-900 mb-3 group-hover:text-gcbp-primary transition-colors">
+                <h3 className="text-base mobile-small:text-lg xs:text-xl sm:text-2xl font-bold text-slate-900 mb-2 mobile-small:mb-3 group-hover:text-gcbp-primary transition-colors">
                   {post.title}
                 </h3>
-                <p className="text-slate-600 leading-relaxed">
+                <p className="text-[12px] mobile-small:text-sm xs:text-base sm:text-lg text-slate-600 leading-relaxed">
                   {post.description}
                 </p>
               </div>
@@ -337,17 +338,17 @@ export const Media: React.FC = () => {
       </section>
 
       {/* Volunteer Opportunities Section */}
-      <section className="volunteer-section py-24 px-6 md:px-12">
-        <div className="max-w-6xl mx-auto">
-          <div className="section-divider h-[1px] bg-slate-300 mb-12"></div>
-          <h2 className="volunteer-heading text-3xl md:text-4xl font-bold text-center text-slate-900 mb-6">
+      <section className="volunteer-section min-h-screen flex flex-col justify-center py-8 mobile-small:py-10 xs:py-12 sm:py-14 md:py-16 lg:py-20 xl:py-24 px-4 mobile-small:px-5 xs:px-6 sm:px-8 md:px-12 lg:px-16">
+        <div className="max-w-6xl mx-auto w-full">
+          <div className="section-divider h-[1px] bg-slate-300 mb-6 mobile-small:mb-8 xs:mb-10 sm:mb-12"></div>
+          <h2 className="volunteer-heading text-[clamp(1.5rem,4vw,2.25rem)] mobile-small:text-2xl xs:text-3xl sm:text-4xl md:text-5xl font-bold text-center text-slate-900 mb-3 mobile-small:mb-4 xs:mb-5 sm:mb-6">
             VOLUNTEER OPPORTUNITIES
           </h2>
-          <p className="text-center text-slate-700 text-lg mb-12 max-w-3xl mx-auto">
+          <p className="text-center text-slate-700 text-[13px] mobile-small:text-sm xs:text-base sm:text-lg md:text-xl mb-6 mobile-small:mb-8 xs:mb-10 sm:mb-12 max-w-3xl mx-auto px-4">
             Volunteering means becoming part of a community making a real-world change. Join us in creating sustainable solutions that impact lives across the globe.
           </p>
           
-          <div className="volunteer-video-container relative h-[500px] rounded-lg overflow-hidden shadow-2xl group cursor-pointer">
+          <div className="volunteer-video-container relative h-[280px] mobile-small:h-[320px] xs:h-[380px] sm:h-[450px] md:h-[500px] lg:h-[550px] xl:h-[600px] rounded-lg overflow-hidden shadow-2xl group cursor-pointer">
             <video
               className="volunteer-video w-full h-full object-cover"
               loop
@@ -360,9 +361,9 @@ export const Media: React.FC = () => {
             <div className="absolute inset-0 bg-black/20 group-hover:bg-black/30 transition-all duration-300 flex items-center justify-center">
               <button
                 onClick={() => setIsVideoPlaying(!isVideoPlaying)}
-                className="w-20 h-20 rounded-full bg-white/90 flex items-center justify-center shadow-xl hover:scale-110 transition-transform"
+                className="w-14 mobile-small:w-16 xs:w-18 sm:w-20 md:w-24 h-14 mobile-small:h-16 xs:h-18 sm:h-20 md:h-24 rounded-full bg-white/90 flex items-center justify-center shadow-xl hover:scale-110 transition-transform active:scale-95"
               >
-                <Play className="w-10 h-10 text-gcbp-primary ml-1" fill="currentColor" />
+                <Play className="w-6 mobile-small:w-7 xs:w-8 sm:w-10 md:w-12 h-6 mobile-small:h-7 xs:h-8 sm:h-10 md:h-12 text-gcbp-primary ml-0.5 mobile-small:ml-1" fill="currentColor" />
               </button>
             </div>
           </div>
@@ -370,30 +371,30 @@ export const Media: React.FC = () => {
       </section>
 
       {/* Donations & Support Section */}
-      <section className="donation-section py-24 px-6 md:px-12 bg-slate-50">
+      <section className="donation-section min-h-screen flex flex-col justify-center py-8 mobile-small:py-10 xs:py-12 sm:py-14 md:py-16 lg:py-20 xl:py-24 px-4 mobile-small:px-5 xs:px-6 sm:px-8 md:px-12 lg:px-16 bg-slate-50">
         <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-[60%_40%] gap-12 items-center">
-            <div className="donation-image">
+          <div className="grid grid-cols-1 md:grid-cols-[60%_40%] gap-8 mobile-small:gap-10 xs:gap-12 sm:gap-14 items-center">
+            <div className="donation-image order-2 md:order-1">
               <img
                 src="https://images.unsplash.com/photo-1532629345422-7515f3d16bb6?auto=format&fit=crop&w=800&q=80"
                 alt="Donations"
-                className="w-full h-[500px] object-cover rounded-lg shadow-xl"
+                className="w-full h-[300px] mobile-small:h-[350px] xs:h-[400px] sm:h-[450px] md:h-[500px] lg:h-[550px] object-cover rounded-lg shadow-xl"
                 loading="lazy"
               />
             </div>
-            <div className="donation-content">
-              <h2 className="text-4xl font-bold text-gcbp-primary mb-6">DONATIONS</h2>
-              <p className="text-lg text-slate-700 leading-relaxed mb-8">
+            <div className="donation-content order-1 md:order-2">
+              <h2 className="text-[clamp(1.75rem,4.5vw,2.5rem)] mobile-small:text-3xl xs:text-4xl sm:text-5xl font-bold text-gcbp-primary mb-4 mobile-small:mb-5 xs:mb-6 sm:mb-8">DONATIONS</h2>
+              <p className="text-[13px] mobile-small:text-sm xs:text-base sm:text-lg md:text-xl text-slate-700 leading-relaxed mb-6 mobile-small:mb-7 xs:mb-8 sm:mb-10">
                 Your contributions directly support communities in need. Every donation helps us expand our programs and reach more people with sustainable solutions.
               </p>
-              <div className="flex items-center gap-6 mb-8">
-                <button className="bg-gcbp-primary text-white px-8 py-3 rounded-full font-bold hover:bg-blue-800 transition-all hover:-translate-y-1 shadow-lg">
+              <div className="flex flex-col xs:flex-row items-start xs:items-center gap-4 mobile-small:gap-5 xs:gap-6 sm:gap-8 mb-6 mobile-small:mb-7 xs:mb-8">
+                <Link to="/contact" className="bg-gcbp-primary text-white px-6 mobile-small:px-7 xs:px-8 py-2.5 mobile-small:py-3 text-sm mobile-small:text-base xs:text-lg font-bold hover:bg-blue-800 transition-all hover:-translate-y-1 shadow-lg active:scale-95 w-full xs:w-auto inline-block text-center rounded-full">
                   Donate
-                </button>
+                </Link>
                 <div className="text-center">
-                  <p className="text-xs font-bold text-slate-700 mb-2">SUPPORT GCBP</p>
-                  <div className="w-32 h-32 bg-white p-2 rounded-lg shadow-lg">
-                    <div className="w-full h-full bg-slate-200 flex items-center justify-center text-xs text-slate-500">
+                  <p className="text-[10px] mobile-small:text-xs xs:text-sm font-bold text-slate-700 mb-1.5 mobile-small:mb-2">SUPPORT GCBP</p>
+                  <div className="w-24 mobile-small:w-28 xs:w-32 sm:w-36 h-24 mobile-small:h-28 xs:h-32 sm:h-36 bg-white p-1.5 mobile-small:p-2 rounded-lg shadow-lg">
+                    <div className="w-full h-full bg-slate-200 flex items-center justify-center text-[9px] mobile-small:text-xs text-slate-500">
                       QR Code
                     </div>
                   </div>
@@ -405,34 +406,34 @@ export const Media: React.FC = () => {
       </section>
 
       {/* Corporate Sponsorship Section */}
-      <section className="sponsorship-section py-24 px-6 md:px-12">
+      <section className="sponsorship-section min-h-screen flex flex-col justify-center py-8 mobile-small:py-10 xs:py-12 sm:py-14 md:py-16 lg:py-20 xl:py-24 px-4 mobile-small:px-5 xs:px-6 sm:px-8 md:px-12 lg:px-16">
         <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-            <div className="sponsorship-content">
-              <h2 className="text-4xl font-bold text-gcbp-primary mb-6">CORPORATE SPONSORSHIP</h2>
-              <ul className="space-y-4 mb-8">
-                <li className="flex items-start gap-3">
-                  <span className="text-gcbp-primary font-bold">•</span>
-                  <span className="text-slate-700">Brand Visibility: Showcase your commitment to sustainability</span>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mobile-small:gap-10 xs:gap-12 sm:gap-14 items-center">
+            <div className="sponsorship-content order-2 md:order-1">
+              <h2 className="text-[clamp(1.75rem,4.5vw,2.5rem)] mobile-small:text-3xl xs:text-4xl sm:text-5xl font-bold text-gcbp-primary mb-4 mobile-small:mb-5 xs:mb-6 sm:mb-8">CORPORATE SPONSORSHIP</h2>
+              <ul className="space-y-3 mobile-small:space-y-4 mb-6 mobile-small:mb-7 xs:mb-8 sm:mb-10">
+                <li className="flex items-start gap-2 mobile-small:gap-3">
+                  <span className="text-gcbp-primary font-bold text-lg mobile-small:text-xl">•</span>
+                  <span className="text-[13px] mobile-small:text-sm xs:text-base sm:text-lg md:text-xl text-slate-700">Brand Visibility: Showcase your commitment to sustainability</span>
                 </li>
-                <li className="flex items-start gap-3">
-                  <span className="text-gcbp-primary font-bold">•</span>
-                  <span className="text-slate-700">Corporate Social Responsibility: Align with meaningful impact</span>
+                <li className="flex items-start gap-2 mobile-small:gap-3">
+                  <span className="text-gcbp-primary font-bold text-lg mobile-small:text-xl">•</span>
+                  <span className="text-[13px] mobile-small:text-sm xs:text-base sm:text-lg md:text-xl text-slate-700">Corporate Social Responsibility: Align with meaningful impact</span>
                 </li>
-                <li className="flex items-start gap-3">
-                  <span className="text-gcbp-primary font-bold">•</span>
-                  <span className="text-slate-700">Community Engagement: Connect with global communities</span>
+                <li className="flex items-start gap-2 mobile-small:gap-3">
+                  <span className="text-gcbp-primary font-bold text-lg mobile-small:text-xl">•</span>
+                  <span className="text-[13px] mobile-small:text-sm xs:text-base sm:text-lg md:text-xl text-slate-700">Community Engagement: Connect with global communities</span>
                 </li>
               </ul>
-              <button className="border-2 border-gcbp-primary text-gcbp-primary px-8 py-3 rounded-full font-bold hover:bg-gcbp-primary hover:text-white transition-all hover:-translate-y-1">
+              <Link to="/contact" className="border-2 border-gcbp-primary text-gcbp-primary px-6 mobile-small:px-7 xs:px-8 py-2.5 mobile-small:py-3 text-sm mobile-small:text-base xs:text-lg font-bold hover:bg-gcbp-primary hover:text-white transition-all hover:-translate-y-1 active:scale-95 w-full md:w-auto inline-block text-center rounded-full">
                 Become a Sponsor
-              </button>
+              </Link>
             </div>
-            <div className="sponsorship-image">
+            <div className="sponsorship-image order-1 md:order-2">
               <img
                 src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=800&q=80"
                 alt="Corporate Sponsorship"
-                className="w-full h-[400px] object-cover rounded-lg shadow-xl"
+                className="w-full h-[300px] mobile-small:h-[350px] xs:h-[400px] sm:h-[450px] md:h-[500px] object-cover rounded-lg shadow-xl"
                 loading="lazy"
               />
             </div>
@@ -441,10 +442,10 @@ export const Media: React.FC = () => {
       </section>
 
       {/* Events Carousel Section */}
-      <section className="events-section py-24 px-6 md:px-12 bg-slate-50">
+      <section className="events-section min-h-screen flex flex-col justify-center py-8 mobile-small:py-10 xs:py-12 sm:py-14 md:py-16 lg:py-20 xl:py-24 px-4 mobile-small:px-5 xs:px-6 sm:px-8 md:px-12 lg:px-16 bg-slate-50">
         <div className="max-w-7xl mx-auto">
           <div 
-            className="relative h-[600px] rounded-lg overflow-hidden shadow-2xl group"
+            className="relative h-[300px] mobile-small:h-[350px] xs:h-[400px] sm:h-[500px] md:h-[600px] lg:h-[650px] xl:h-[700px] rounded-lg overflow-hidden shadow-2xl group"
             onMouseEnter={() => setIsCarouselPaused(true)}
             onMouseLeave={() => setIsCarouselPaused(false)}
           >
@@ -461,8 +462,8 @@ export const Media: React.FC = () => {
                   className="w-full h-full object-cover"
                   loading="lazy"
                 />
-                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-8">
-                  <h3 className="text-3xl font-bold text-white">{event.title}</h3>
+                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4 mobile-small:p-5 xs:p-6 sm:p-8 md:p-10">
+                  <h3 className="text-lg mobile-small:text-xl xs:text-2xl sm:text-3xl md:text-4xl font-bold text-white">{event.title}</h3>
                 </div>
               </div>
             ))}
@@ -470,15 +471,15 @@ export const Media: React.FC = () => {
             {/* Navigation Arrows */}
             <button
               onClick={prevEvent}
-              className="absolute left-4 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-white/90 flex items-center justify-center shadow-xl hover:bg-white transition-all z-20 opacity-0 group-hover:opacity-100"
+              className="absolute left-2 mobile-small:left-3 xs:left-4 top-1/2 -translate-y-1/2 w-8 mobile-small:w-10 xs:w-12 h-8 mobile-small:h-10 xs:h-12 rounded-full bg-white/90 flex items-center justify-center shadow-xl hover:bg-white transition-all z-20 opacity-0 group-hover:opacity-100 active:scale-95"
             >
-              <ArrowLeft className="w-6 h-6 text-gcbp-primary" />
+              <ArrowLeft className="w-4 mobile-small:w-5 xs:w-6 h-4 mobile-small:h-5 xs:h-6 text-gcbp-primary" />
             </button>
             <button
               onClick={nextEvent}
-              className="absolute right-4 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-white/90 flex items-center justify-center shadow-xl hover:bg-white transition-all z-20 opacity-0 group-hover:opacity-100"
+              className="absolute right-2 mobile-small:right-3 xs:right-4 top-1/2 -translate-y-1/2 w-8 mobile-small:w-10 xs:w-12 h-8 mobile-small:h-10 xs:h-12 rounded-full bg-white/90 flex items-center justify-center shadow-xl hover:bg-white transition-all z-20 opacity-0 group-hover:opacity-100 active:scale-95"
             >
-              <ArrowRight className="w-6 h-6 text-gcbp-primary" />
+              <ArrowRight className="w-4 mobile-small:w-5 xs:w-6 h-4 mobile-small:h-5 xs:h-6 text-gcbp-primary" />
             </button>
 
             {/* Dots Indicator */}
@@ -498,9 +499,9 @@ export const Media: React.FC = () => {
       </section>
 
       {/* FAQs Section */}
-      <section className="faqs-section py-24 px-6 md:px-12">
-        <div className="max-w-3xl mx-auto">
-          <h2 className="text-4xl font-bold text-center text-slate-900 mb-12">Frequently Asked Questions</h2>
+      <section className="faqs-section min-h-screen flex flex-col justify-center py-8 mobile-small:py-10 xs:py-12 sm:py-14 md:py-16 lg:py-20 xl:py-24 px-4 mobile-small:px-5 xs:px-6 sm:px-8 md:px-12 lg:px-16">
+        <div className="max-w-3xl mx-auto w-full">
+          <h2 className="text-[clamp(1.5rem,4vw,2.25rem)] mobile-small:text-2xl xs:text-3xl sm:text-4xl md:text-5xl font-bold text-center text-slate-900 mb-6 mobile-small:mb-8 xs:mb-10 sm:mb-12">Frequently Asked Questions</h2>
           <div className="space-y-0">
             {faqs.map((faq, index) => (
               <div
@@ -509,15 +510,15 @@ export const Media: React.FC = () => {
               >
                 <button
                   onClick={() => handleFaqToggle(index)}
-                  className="w-full py-6 flex items-center justify-between text-left group"
+                  className="w-full py-4 mobile-small:py-5 xs:py-6 flex items-center justify-between text-left group"
                 >
-                  <span className="text-lg font-semibold text-slate-900 group-hover:text-gcbp-primary transition-colors">
+                  <span className="text-sm mobile-small:text-base xs:text-lg sm:text-xl font-semibold text-slate-900 group-hover:text-gcbp-primary transition-colors pr-4">
                     {faq.question}
                   </span>
-                  <ChevronDown className="faq-chevron w-5 h-5 text-gcbp-primary transition-transform" />
+                  <ChevronDown className="faq-chevron w-4 mobile-small:w-5 xs:w-6 h-4 mobile-small:h-5 xs:h-6 text-gcbp-primary transition-transform flex-shrink-0" />
                 </button>
                 <div className="faq-answer overflow-hidden">
-                  <p className="pb-6 text-slate-600 leading-relaxed">{faq.answer}</p>
+                  <p className="pb-4 mobile-small:pb-5 xs:pb-6 text-[12px] mobile-small:text-sm xs:text-base sm:text-lg text-slate-600 leading-relaxed">{faq.answer}</p>
                 </div>
               </div>
             ))}
