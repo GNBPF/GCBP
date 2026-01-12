@@ -1,7 +1,10 @@
 import React, { useLayoutEffect, useRef } from 'react';
-import { Link } from 'react-router-dom';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { HeroSection } from '../components/Programs/HeroSection';
+import { ProgramsTimelineSection } from '../components/Programs/ProgramsTimelineSection';
+import { CommunitySection } from '../components/Programs/CommunitySection';
+import { CTASection } from '../components/Programs/CTASection';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -52,15 +55,6 @@ const programs = [
   },
 ];
 
-const communityImages = [
-  'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&w=600&q=80',
-  'https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=600&q=80',
-  'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=600&q=80',
-  'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=600&q=80',
-  'https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=600&q=80',
-  'https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=600&q=80',
-];
-
 export const Programs: React.FC = () => {
   const rootRef = useRef<HTMLDivElement>(null);
 
@@ -68,257 +62,264 @@ export const Programs: React.FC = () => {
     if (!rootRef.current) return;
 
     const ctx = gsap.context(() => {
-      // Hero title animation
-      gsap.from('.hero-title', {
-        y: -20,
-        opacity: 0,
-        duration: 0.6,
-        ease: 'power3.out',
+      // ===== 1. PAGE LOAD — "OUR PROGRAMS" HEADING =====
+      // Set initial state
+      gsap.set('.hero-title', { opacity: 0, scale: 0.96 });
+      
+      // Heading animation: Opacity 0 → 100, Scale 0.96 → 1, Duration: 0.8s
+      gsap.to('.hero-title', {
+        opacity: 1,
+        scale: 1,
+        duration: 0.8,
+        ease: 'power2.out'
       });
 
-      // Background watermark rotation
-      gsap.to('.watermark', {
-        rotation: 6,
-        duration: 25,
-        ease: 'none',
-        repeat: -1,
-        yoyo: true,
-      });
+      // Outline text stroke: Stroke opacity animates in slightly after fill (100ms delay)
+      // (Handled by CSS if using stroke, otherwise skip)
 
-        // Timeline line growth
+      // ===== 2. BLUE TIMELINE SECTION =====
+      // A. Timeline Spine (Vertical Line + Dots)
+      // Timeline line: Height animates with scroll, grows top → bottom
         gsap.fromTo('.timeline-line', 
           { scaleY: 0, transformOrigin: 'top' },
           {
             scaleY: 1,
+          ease: 'none',
             scrollTrigger: {
               trigger: '.timeline-container',
               start: 'top top',
               end: 'bottom bottom',
               scrub: true,
-            },
+            invalidateOnRefresh: true
           }
-        );
+        }
+      );
 
-      // Program blocks animations
+      // B. Background Bubble Pattern
+      // Subtle parallax: Moves slower than content (0.7x)
+      gsap.to('.bubble-pattern', {
+        y: (i, target) => {
+          return ScrollTrigger.maxScroll(window) * 0.3; // 0.7x means 30% movement
+        },
+        ease: 'none',
+        scrollTrigger: {
+          trigger: '.timeline-container',
+          start: 'top top',
+          end: 'bottom bottom',
+          scrub: true,
+          invalidateOnRefresh: true
+        }
+      });
+
+      // Very light opacity pulse: 6% → 8%, Duration: 25–30s loop
+      gsap.to('.bubble-pattern', {
+        opacity: 0.08,
+        duration: 28,
+        ease: 'sine.inOut',
+        repeat: -1,
+        yoyo: true
+      });
+
+      // ===== 3. PROGRAM BLOCKS =====
       programs.forEach((program, index) => {
         const programSelector = `#${program.id}`;
         const cardSelector = `${programSelector} .program-card`;
         const imageSelector = `${programSelector} .program-image`;
         const dotSelector = `${programSelector} .timeline-dot`;
+        const dividerSelector = `${programSelector} .divider-line`;
 
-        // Card animation
-        gsap.from(cardSelector, {
-          x: program.imagePosition === 'left' ? 40 : -40,
-          opacity: 0,
-          duration: 0.45,
-          scrollTrigger: {
-            trigger: programSelector,
-            start: 'top 70%',
-            toggleActions: 'play none none reverse',
-          },
-        });
-
-        // Images stagger animation
-        gsap.from(`${imageSelector}`, {
-          y: 20,
-          opacity: 0,
-          scale: 0.94,
-          duration: 0.6,
-          stagger: 0.08,
+        // A. Program Text Card (White Box)
+        // Set initial states
+        gsap.set(cardSelector, { opacity: 0, y: 24 });
+        gsap.set(dividerSelector, { scaleX: 0 });
+        
+        // On scroll into view: Fade in, Slide from timeline side, Y offset: 24px
+        gsap.to(cardSelector, {
+          opacity: 1,
+          y: 0,
+          x: 0,
+          duration: 0.8,
           ease: 'power2.out',
           scrollTrigger: {
             trigger: programSelector,
-            start: 'top 75%',
+            start: 'top 80%',
             toggleActions: 'play none none reverse',
-          },
+            invalidateOnRefresh: true
+          }
         });
 
-        // Parallax effect on images
-        gsap.to(`${imageSelector}`, {
-          y: -12,
-          ease: 'none',
+        // Divider inside card: Width animates 0 → 100%
+        gsap.to(dividerSelector, {
+          scaleX: 1,
+          duration: 1.2,
+          ease: 'power2.out',
           scrollTrigger: {
             trigger: programSelector,
-            start: 'top bottom',
-            end: 'bottom top',
-            scrub: true,
-          },
+            start: 'top 80%',
+            toggleActions: 'play none none reverse',
+            invalidateOnRefresh: true
+          }
         });
 
-        // Timeline dot activation
-        gsap.to(dotSelector, {
-          scale: 1.4,
+        // Card hover: Very subtle lift (Y: -4px), Soft shadow increase (handled by CSS)
+
+        // B. Image Clusters (Stacked Photos)
+        // Set initial states
+        gsap.set(imageSelector, { opacity: 0, scale: 0.95 });
+        
+        // Entry: Images animate one-by-one, Fade + scale 0.95 → 1
+        gsap.to(imageSelector, {
           opacity: 1,
-          boxShadow: '0 0 20px rgba(255,255,255,0.8)',
+          scale: 1,
+          duration: 0.8,
+          stagger: 0.1,
+          ease: 'power2.out',
+          scrollTrigger: {
+            trigger: programSelector,
+            start: 'top 80%',
+            toggleActions: 'play none none reverse',
+            invalidateOnRefresh: true
+          }
+        });
+
+        // Z-depth illusion: Front image slightly larger (handled by CSS)
+        // Hover: Individual image zoom 1 → 1.05, Others dim to 80% (handled by CSS)
+
+        // Timeline dot activation
+        // Active node: Scales 1 → 1.3, Changes color slightly (lighter blue)
+        // Inactive nodes: Opacity 60%
+        gsap.to(dotSelector, {
+          scale: 1.3,
+          backgroundColor: 'rgba(255, 255, 255, 0.9)',
+          opacity: 1,
+          duration: 0.3,
+          ease: 'power2.out',
           scrollTrigger: {
             trigger: programSelector,
             start: 'top 60%',
             end: 'bottom 40%',
-            scrub: true,
-          },
+            toggleActions: 'play none none reverse',
+            invalidateOnRefresh: true
+          }
+        });
+
+        // Set inactive dots to 60% opacity
+        gsap.utils.toArray<HTMLElement>('.timeline-dot').forEach((dot, i) => {
+          if (i !== index) {
+            gsap.set(dot, { opacity: 0.6 });
+          }
         });
       });
 
-      // Community section transition
-      gsap.from('.community-grid img', {
-        y: 30,
-        opacity: 0,
-        duration: 0.6,
-        stagger: 0.1,
+      // ===== 4. TRANSITION BETWEEN PROGRAMS =====
+      // Dotted timeline section: Dots animate downward as scroll continues
+      // Small pause zone (white space): No animation (handled by spacing)
+
+      // ===== 5. "BE PART OF THE CHANGE" IMAGE GRID =====
+      // Set initial states
+      gsap.set('.community-grid img', { opacity: 0 });
+      
+      // Grid reveal: Images fade in in a diagonal sequence
+      gsap.to('.community-grid img', {
+        opacity: 1,
+        duration: 0.8,
+        stagger: {
+          amount: 0.6,
+          grid: 'auto',
+          from: 'start'
+        },
         ease: 'power2.out',
         scrollTrigger: {
           trigger: '.community-section',
           start: 'top 80%',
-        },
+          toggleActions: 'play none none reverse',
+          invalidateOnRefresh: true
+        }
       });
 
-      // CTA buttons animation
-      gsap.from('.cta-button', {
-        scale: 0.9,
-        opacity: 0,
-        duration: 0.5,
-        stagger: 0.12,
-        ease: 'back.out(1.7)',
+      // Hover: Image lifts slightly, Soft shadow (handled by CSS)
+
+      // ===== 6. "LET'S DO THIS TOGETHER" CTA =====
+      // Set initial states
+      gsap.set('.cta-title', { opacity: 0, y: 20 });
+      gsap.set('.cta-button', { opacity: 0, scale: 0.9 });
+      
+      // Text: Fade + slight upward motion
+      gsap.to('.cta-title', {
+        opacity: 1,
+        y: 0,
+        duration: 0.8,
+        ease: 'power2.out',
         scrollTrigger: {
           trigger: '.cta-section',
           start: 'top 80%',
-        },
+          toggleActions: 'play none none reverse',
+          invalidateOnRefresh: true
+        }
       });
+
+      // Buttons: Slight stagger entry (80ms each)
+      gsap.to('.cta-button', {
+        opacity: 1,
+        scale: 1,
+        duration: 0.6,
+        stagger: 0.08,
+        ease: 'power2.out',
+        scrollTrigger: {
+          trigger: '.cta-section',
+          start: 'top 80%',
+          toggleActions: 'play none none reverse',
+          invalidateOnRefresh: true
+        }
+      });
+
+      // Hover: Scale 1 → 1.04, Background color deepens (handled by CSS)
+      // Click: Press effect (scale 0.96) (handled by CSS active:scale-96)
+
+      // ===== 7. FOOTER =====
+      // (Already handled in Footer component)
+
     }, rootRef);
 
-    return () => ctx.revert();
+    return () => {
+      ctx.revert();
+      ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+    };
   }, []);
 
   return (
-    <div ref={rootRef} className="relative">
-      {/* Hero Section */}
-      <section className="relative bg-gcbp-primary min-h-screen max-h-[1200px] flex items-center justify-center overflow-hidden pt-20 mobile-small:pt-24 xs:pt-28 sm:pt-32">
-        {/* Background Watermark */}
-        <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-          <div className="watermark w-[400px] mobile-small:w-[500px] xs:w-[600px] sm:w-[700px] md:w-[800px] lg:w-[900px] xl:w-[1000px] h-[400px] mobile-small:h-[500px] xs:h-[600px] sm:h-[700px] md:h-[800px] lg:h-[900px] xl:h-[1000px] rounded-full border-2 mobile-small:border-3 xs:border-4 border-white/10 flex items-center justify-center">
-            <div className="w-16 mobile-small:w-20 xs:w-24 sm:w-28 md:w-32 lg:w-36 h-16 mobile-small:h-20 xs:h-24 sm:h-28 md:h-32 lg:h-36 rounded-full bg-white/5"></div>
-          </div>
-        </div>
-
-        {/* Hero Title */}
-        <h1 className="hero-title relative z-10 text-[clamp(2.5rem,8vw,6rem)] mobile-small:text-[clamp(3rem,10vw,8rem)] sm:text-[clamp(4rem,12vw,10rem)] font-black text-transparent stroke-2 stroke-white text-center leading-none px-4 mobile-small:px-6">
-          OUR PROGRAMS
-        </h1>
-      </section>
-
-      {/* Programs Timeline Section */}
-      <section className="relative bg-gcbp-primary py-8 mobile-small:py-10 xs:py-12 sm:py-14 md:py-16 lg:py-20 xl:py-24">
-        <div className="timeline-container relative max-w-7xl mx-auto px-4 mobile-small:px-5 xs:px-6 sm:px-8 md:px-12 lg:px-16">
-          {/* Central Timeline Line */}
-          <div className="absolute left-1/2 top-0 bottom-0 w-[1px] mobile-small:w-[2px] -translate-x-1/2 hidden md:block">
-            <div className="timeline-line h-full bg-white/40" style={{ borderLeft: '2px dashed rgba(255,255,255,0.5)' }}></div>
-          </div>
-
-          {/* Program Blocks */}
-          {programs.map((program, index) => (
-            <div
-              key={program.id}
-              id={program.id}
-              className="relative min-h-screen flex items-center py-8 mobile-small:py-10 xs:py-12 sm:py-14 md:py-16 lg:py-20 gap-5 mobile-small:gap-6 xs:gap-8 sm:gap-10"
-            >
-              {/* Timeline Dot */}
-              <div className="absolute left-1/2 -translate-x-1/2 w-6 mobile-small:w-7 xs:w-8 h-6 mobile-small:h-7 xs:h-8 rounded-full bg-white border-2 mobile-small:border-3 xs:border-4 border-gcbp-primary z-10 timeline-dot opacity-50 shadow-lg hidden md:block"></div>
-
-              <div
-                className={`flex-1 flex flex-col md:flex-row items-center gap-6 mobile-small:gap-8 xs:gap-10 sm:gap-12 ${
-                  program.imagePosition === 'left' ? 'md:flex-row' : 'md:flex-row-reverse'
-                }`}
-              >
-                {/* Images */}
-                <div className="flex-1 w-full grid grid-cols-2 gap-3 mobile-small:gap-4">
-                  {program.images.map((img, imgIndex) => (
-                    <div
-                      key={imgIndex}
-                      className={`program-image overflow-hidden rounded-lg shadow-2xl ${
-                        imgIndex === 0 ? 'col-span-2 h-[180px] mobile-small:h-[200px] xs:h-[240px] sm:h-[280px] md:h-64 lg:h-[300px] xl:h-[360px]' : 'h-[140px] mobile-small:h-[160px] xs:h-[180px] sm:h-[200px] md:h-48 lg:h-[220px] xl:h-[260px]'
-                      }`}
-                    >
-                      <img
-                        src={img}
-                        alt={`${program.title} ${imgIndex + 1}`}
-                        className="w-full h-full object-cover"
-                        loading="lazy"
-                      />
-                    </div>
-                  ))}
-                </div>
-
-                {/* Program Card */}
-                <div className="flex-1 w-full">
-                  <div className="program-card bg-white rounded-2xl p-5 mobile-small:p-6 xs:p-8 sm:p-10 md:p-12 shadow-2xl hover:shadow-3xl transition-shadow duration-300 cursor-pointer hover:-translate-y-1">
-                    <h2 className="text-[clamp(1.5rem,4vw,2.25rem)] mobile-small:text-2xl xs:text-3xl sm:text-4xl md:text-5xl font-bold text-gcbp-primary mb-3 mobile-small:mb-4 xs:mb-5">
-                      {program.title}
-                    </h2>
-                    <p className="text-[13px] mobile-small:text-sm xs:text-base sm:text-lg md:text-xl text-slate-700 leading-relaxed">
-                      {program.description}
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* Transition Section - Be Part of the Change */}
-      <section className="community-section bg-[#f3f3f3] min-h-screen flex flex-col justify-center py-8 mobile-small:py-10 xs:py-12 sm:py-14 md:py-16 lg:py-20 xl:py-24 px-4 mobile-small:px-5 xs:px-6 sm:px-8 md:px-12 lg:px-16">
-        <div className="max-w-6xl mx-auto w-full">
-          <h2 className="text-[clamp(2rem,6vw,3.5rem)] mobile-small:text-[clamp(2.5rem,7vw,4rem)] xs:text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black text-center text-slate-900 mb-6 mobile-small:mb-8 xs:mb-10 sm:mb-12">
-            BE PART OF THE CHANGE
-          </h2>
-          <p className="text-[clamp(0.875rem,2.5vw,1.125rem)] mobile-small:text-base xs:text-lg sm:text-xl md:text-2xl text-center text-slate-700 mb-8 mobile-small:mb-10 xs:mb-12 sm:mb-14 max-w-3xl mx-auto px-4">
-            At the Heart of All We Do: Building Sustainable Communities Through Collective Action
-          </p>
-
-          {/* Masonry Grid */}
-          <div className="community-grid grid grid-cols-2 md:grid-cols-3 gap-2 mobile-small:gap-3 xs:gap-4 sm:gap-5 md:gap-6">
-            {communityImages.map((img, index) => (
-              <div
-                key={index}
-                className={`overflow-hidden rounded-lg shadow-lg group cursor-pointer ${
-                  index === 0 ? 'md:row-span-2' : index === 3 ? 'md:row-span-2' : ''
-                }`}
-              >
-                <div className="relative overflow-hidden h-full">
-                  <img
-                    src={img}
-                    alt={`Community ${index + 1}`}
-                    className="w-full h-full object-cover group-hover:scale-106 transition-transform duration-500"
-                    loading="lazy"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* CTA Section */}
-      <section className="cta-section bg-white min-h-screen flex flex-col justify-center py-8 mobile-small:py-10 xs:py-12 sm:py-14 md:py-16 lg:py-20 xl:py-24 px-4 mobile-small:px-5 xs:px-6 sm:px-8 md:px-12 lg:px-16">
-        <div className="max-w-4xl mx-auto text-center w-full">
-          <h2 className="text-[clamp(2rem,6vw,3.5rem)] mobile-small:text-[clamp(2.5rem,7vw,4rem)] xs:text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black text-slate-900 mb-6 mobile-small:mb-8 xs:mb-10 sm:mb-12">
-            LET'S DO THIS TOGETHER!
-          </h2>
-          <div className="flex flex-col xs:flex-row gap-4 mobile-small:gap-5 xs:gap-6 sm:gap-7 md:gap-8 justify-center items-center">
-            <Link to="/contact" className="cta-button bg-gcbp-primary text-white px-8 mobile-small:px-10 xs:px-12 py-3 mobile-small:py-3.5 xs:py-4 text-sm mobile-small:text-base xs:text-lg sm:text-xl font-bold hover:bg-blue-800 transition-all hover:-translate-y-1 shadow-lg active:scale-95 w-full xs:w-auto text-center rounded-full">
-              Donate
-            </Link>
-            <Link to="/contact" className="cta-button bg-gcbp-primary text-white px-8 mobile-small:px-10 xs:px-12 py-3 mobile-small:py-3.5 xs:py-4 text-sm mobile-small:text-base xs:text-lg sm:text-xl font-bold hover:bg-blue-800 transition-all hover:-translate-y-1 shadow-lg active:scale-95 w-full xs:w-auto text-center rounded-full">
-              Volunteer
-            </Link>
-            <Link to="/contact" className="cta-button bg-gcbp-primary text-white px-8 mobile-small:px-10 xs:px-12 py-3 mobile-small:py-3.5 xs:py-4 text-sm mobile-small:text-base xs:text-lg sm:text-xl font-bold hover:bg-blue-800 transition-all hover:-translate-y-1 shadow-lg active:scale-95 w-full xs:w-auto text-center rounded-full">
-              Sponsor
-            </Link>
-          </div>
-        </div>
-      </section>
+    <div ref={rootRef} className="relative bg-white">
+      <style>{`
+        .program-card:hover {
+          transform: translateY(-4px);
+          box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+        .program-image:first-child {
+          transform: scale(1.02);
+          z-index: 2;
+        }
+        .program-image:hover {
+          transform: scale(1.05);
+          z-index: 3;
+        }
+        .program-image:hover ~ .program-image {
+          opacity: 0.8;
+        }
+        .community-grid img:hover {
+          transform: translateY(-4px);
+          box-shadow: 0 12px 24px rgba(0,0,0,0.15);
+        }
+        .cta-button:hover {
+          transform: scale(1.04);
+          background-color: #1e3a8a;
+        }
+      `}</style>
+      <HeroSection />
+      <ProgramsTimelineSection />
+      <CommunitySection />
+      <CTASection />
     </div>
   );
 };
 
+export default Programs;

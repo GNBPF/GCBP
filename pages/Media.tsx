@@ -1,37 +1,15 @@
 import React, { useLayoutEffect, useRef, useState } from 'react';
-import { Link } from 'react-router-dom';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { ChevronDown, Play, ArrowLeft, ArrowRight } from 'lucide-react';
+import { HeroSection } from '../components/Media/HeroSection';
+import { BlogsSection } from '../components/Media/BlogsSection';
+import { VolunteerSection } from '../components/Media/VolunteerSection';
+import { DonationsSection } from '../components/Media/DonationsSection';
+import { SponsorshipSection } from '../components/Media/SponsorshipSection';
+import { EventsSection } from '../components/Media/EventsSection';
+import { FAQsSection } from '../components/Media/FAQsSection';
 
 gsap.registerPlugin(ScrollTrigger);
-
-const blogPosts = [
-  {
-    id: 1,
-    date: 'March 15, 2024',
-    category: 'Impact Story',
-    title: 'Impactful Story: Community Transformation in Kenya',
-    description: 'How our water access project changed lives in rural communities through sustainable infrastructure.',
-    image: 'https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?auto=format&fit=crop&w=800&q=80',
-  },
-  {
-    id: 2,
-    date: 'March 10, 2024',
-    category: 'Initiative',
-    title: 'Upcoming Initiatives: Green Energy Expansion',
-    description: 'We are launching solar panel installations across 12 new communities this spring.',
-    image: 'https://images.unsplash.com/photo-1497435334941-8c899ee9e8e9?auto=format&fit=crop&w=800&q=80',
-  },
-  {
-    id: 3,
-    date: 'March 5, 2024',
-    category: 'News',
-    title: 'Partnership Announcement: Global Tech Leaders',
-    description: 'Major technology companies join forces with GCBP to accelerate climate solutions.',
-    image: 'https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=800&q=80',
-  },
-];
 
 const events = [
   {
@@ -51,25 +29,6 @@ const events = [
   },
 ];
 
-const faqs = [
-  {
-    question: 'How can I become a volunteer in your organization?',
-    answer: 'You can apply to become a volunteer by visiting our volunteer opportunities page and filling out the application form. We welcome individuals from all backgrounds who are passionate about environmental conservation and community development.',
-  },
-  {
-    question: 'Is there a donation fee?',
-    answer: 'No, there is no fee for making a donation. 100% of your contribution goes directly to supporting our programs and initiatives. We are transparent about our use of funds and provide regular updates on how donations are utilized.',
-  },
-  {
-    question: 'What kind of projects does the collective work on?',
-    answer: 'GCBP works on a wide range of projects including conservation efforts, clean energy initiatives, environmental education programs, and sustainable agriculture. Visit our Programs page to learn more about each area of focus.',
-  },
-  {
-    question: 'How can I apply for corporate sponsorship?',
-    answer: 'Corporate partners can apply for sponsorship by contacting our partnerships team through the form on this page or by emailing partnerships@gcbp.org. We offer various sponsorship tiers with different benefits and engagement opportunities.',
-  },
-];
-
 export const Media: React.FC = () => {
   const rootRef = useRef<HTMLDivElement>(null);
   const [currentEventIndex, setCurrentEventIndex] = useState(0);
@@ -80,139 +39,270 @@ export const Media: React.FC = () => {
     if (!rootRef.current) return;
 
     const ctx = gsap.context(() => {
-      // Hero animations
-      gsap.from('.hero-title', {
-        y: 24,
-        opacity: 0,
-        duration: 0.8,
-        ease: 'power3.out',
-      });
-
-      gsap.from('.hero-subtitle', {
-        y: 20,
-        opacity: 0,
-        duration: 0.8,
-        delay: 0.3,
-        ease: 'power3.out',
-      });
-
-      // Gradient parallax
+      // ===== 1. PAGE LOAD — HERO SECTION =====
+      // Set initial states
+      gsap.set('.hero-gradient', { opacity: 0, scale: 1.05 });
+      gsap.set('.hero-title', { opacity: 0, y: 20 });
+      gsap.set('.hero-subtitle', { opacity: 0 });
+      gsap.set('.hero-watermark', { opacity: 0.05 });
+      
+      // Background gradient → fade in + slight scale (1.05 → 1)
       gsap.to('.hero-gradient', {
-        backgroundPosition: '0% 10%',
-        ease: 'none',
-        scrollTrigger: {
+        opacity: 1,
+        scale: 1,
+        duration: 1,
+        ease: 'power2.out'
+      });
+
+      // "Media & Events" text: Opacity 0 → 100, Y: +20px → 0, Duration: 0.8s, Ease: ease-out
+      gsap.to('.hero-title', {
+        opacity: 1,
+        y: 0,
+        duration: 0.8,
+        ease: 'power2.out'
+      });
+
+      // Subheading appears 0.2s after heading
+      gsap.to('.hero-subtitle', {
+        opacity: 1,
+        duration: 0.8,
+        delay: 0.2,
+        ease: 'power2.out'
+      });
+
+      // Scroll behavior: Subtle parallax on background (moves slower than text)
+      ScrollTrigger.create({
           trigger: '.hero-section',
           start: 'top top',
           end: 'bottom top',
           scrub: true,
-        },
+        onUpdate: (self) => {
+          gsap.to('.hero-gradient', {
+            y: self.progress * 50 * 0.3, // Moves slower than text
+            ease: 'none'
+          });
+        }
       });
 
-      // Blog cards stagger
-      gsap.from('.blog-card', {
-        y: 20,
+      // Logo watermark (GCBP) → very low opacity, fixed, fades out after hero
+      ScrollTrigger.create({
+        trigger: '.hero-section',
+        start: 'bottom top',
+        onEnter: () => {
+          gsap.to('.hero-watermark', {
         opacity: 0,
-        duration: 0.6,
-        stagger: 0.12,
+            duration: 0.5,
+            ease: 'power2.out'
+          });
+        }
+      });
+
+      // ===== 2. BLOGS & INSIGHTS (3 Cards) =====
+      // Set initial states
+      gsap.set('.blog-card', { opacity: 0, y: 30 });
+      
+      // Cards animate one by one: Opacity 0 → 100, Y: +30px → 0, Delay: 0s / 0.15s / 0.3s
+      gsap.to('.blog-card', {
+        opacity: 1,
+        y: 0,
+        duration: 0.8,
+        stagger: 0.15,
         ease: 'power2.out',
         scrollTrigger: {
           trigger: '.blogs-section',
           start: 'top 80%',
-        },
+          toggleActions: 'play none none reverse',
+          invalidateOnRefresh: true
+        }
       });
 
-      // Volunteer section divider animation
-      gsap.from('.section-divider', {
-        scaleX: 0,
-        duration: 1,
+      // Hover interaction: Image scale 1 → 1.05, Card shadow increases, Text underline (handled by CSS)
+
+      // ===== 3. SECTION DIVIDER LINES =====
+      // Width: 0% → 100%, Trigger: when section enters viewport, Duration: 0.6s
+      gsap.utils.toArray<HTMLElement>('.section-divider').forEach((divider) => {
+        gsap.set(divider, { scaleX: 0, transformOrigin: 'left center' });
+        gsap.to(divider, {
+          scaleX: 1,
+          duration: 0.6,
+          ease: 'power2.out',
+          scrollTrigger: {
+            trigger: divider,
+            start: 'top 85%',
+            toggleActions: 'play none none reverse',
+            invalidateOnRefresh: true
+          }
+        });
+      });
+
+      // ===== 4. VOLUNTEER OPPORTUNITIES =====
+      // Set initial states
+      gsap.set('.volunteer-heading', { opacity: 0, y: 20 });
+      gsap.set('.volunteer-text', { opacity: 0 });
+      
+      // Heading: Fade + Y (20px → 0)
+      gsap.to('.volunteer-heading', {
+        opacity: 1,
+        y: 0,
+        duration: 0.8,
         ease: 'power2.out',
         scrollTrigger: {
           trigger: '.volunteer-section',
           start: 'top 80%',
-        },
+          toggleActions: 'play none none reverse',
+          invalidateOnRefresh: true
+        }
       });
 
-      gsap.from('.volunteer-heading', {
-        y: 16,
-        opacity: 0,
-        duration: 0.6,
+      // Paragraph: Fade only (keep calm)
+      gsap.to('.volunteer-text', {
+        opacity: 1,
+        duration: 0.8,
+        delay: 0.2,
+        ease: 'power2.out',
         scrollTrigger: {
           trigger: '.volunteer-section',
           start: 'top 80%',
-        },
+          toggleActions: 'play none none reverse',
+          invalidateOnRefresh: true
+        }
       });
 
-      // Video zoom effect
+      // Image animation: Slight horizontal parallax, Moves opposite to scroll (very subtle)
       gsap.to('.volunteer-video', {
-        scale: 1.1,
+        x: (i, target) => {
+          return ScrollTrigger.maxScroll(window) * 0.1; // Very subtle
+        },
         ease: 'none',
         scrollTrigger: {
           trigger: '.volunteer-video-container',
           start: 'top bottom',
           end: 'bottom top',
           scrub: true,
-        },
+          invalidateOnRefresh: true
+        }
       });
 
-      // Donation section animations
-      gsap.from('.donation-content', {
-        x: -40,
-        opacity: 0,
+      // ===== 5. DONATIONS SECTION (Split Layout) =====
+      // Set initial states
+      gsap.set('.donation-image-mask', { scaleY: 1, transformOrigin: 'bottom center' });
+      gsap.set('.donation-content', { opacity: 0 });
+      gsap.set('.be-part-title', { letterSpacing: '0.1em' });
+      
+      // Left image: Mask reveal from bottom → top, Duration: 0.8s
+      gsap.to('.donation-image-mask', {
+        scaleY: 0,
         duration: 0.8,
+        ease: 'power2.out',
         scrollTrigger: {
           trigger: '.donation-section',
-          start: 'top 75%',
-        },
+          start: 'top 80%',
+          toggleActions: 'play none none reverse',
+          invalidateOnRefresh: true
+        }
       });
 
-      gsap.from('.donation-image', {
-        x: 40,
-        opacity: 0,
+      // Right content: "Be a part of the change" - Letter spacing tightens slightly on reveal
+      gsap.to('.be-part-title', {
+        letterSpacing: '0.05em',
         duration: 0.8,
+        ease: 'power2.out',
         scrollTrigger: {
           trigger: '.donation-section',
-          start: 'top 75%',
-        },
+          start: 'top 80%',
+          toggleActions: 'play none none reverse',
+          invalidateOnRefresh: true
+        }
       });
 
-      // Sponsorship section
-      gsap.from('.sponsorship-content', {
-        x: 40,
-        opacity: 0,
-        duration: 0.8,
-        scrollTrigger: {
-          trigger: '.sponsorship-section',
-          start: 'top 75%',
-        },
-      });
+      // Donate button: Hover background fills from left, Arrow slides 6px right (handled by CSS)
 
-      gsap.from('.sponsorship-image', {
-        x: -40,
-        opacity: 0,
-        duration: 0.8,
-        scrollTrigger: {
-          trigger: '.sponsorship-section',
-          start: 'top 75%',
-        },
-      });
-
-      // Events carousel fade
-      gsap.from('.event-slide', {
-        opacity: 0,
+      // ===== 6. CORPORATE SPONSORSHIP =====
+      // Set initial states
+      gsap.set('.sponsorship-benefit', { opacity: 0, x: -20 });
+      gsap.set('.sponsorship-image', { opacity: 0, scale: 1.08 });
+      
+      // List animation: Bullet points appear line by line, Opacity + slight X movement
+      gsap.to('.sponsorship-benefit', {
+        opacity: 1,
+        x: 0,
         duration: 0.6,
+        stagger: 0.1,
+        ease: 'power2.out',
+        scrollTrigger: {
+          trigger: '.sponsorship-section',
+          start: 'top 80%',
+          toggleActions: 'play none none reverse',
+          invalidateOnRefresh: true
+        }
+      });
+
+      // Image: Fade + scale (1.08 → 1)
+      gsap.to('.sponsorship-image', {
+        opacity: 1,
+        scale: 1,
+        duration: 0.8,
+        ease: 'power2.out',
+        scrollTrigger: {
+          trigger: '.sponsorship-section',
+          start: 'top 80%',
+          toggleActions: 'play none none reverse',
+          invalidateOnRefresh: true
+        }
+      });
+
+      // Button: Hover border → solid fill, Press scale 0.96 (handled by CSS)
+
+      // ===== 7. EVENTS SLIDER / FEATURE CARD =====
+      // Set initial states
+      gsap.set('.event-slide', { opacity: 0, scale: 0.96 });
+      gsap.set('.event-overlay-text', { opacity: 0 });
+      
+      // On scroll: Event card Scale 0.96 → 1, Opacity 0 → 100
+      gsap.to('.event-slide', {
+        opacity: 1,
+        scale: 1,
+        duration: 0.8,
+        ease: 'power2.out',
         scrollTrigger: {
           trigger: '.events-section',
           start: 'top 80%',
-        },
+          toggleActions: 'play none none reverse',
+          invalidateOnRefresh: true
+        }
       });
 
-      // FAQ accordion animations
+      // Overlay text: Fades in after image settles (important for readability)
+      gsap.to('.event-overlay-text', {
+        opacity: 1,
+        duration: 0.8,
+        delay: 0.3,
+        ease: 'power2.out',
+        scrollTrigger: {
+          trigger: '.events-section',
+          start: 'top 80%',
+          toggleActions: 'play none none reverse',
+          invalidateOnRefresh: true
+        }
+      });
+
+      // Carousel: Auto-slide every 5s (handled by React state)
+      // Manual arrow: Click → smooth slide + slight blur transition (handled by React)
+
+      // ===== 8. FAQs (Accordion) =====
+      // Set initial states
       gsap.utils.toArray<HTMLElement>('.faq-item').forEach((item) => {
         const answer = item.querySelector('.faq-answer');
         if (answer) {
           gsap.set(answer, { height: 0, opacity: 0 });
         }
       });
+
+      // Interaction: Click → Arrow rotates 0° → 90°, Height expands smoothly, Answer fades in with 0.2s delay (handled by React)
+      // Active FAQ has slightly darker border (handled by CSS)
+
+      // ===== 9. FOOTER =====
+      // (Already handled in Footer component)
     }, rootRef);
 
     return () => ctx.revert();
@@ -226,7 +316,7 @@ export const Media: React.FC = () => {
     
     const interval = setInterval(() => {
       setCurrentEventIndex((prev) => (prev + 1) % events.length);
-    }, 5000);
+    }, 5000); // Auto-slide every 5s
 
     return () => clearInterval(interval);
   }, [isCarouselPaused]);
@@ -273,7 +363,7 @@ export const Media: React.FC = () => {
           ease: 'power2.inOut',
         });
         gsap.to(chevron, {
-          rotation: 180,
+          rotation: 90,
           duration: 0.3,
         });
       }
@@ -290,241 +380,41 @@ export const Media: React.FC = () => {
   };
 
   return (
-    <div ref={rootRef} className="relative">
-      {/* Hero Section */}
-      <section className="hero-section relative bg-gradient-to-b from-gcbp-primary to-white pt-20 mobile-small:pt-24 xs:pt-28 sm:pt-32 md:pt-36 pb-12 mobile-small:pb-16 xs:pb-18 sm:pb-20 overflow-hidden">
-        <div className="hero-gradient absolute inset-0 bg-gradient-to-b from-gcbp-primary via-blue-600 to-white opacity-100"></div>
-        <div className="relative z-10 max-w-4xl mx-auto px-4 mobile-small:px-5 xs:px-6 sm:px-8 md:px-10 text-center">
-          <h1 className="hero-title text-[clamp(2rem,6vw,3.5rem)] mobile-small:text-[clamp(2.5rem,7vw,4rem)] xs:text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold text-slate-900 mb-4 mobile-small:mb-5 xs:mb-6 sm:mb-8">
-            Media & Events
-          </h1>
-          <p className="hero-subtitle text-[clamp(0.875rem,2.5vw,1.125rem)] mobile-small:text-base xs:text-lg sm:text-xl md:text-2xl lg:text-3xl text-slate-700 leading-relaxed px-2">
-            A global collective making community partners and programs for a sustainable future.
-          </p>
-        </div>
-      </section>
-
-      {/* Blogs & Insights Section */}
-      <section className="blogs-section min-h-screen flex flex-col justify-center py-8 mobile-small:py-10 xs:py-12 sm:py-14 md:py-16 lg:py-20 xl:py-24 px-4 mobile-small:px-5 xs:px-6 sm:px-8 md:px-12 lg:px-16">
-        <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5 mobile-small:gap-6 xs:gap-7 sm:gap-8 md:gap-10">
-            {blogPosts.map((post) => (
-              <div
-                key={post.id}
-                className="blog-card group cursor-pointer"
-              >
-                <div className="overflow-hidden rounded-lg mb-3 mobile-small:mb-4 shadow-sm group-hover:shadow-lg transition-shadow duration-300">
-                  <img
-                    src={post.image}
-                    alt={post.title}
-                    className="w-full h-[180px] mobile-small:h-[200px] xs:h-[240px] sm:h-64 md:h-[280px] lg:h-[300px] object-cover group-hover:scale-104 transition-transform duration-500"
-                    loading="lazy"
-                  />
-                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-all duration-500"></div>
-                </div>
-                <div className="text-[10px] mobile-small:text-xs xs:text-sm uppercase tracking-wider text-slate-500 mb-2 mobile-small:mb-2.5">
-                  {post.date} • {post.category}
-                </div>
-                <h3 className="text-base mobile-small:text-lg xs:text-xl sm:text-2xl font-bold text-slate-900 mb-2 mobile-small:mb-3 group-hover:text-gcbp-primary transition-colors">
-                  {post.title}
-                </h3>
-                <p className="text-[12px] mobile-small:text-sm xs:text-base sm:text-lg text-slate-600 leading-relaxed">
-                  {post.description}
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Volunteer Opportunities Section */}
-      <section className="volunteer-section min-h-screen flex flex-col justify-center py-8 mobile-small:py-10 xs:py-12 sm:py-14 md:py-16 lg:py-20 xl:py-24 px-4 mobile-small:px-5 xs:px-6 sm:px-8 md:px-12 lg:px-16">
-        <div className="max-w-6xl mx-auto w-full">
-          <div className="section-divider h-[1px] bg-slate-300 mb-6 mobile-small:mb-8 xs:mb-10 sm:mb-12"></div>
-          <h2 className="volunteer-heading text-[clamp(1.5rem,4vw,2.25rem)] mobile-small:text-2xl xs:text-3xl sm:text-4xl md:text-5xl font-bold text-center text-slate-900 mb-3 mobile-small:mb-4 xs:mb-5 sm:mb-6">
-            VOLUNTEER OPPORTUNITIES
-          </h2>
-          <p className="text-center text-slate-700 text-[13px] mobile-small:text-sm xs:text-base sm:text-lg md:text-xl mb-6 mobile-small:mb-8 xs:mb-10 sm:mb-12 max-w-3xl mx-auto px-4">
-            Volunteering means becoming part of a community making a real-world change. Join us in creating sustainable solutions that impact lives across the globe.
-          </p>
-          
-          <div className="volunteer-video-container relative h-[280px] mobile-small:h-[320px] xs:h-[380px] sm:h-[450px] md:h-[500px] lg:h-[550px] xl:h-[600px] rounded-lg overflow-hidden shadow-2xl group cursor-pointer">
-            <video
-              className="volunteer-video w-full h-full object-cover"
-              loop
-              muted
-              playsInline
-              autoPlay
-            >
-              <source src="https://videos.pexels.com/video-files/3045163/3045163-hd_1920_1080_25fps.mp4" type="video/mp4" />
-            </video>
-            <div className="absolute inset-0 bg-black/20 group-hover:bg-black/30 transition-all duration-300 flex items-center justify-center">
-              <button
-                onClick={() => setIsVideoPlaying(!isVideoPlaying)}
-                className="w-14 mobile-small:w-16 xs:w-18 sm:w-20 md:w-24 h-14 mobile-small:h-16 xs:h-18 sm:h-20 md:h-24 rounded-full bg-white/90 flex items-center justify-center shadow-xl hover:scale-110 transition-transform active:scale-95"
-              >
-                <Play className="w-6 mobile-small:w-7 xs:w-8 sm:w-10 md:w-12 h-6 mobile-small:h-7 xs:h-8 sm:h-10 md:h-12 text-gcbp-primary ml-0.5 mobile-small:ml-1" fill="currentColor" />
-              </button>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Donations & Support Section */}
-      <section className="donation-section min-h-screen flex flex-col justify-center py-8 mobile-small:py-10 xs:py-12 sm:py-14 md:py-16 lg:py-20 xl:py-24 px-4 mobile-small:px-5 xs:px-6 sm:px-8 md:px-12 lg:px-16 bg-slate-50">
-        <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-[60%_40%] gap-8 mobile-small:gap-10 xs:gap-12 sm:gap-14 items-center">
-            <div className="donation-image order-2 md:order-1">
-              <img
-                src="https://images.unsplash.com/photo-1532629345422-7515f3d16bb6?auto=format&fit=crop&w=800&q=80"
-                alt="Donations"
-                className="w-full h-[300px] mobile-small:h-[350px] xs:h-[400px] sm:h-[450px] md:h-[500px] lg:h-[550px] object-cover rounded-lg shadow-xl"
-                loading="lazy"
-              />
-            </div>
-            <div className="donation-content order-1 md:order-2">
-              <h2 className="text-[clamp(1.75rem,4.5vw,2.5rem)] mobile-small:text-3xl xs:text-4xl sm:text-5xl font-bold text-gcbp-primary mb-4 mobile-small:mb-5 xs:mb-6 sm:mb-8">DONATIONS</h2>
-              <p className="text-[13px] mobile-small:text-sm xs:text-base sm:text-lg md:text-xl text-slate-700 leading-relaxed mb-6 mobile-small:mb-7 xs:mb-8 sm:mb-10">
-                Your contributions directly support communities in need. Every donation helps us expand our programs and reach more people with sustainable solutions.
-              </p>
-              <div className="flex flex-col xs:flex-row items-start xs:items-center gap-4 mobile-small:gap-5 xs:gap-6 sm:gap-8 mb-6 mobile-small:mb-7 xs:mb-8">
-                <Link to="/contact" className="bg-gcbp-primary text-white px-6 mobile-small:px-7 xs:px-8 py-2.5 mobile-small:py-3 text-sm mobile-small:text-base xs:text-lg font-bold hover:bg-blue-800 transition-all hover:-translate-y-1 shadow-lg active:scale-95 w-full xs:w-auto inline-block text-center rounded-full">
-                  Donate
-                </Link>
-                <div className="text-center">
-                  <p className="text-[10px] mobile-small:text-xs xs:text-sm font-bold text-slate-700 mb-1.5 mobile-small:mb-2">SUPPORT GCBP</p>
-                  <div className="w-24 mobile-small:w-28 xs:w-32 sm:w-36 h-24 mobile-small:h-28 xs:h-32 sm:h-36 bg-white p-1.5 mobile-small:p-2 rounded-lg shadow-lg">
-                    <div className="w-full h-full bg-slate-200 flex items-center justify-center text-[9px] mobile-small:text-xs text-slate-500">
-                      QR Code
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Corporate Sponsorship Section */}
-      <section className="sponsorship-section min-h-screen flex flex-col justify-center py-8 mobile-small:py-10 xs:py-12 sm:py-14 md:py-16 lg:py-20 xl:py-24 px-4 mobile-small:px-5 xs:px-6 sm:px-8 md:px-12 lg:px-16">
-        <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mobile-small:gap-10 xs:gap-12 sm:gap-14 items-center">
-            <div className="sponsorship-content order-2 md:order-1">
-              <h2 className="text-[clamp(1.75rem,4.5vw,2.5rem)] mobile-small:text-3xl xs:text-4xl sm:text-5xl font-bold text-gcbp-primary mb-4 mobile-small:mb-5 xs:mb-6 sm:mb-8">CORPORATE SPONSORSHIP</h2>
-              <ul className="space-y-3 mobile-small:space-y-4 mb-6 mobile-small:mb-7 xs:mb-8 sm:mb-10">
-                <li className="flex items-start gap-2 mobile-small:gap-3">
-                  <span className="text-gcbp-primary font-bold text-lg mobile-small:text-xl">•</span>
-                  <span className="text-[13px] mobile-small:text-sm xs:text-base sm:text-lg md:text-xl text-slate-700">Brand Visibility: Showcase your commitment to sustainability</span>
-                </li>
-                <li className="flex items-start gap-2 mobile-small:gap-3">
-                  <span className="text-gcbp-primary font-bold text-lg mobile-small:text-xl">•</span>
-                  <span className="text-[13px] mobile-small:text-sm xs:text-base sm:text-lg md:text-xl text-slate-700">Corporate Social Responsibility: Align with meaningful impact</span>
-                </li>
-                <li className="flex items-start gap-2 mobile-small:gap-3">
-                  <span className="text-gcbp-primary font-bold text-lg mobile-small:text-xl">•</span>
-                  <span className="text-[13px] mobile-small:text-sm xs:text-base sm:text-lg md:text-xl text-slate-700">Community Engagement: Connect with global communities</span>
-                </li>
-              </ul>
-              <Link to="/contact" className="border-2 border-gcbp-primary text-gcbp-primary px-6 mobile-small:px-7 xs:px-8 py-2.5 mobile-small:py-3 text-sm mobile-small:text-base xs:text-lg font-bold hover:bg-gcbp-primary hover:text-white transition-all hover:-translate-y-1 active:scale-95 w-full md:w-auto inline-block text-center rounded-full">
-                Become a Sponsor
-              </Link>
-            </div>
-            <div className="sponsorship-image order-1 md:order-2">
-              <img
-                src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=800&q=80"
-                alt="Corporate Sponsorship"
-                className="w-full h-[300px] mobile-small:h-[350px] xs:h-[400px] sm:h-[450px] md:h-[500px] object-cover rounded-lg shadow-xl"
-                loading="lazy"
-              />
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Events Carousel Section */}
-      <section className="events-section min-h-screen flex flex-col justify-center py-8 mobile-small:py-10 xs:py-12 sm:py-14 md:py-16 lg:py-20 xl:py-24 px-4 mobile-small:px-5 xs:px-6 sm:px-8 md:px-12 lg:px-16 bg-slate-50">
-        <div className="max-w-7xl mx-auto">
-          <div 
-            className="relative h-[300px] mobile-small:h-[350px] xs:h-[400px] sm:h-[500px] md:h-[600px] lg:h-[650px] xl:h-[700px] rounded-lg overflow-hidden shadow-2xl group"
-            onMouseEnter={() => setIsCarouselPaused(true)}
-            onMouseLeave={() => setIsCarouselPaused(false)}
-          >
-            {events.map((event, index) => (
-              <div
-                key={event.id}
-                className={`event-slide absolute inset-0 transition-opacity duration-500 ${
-                  index === currentEventIndex ? 'opacity-100 z-10' : 'opacity-0 z-0'
-                }`}
-              >
-                <img
-                  src={event.image}
-                  alt={event.title}
-                  className="w-full h-full object-cover"
-                  loading="lazy"
-                />
-                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4 mobile-small:p-5 xs:p-6 sm:p-8 md:p-10">
-                  <h3 className="text-lg mobile-small:text-xl xs:text-2xl sm:text-3xl md:text-4xl font-bold text-white">{event.title}</h3>
-                </div>
-              </div>
-            ))}
-            
-            {/* Navigation Arrows */}
-            <button
-              onClick={prevEvent}
-              className="absolute left-2 mobile-small:left-3 xs:left-4 top-1/2 -translate-y-1/2 w-8 mobile-small:w-10 xs:w-12 h-8 mobile-small:h-10 xs:h-12 rounded-full bg-white/90 flex items-center justify-center shadow-xl hover:bg-white transition-all z-20 opacity-0 group-hover:opacity-100 active:scale-95"
-            >
-              <ArrowLeft className="w-4 mobile-small:w-5 xs:w-6 h-4 mobile-small:h-5 xs:h-6 text-gcbp-primary" />
-            </button>
-            <button
-              onClick={nextEvent}
-              className="absolute right-2 mobile-small:right-3 xs:right-4 top-1/2 -translate-y-1/2 w-8 mobile-small:w-10 xs:w-12 h-8 mobile-small:h-10 xs:h-12 rounded-full bg-white/90 flex items-center justify-center shadow-xl hover:bg-white transition-all z-20 opacity-0 group-hover:opacity-100 active:scale-95"
-            >
-              <ArrowRight className="w-4 mobile-small:w-5 xs:w-6 h-4 mobile-small:h-5 xs:h-6 text-gcbp-primary" />
-            </button>
-
-            {/* Dots Indicator */}
-            <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2 z-20">
-              {events.map((_, index) => (
-                <button
-                  key={index}
-                  onClick={() => setCurrentEventIndex(index)}
-                  className={`w-2 h-2 rounded-full transition-all ${
-                    index === currentEventIndex ? 'bg-white w-8' : 'bg-white/50'
-                  }`}
-                />
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* FAQs Section */}
-      <section className="faqs-section min-h-screen flex flex-col justify-center py-8 mobile-small:py-10 xs:py-12 sm:py-14 md:py-16 lg:py-20 xl:py-24 px-4 mobile-small:px-5 xs:px-6 sm:px-8 md:px-12 lg:px-16">
-        <div className="max-w-3xl mx-auto w-full">
-          <h2 className="text-[clamp(1.5rem,4vw,2.25rem)] mobile-small:text-2xl xs:text-3xl sm:text-4xl md:text-5xl font-bold text-center text-slate-900 mb-6 mobile-small:mb-8 xs:mb-10 sm:mb-12">Frequently Asked Questions</h2>
-          <div className="space-y-0">
-            {faqs.map((faq, index) => (
-              <div
-                key={index}
-                className={`faq-item faq-item-${index} border-b border-slate-200`}
-              >
-                <button
-                  onClick={() => handleFaqToggle(index)}
-                  className="w-full py-4 mobile-small:py-5 xs:py-6 flex items-center justify-between text-left group"
-                >
-                  <span className="text-sm mobile-small:text-base xs:text-lg sm:text-xl font-semibold text-slate-900 group-hover:text-gcbp-primary transition-colors pr-4">
-                    {faq.question}
-                  </span>
-                  <ChevronDown className="faq-chevron w-4 mobile-small:w-5 xs:w-6 h-4 mobile-small:h-5 xs:h-6 text-gcbp-primary transition-transform flex-shrink-0" />
-                </button>
-                <div className="faq-answer overflow-hidden">
-                  <p className="pb-4 mobile-small:pb-5 xs:pb-6 text-[12px] mobile-small:text-sm xs:text-base sm:text-lg text-slate-600 leading-relaxed">{faq.answer}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+    <div ref={rootRef} className="relative bg-white">
+      <style>{`
+        .blog-card:hover img {
+          transform: scale(1.05);
+        }
+        .blog-card:hover {
+          box-shadow: 0 12px 24px rgba(0,0,0,0.15);
+        }
+        .donate-btn:hover .arrow-icon {
+          transform: translateX(6px);
+        }
+        .sponsor-btn:hover {
+          background-color: #1e40af;
+          color: white;
+        }
+        .faq-item.active {
+          border-color: #1e40af;
+        }
+      `}</style>
+      <HeroSection />
+      <BlogsSection />
+      <VolunteerSection 
+        isVideoPlaying={isVideoPlaying}
+        onVideoToggle={() => setIsVideoPlaying(!isVideoPlaying)}
+      />
+      <DonationsSection />
+      <SponsorshipSection />
+      <EventsSection 
+        currentEventIndex={currentEventIndex}
+        onNextEvent={nextEvent}
+        onPrevEvent={prevEvent}
+        onEventSelect={setCurrentEventIndex}
+        onCarouselPause={setIsCarouselPaused}
+      />
+      <FAQsSection openFaq={openFaq} onFaqToggle={handleFaqToggle} />
     </div>
   );
 };

@@ -4,10 +4,10 @@ import { NavItem } from '../types';
 import { Menu, X } from 'lucide-react';
 
 const navItems: NavItem[] = [
-  { label: 'Home', href: '/' },
   { label: 'About', href: '/about' },
   { label: 'Our Programs', href: '/programs' },
   { label: 'Media & Events', href: '/media' },
+  { label: 'Stories', href: '/stories' },
 ];
 
 export const Navbar: React.FC = () => {

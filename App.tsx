@@ -6,6 +6,7 @@ import { About } from './pages/About';
 import { Programs } from './pages/Programs';
 import { Media } from './pages/Media';
 import { Contact } from './pages/Contact';
+import { Stories } from './pages/Stories';
 import { Footer } from './components/Footer';
 import Lenis from 'lenis';
 import gsap from 'gsap';
@@ -78,6 +79,7 @@ function App() {
           <Route path="/about" element={<About />} />
           <Route path="/programs" element={<Programs />} />
           <Route path="/media" element={<Media />} />
+          <Route path="/stories" element={<Stories />} />
           <Route path="/contact" element={<Contact />} />
         </Routes>
         <Footer />
