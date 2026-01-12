@@ -46,17 +46,17 @@ export const Navbar: React.FC = () => {
   };
 
   return (
-    <nav className="fixed top-0 left-0 right-0 w-full z-50 flex justify-between items-center px-3 mobile-small:px-4 xs:px-5 sm:px-6 md:px-[6%] lg:px-[8%] py-3 mobile-small:py-4 xs:py-4.5 sm:py-5 bg-white/95 backdrop-blur-sm transition-all duration-300 border-b border-transparent">
+    <nav className="fixed top-0 left-0 right-0 w-full z-50 flex justify-between items-center px-3 mobile-small:px-4 xs:px-5 sm:px-6 md:px-[6%] lg:px-[8%] py-2 mobile-small:py-2.5 xs:py-3 sm:py-3 md:py-2.5 lg:py-3 bg-white/95 backdrop-blur-sm transition-all duration-300 border-b border-transparent">
       {/* Logo */}
       <Link 
         to="/"
-        className="flex items-center gap-1.5 mobile-small:gap-2 cursor-pointer"
+        className="flex items-center cursor-pointer"
       >
-         {/* Simple placeholder logo to match design */}
-         <div className="w-6 mobile-small:w-7 xs:w-8 h-6 mobile-small:h-7 xs:h-8 rounded-full bg-gcbp-primary flex items-center justify-center text-white font-bold text-[10px] mobile-small:text-xs">GC</div>
-         <span className="text-base mobile-small:text-lg xs:text-xl font-bold tracking-tight text-slate-900">
-            GCBP
-         </span>
+         <img 
+           src="/logo2.png" 
+           alt="GCBP Logo" 
+           className="h-14 mobile-small:h-16 xs:h-18 sm:h-20 md:h-24 lg:h-28 xl:h-32 w-auto object-contain"
+         />
       </Link>
 
       {/* Desktop Menu */}
@@ -66,7 +66,7 @@ export const Navbar: React.FC = () => {
             <a
               key={item.label}
               href={item.href}
-              className="mx-2 lg:mx-3 xl:mx-4 font-medium text-xs lg:text-sm text-slate-800 hover:text-gcbp-primary transition-colors"
+              className="mx-2 lg:mx-3 xl:mx-4 font-medium text-sm md:text-base lg:text-lg text-slate-800 hover:text-gcbp-primary transition-colors"
               onClick={(e) => handleNavClick(item, e)}
             >
               {item.label}
@@ -75,7 +75,7 @@ export const Navbar: React.FC = () => {
             <Link
               key={item.label}
               to={item.href}
-              className={`mx-2 lg:mx-3 xl:mx-4 font-medium text-xs lg:text-sm transition-colors ${
+              className={`mx-2 lg:mx-3 xl:mx-4 font-medium text-sm md:text-base lg:text-lg transition-colors ${
                 location.pathname === item.href
                   ? 'text-gcbp-primary'
                   : 'text-slate-800 hover:text-gcbp-primary'
@@ -91,7 +91,7 @@ export const Navbar: React.FC = () => {
       <div className="flex items-center gap-2 mobile-small:gap-3 xs:gap-4">
         <Link
           to="/contact"
-          className="hidden md:inline-block bg-gcbp-primary text-white px-5 lg:px-6 xl:px-8 py-2 lg:py-2.5 rounded-full font-medium text-xs lg:text-sm hover:bg-blue-800 transition-colors shadow-lg shadow-blue-900/10 active:scale-95"
+          className="hidden md:inline-block bg-gcbp-primary text-white px-6 lg:px-8 xl:px-10 py-2.5 lg:py-3 rounded-full font-medium text-sm md:text-base lg:text-lg hover:bg-blue-800 transition-colors shadow-lg shadow-blue-900/10 active:scale-95"
         >
           Contact Us
         </Link>

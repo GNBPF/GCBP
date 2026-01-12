@@ -22,145 +22,148 @@ export const Home: React.FC = () => {
     if (!mainRef.current) return;
 
     const ctx = gsap.context(() => {
-      // --- ANIMATION 1: HERO BUBBLE BACKGROUND & IMAGES ---
-      const heroSection = document.querySelector(".hero");
-      if (heroSection) {
-        // Bubble background: scale-in (1.05 → 1) + opacity fade (0 → 100%, 1.2s)
-        gsap.from(".bubble-bg", {
-          scale: 1.05,
-          opacity: 0,
-          duration: 1.2,
-          ease: "power2.out"
-        });
+      // --- ANIMATION 1: HERO ROW SWAP ON SCROLL ---
+      // Initial reveal on load
+      gsap.set(".hero-img-inner", {
+        y: 40,
+        scale: 1.05
+      });
 
-        // Images: Staggered float animation (Y: +6px → -6px, 6-8s, infinite, alternate)
-        const floatDurations = [6, 7, 8, 6.5, 7.5, 8, 6];
-        document.querySelectorAll(".float-img-1, .float-img-2, .float-img-3, .float-img-4, .float-img-5, .float-img-6, .float-img-7").forEach((img, index) => {
-          gsap.to(img, {
-            y: -6,
-            duration: floatDurations[index] || 7,
-            ease: "sine.inOut",
-            repeat: -1,
-            yoyo: true
-          });
-        });
+      gsap.set(".hero-img-mask", {
+        opacity: 1
+      });
 
-        // Scroll: Bubble blur + fade, parallax (0.8x)
-        const heroTimeline = gsap.timeline({
+      // Bubble background: scale-in + opacity fade
+      gsap.to(".bubble-bg", {
+        scale: 1,
+        opacity: 1,
+        duration: 1.2,
+        ease: "power3.out"
+      });
+
+      // Images: Slide-in reveal with stagger
+      gsap.to(".hero-img-inner", {
+        y: 0,
+        scale: 1,
+        duration: 1.2,
+        ease: "power3.out",
+        stagger: 0.08
+      });
+
+      // ROW SWAP ANIMATION - Pinned scroll trigger
+      // Top row starts at ~8% from top, bottom row at ~53% from top
+      // Distance to swap: ~45% of viewport height (45vh)
+      const heroSwapTimeline = gsap.timeline({
         scrollTrigger: {
           trigger: ".hero",
           start: "top top",
-          end: "bottom top",
-            scrub: true,
-            invalidateOnRefresh: true
-          }
-        });
+          end: "+=2000", // Scroll distance for the swap
+          pin: true,
+          scrub: 1,
+          anticipatePin: 1,
+          invalidateOnRefresh: true
+        }
+      });
 
-        heroTimeline.to(".bubble-bg", {
-          filter: "blur(4px)",
-          opacity: 0.8,
-          ease: "none"
-        }, 0);
+      // Calculate the swap distance: from 8% to 53% = 45% of viewport height
+      // TOP ROW (4 images) → Moves DOWN to bottom position
+      heroSwapTimeline.to(".row-1", {
+        y: "45vh", // Moves down from 8% to 53% position (45vh)
+        ease: "power2.inOut"
+      }, 0);
 
-        // Parallax for images (0.8x speed)
-        heroTimeline.to(".hero-img", {
-          y: (i, target) => {
-            const scrollAmount = window.scrollY * 0.2; // 0.8x means 20% movement
-            return scrollAmount;
-          },
-          ease: "none"
-        }, 0);
-        
-        // TOP ROW (4 images) → goes DOWN
-        heroTimeline.to(".row-1", {
-          y: () => window.innerHeight * 0.45,
-          scale: 0.95,
-          ease: "none"
-        }, 0);
+      // BOTTOM ROW (3 images) → Moves UP to top position
+      heroSwapTimeline.to(".row-2", {
+        y: "-45vh", // Moves up from 53% to 8% position (-45vh)
+        ease: "power2.inOut"
+      }, 0);
 
-        // BOTTOM ROW (3 images) → goes UP
-        heroTimeline.to(".row-2", {
-          y: () => -window.innerHeight * 0.45,
-          scale: 1.05,
-          ease: "none"
-        }, 0);
-      }
+      // Optional: Bubble blur during swap
+      heroSwapTimeline.to(".bubble-bg", {
+        filter: "blur(4px)",
+        opacity: 0.7,
+        ease: "none"
+      }, 0);
 
       // --- ANIMATION 2: THE GCBP SPLIT REVEAL + TEXT REVEAL ---
       const revealSection = document.querySelector("#reveal");
       if (revealSection) {
-        // Hide hero content initially
+        // Set initial states - everything hidden
         gsap.set(".hero-badge", { opacity: 0, y: 10 });
         gsap.set(".hero-title-line", { opacity: 0, y: 20 });
         gsap.set(".line-1, .line-2, .line-3", { opacity: 0, y: 20 });
         gsap.set(".hero-btn-group", { opacity: 0, y: 10 });
+        gsap.set("#left-text", { x: 0 });
+        gsap.set("#right-text", { x: 0 });
         
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: "#reveal",
-          start: "top top",
-          end: "+=1500",
-          pin: true,
-          scrub: 1,
+        const tl = gsap.timeline({
+          scrollTrigger: {
+            trigger: "#reveal",
+            start: "top top",
+            end: "+=1500",
+            pin: true,
+            scrub: 1,
             anticipatePin: 1,
-            invalidateOnRefresh: true,
-            onEnter: () => {
-              // Ensure text is visible after scroll starts
-              gsap.to(".hero-badge, .hero-title-line, .line-1, .line-2, .line-3, .hero-btn-group", {
-                opacity: 1,
-                y: 0,
-                duration: 0.8,
-                ease: "power2.out",
-                delay: 0.5
-              });
-            }
-        }
-      });
+            invalidateOnRefresh: true
+          }
+        });
 
-        // Split text animation
-      tl.to("#left-text", { x: -500, duration: 2 }, "split")
-        .to("#right-text", { x: 500, duration: 2 }, "split")
-          .to(".reveal-bg", { opacity: 1, scale: 1, duration: 1 }, "split+=0.5")
-          // Badge reveal
-          .to(".hero-badge", { 
-            opacity: 1, 
-            y: 0, 
-            duration: 0.6,
-            ease: "power2.out"
-          }, "split+=0.8")
-          // Title reveal
-          .to(".hero-title-line", { 
-            opacity: 1, 
-            y: 0, 
-            duration: 0.8,
-            ease: "power2.out"
-          }, "split+=1")
-          // Line-by-line text reveal (120ms delay per line)
-          .to(".line-1", { 
-            opacity: 1, 
-            y: 0, 
-            duration: 0.6,
-            ease: "power2.out"
-          }, "split+=1.2")
-          .to(".line-2", { 
-            opacity: 1, 
-            y: 0, 
-            duration: 0.6,
-            ease: "power2.out"
-          }, "split+=1.32")
-          .to(".line-3", { 
-            opacity: 1, 
-            y: 0, 
-            duration: 0.6,
-            ease: "power2.out"
-          }, "split+=1.44")
-          // Fade in buttons
-          .to(".hero-btn-group", { 
-            opacity: 1, 
-            y: 0,
-            duration: 0.8,
-            ease: "power2.out"
-          }, "split+=1.5");
+        // PHASE 1: Split GCBP text (0 → 0.4)
+        tl.to("#left-text", { 
+          x: -500, 
+          duration: 0.4,
+          ease: "power2.inOut"
+        }, 0)
+        .to("#right-text", { 
+          x: 500, 
+          duration: 0.4,
+          ease: "power2.inOut"
+        }, 0);
+
+        // PHASE 2: Reveal content (0.5 → 1.0)
+        // Text appears after GCBP is fully split
+        tl.to(".hero-badge", { 
+          opacity: 1, 
+          y: 0, 
+          duration: 0.2,
+          ease: "power2.out"
+        }, 0.5)
+        .to(".hero-title-line", { 
+          opacity: 1, 
+          y: 0, 
+          duration: 0.25,
+          ease: "power2.out"
+        }, 0.55)
+        .to(".line-1", { 
+          opacity: 1, 
+          y: 0, 
+          duration: 0.2,
+          ease: "power2.out"
+        }, 0.65)
+        .to(".line-2", { 
+          opacity: 1, 
+          y: 0, 
+          duration: 0.2,
+          ease: "power2.out"
+        }, 0.7)
+        .to(".line-3", { 
+          opacity: 1, 
+          y: 0, 
+          duration: 0.2,
+          ease: "power2.out"
+        }, 0.75)
+        .to(".hero-btn-group", { 
+          opacity: 1, 
+          y: 0,
+          duration: 0.3,
+          ease: "power2.out"
+        }, 0.85);
+
+        // Timeline ends at 1.5, keeping text visible
+        // On reverse scroll (scrolling up):
+        // - Text fades out: 1.0 → 0.5 (completely hidden by 0.5)
+        // - GCBP closes: 0.4 → 0 (starts closing at 0.4)
+        // Text is hidden by 0.5, GCBP closes 0.4→0, so text is gone before GCBP closes
       }
 
       // --- ANIMATION 3: ABOUT SECTION (OUR DNA) ---
