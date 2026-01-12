@@ -19,7 +19,7 @@ export const DonationsSection: React.FC = () => {
           <div className="donation-image relative overflow-hidden rounded-lg shadow-xl">
             <div className="donation-image-mask absolute inset-0 bg-white origin-bottom"></div>
             <img
-              src="https://images.unsplash.com/photo-1532629345422-7515f3d16bb6?auto=format&fit=crop&w=800&q=80"
+              src="/images/img3.jpg"
               alt="Donations"
               className="w-full h-[300px] mobile-small:h-[350px] xs:h-[400px] sm:h-[450px] md:h-[500px] lg:h-[550px] object-cover"
               loading="lazy"

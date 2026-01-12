@@ -6,7 +6,7 @@ export const MapSection: React.FC = () => {
       <div className="max-w-6xl mx-auto">
         <div className="relative rounded-lg overflow-hidden shadow-2xl group cursor-pointer">
           <img
-            src="https://images.unsplash.com/photo-1521791136064-7986c2920216?auto=format&fit=crop&w=1200&q=80"
+            src="/images/img8.jpg"
             alt="Location Map"
             className="map-image w-full h-[300px] mobile-small:h-[350px] xs:h-[400px] sm:h-[450px] md:h-[500px] lg:h-[550px] object-cover"
             loading="lazy"

@@ -6,21 +6,21 @@ const blogPosts = [
     date: 'SEP 27, 2021',
     category: 'BLOG',
     title: 'STORIES THAT MATTER. STRAIGHT FROM THE GROUND.',
-    image: 'https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?auto=format&fit=crop&w=800&q=80',
+    image: '/images/img8.jpg',
   },
   {
     id: 2,
     date: 'SEP 27, 2021',
     category: 'BLOG',
     title: 'INSIGHTS INTO OUR WORK, COMMUNITIES, AND CAUSES.',
-    image: 'https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&w=800&q=80',
+    image: '/images/img1.jpg',
   },
   {
     id: 3,
     date: 'SEP 27, 2021',
     category: 'BLOG',
     title: 'STAY INFORMED, INSPIRED, AND INVOLVED.',
-    image: 'https://images.unsplash.com/photo-1532629345422-7515f3d16bb6?auto=format&fit=crop&w=800&q=80',
+    image: '/images/img2.jpg',
   },
 ];
 

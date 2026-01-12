@@ -55,11 +55,15 @@ export const AchievementsSection: React.FC = () => {
 
           <div className="space-y-4 mobile-small:space-y-5 xs:space-y-6">
             <div className="relative overflow-hidden rounded-lg shadow-xl impact-video border border-slate-200 aspect-[4/3]">
-              <img
-                src="https://images.unsplash.com/photo-1593113598332-cd288d649433?auto=format&fit=crop&w=1200&q=80"
-                alt="Impact"
+              <video
                 className="w-full h-full object-cover"
-              />
+                loop
+                muted
+                playsInline
+                autoPlay
+              >
+                <source src="/images/vid3.mp4" type="video/mp4" />
+              </video>
             </div>
             
             <div className="space-y-3 mobile-small:space-y-4">

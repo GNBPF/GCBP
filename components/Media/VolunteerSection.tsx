@@ -34,7 +34,7 @@ export const VolunteerSection: React.FC<VolunteerSectionProps> = ({ isVideoPlayi
             playsInline
             autoPlay
           >
-            <source src="https://videos.pexels.com/video-files/3045163/3045163-hd_1920_1080_25fps.mp4" type="video/mp4" />
+            <source src="/images/vid2.mp4" type="video/mp4" />
           </video>
           <div className="absolute inset-0 bg-black/20 group-hover:bg-black/30 transition-all duration-300 flex items-center justify-center">
             <button

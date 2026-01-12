@@ -18,7 +18,7 @@ export const PartnersSection: React.FC = () => {
             <h2 className="text-[clamp(3rem,10vw,8rem)] mobile-small:text-[clamp(4rem,12vw,10rem)] font-black text-gcbp-primary mb-6 mobile-small:mb-8">GCBP</h2>
             <div className="feature-image aspect-[4/3] overflow-hidden rounded-lg shadow-xl">
               <img 
-                src="https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?auto=format&fit=crop&w=800&q=80" 
+                src="/images/img5.jpg" 
                 alt="Child" 
                 className="w-full h-full object-cover scale-108" 
               />

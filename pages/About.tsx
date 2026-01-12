@@ -28,6 +28,8 @@ export const About: React.FC = () => {
     if (!rootRef.current) return;
 
     const ctx = gsap.context(() => {
+      // Initial refresh for responsive setup
+      ScrollTrigger.refresh();
       // ===== 1. HERO SECTION =====
       // Set initial states
       gsap.set('.hero-bg', { opacity: 0 });
@@ -301,7 +303,14 @@ export const About: React.FC = () => {
 
     }, rootRef);
 
+    // Handle window resize for responsive animations
+    const handleResize = () => {
+      ScrollTrigger.refresh();
+    };
+    window.addEventListener('resize', handleResize);
+
     return () => {
+      window.removeEventListener('resize', handleResize);
       ctx.revert();
       ScrollTrigger.getAll().forEach(trigger => trigger.kill());
     };

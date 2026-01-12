@@ -7,9 +7,9 @@ const programs = [
     description: 'Protecting marine ecosystems and coastal communities through sustainable practices and habitat restoration.',
     imagePosition: 'left',
     images: [
-      'https://images.unsplash.com/photo-1559827260-dc66d52bef19?auto=format&fit=crop&w=800&q=80',
-      'https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=800&q=80',
-      'https://images.unsplash.com/photo-1583212292454-1fe6229603b7?auto=format&fit=crop&w=800&q=80',
+      '/images/img7.jpg',
+      '/images/img8.jpg',
+      '/images/img1.jpg',
     ],
   },
   {
@@ -18,9 +18,9 @@ const programs = [
     description: 'Accelerating the transition to renewable energy sources, empowering communities with solar and wind solutions.',
     imagePosition: 'right',
     images: [
-      'https://images.unsplash.com/photo-1497435334941-8c899ee9e8e9?auto=format&fit=crop&w=800&q=80',
-      'https://images.unsplash.com/photo-1466611653911-95081537e5b7?auto=format&fit=crop&w=800&q=80',
-      'https://images.unsplash.com/photo-1509391366360-2e959784a276?auto=format&fit=crop&w=800&q=80',
+      '/images/img2.jpg',
+      '/images/img3.jpg',
+      '/images/img4.jpg',
     ],
   },
   {
@@ -29,9 +29,9 @@ const programs = [
     description: 'Inspiring the next generation of environmental stewards through hands-on learning and nature immersion programs.',
     imagePosition: 'right',
     images: [
-      'https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&w=800&q=80',
-      'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&w=800&q=80',
-      'https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=800&q=80',
+      '/images/img5.jpg',
+      '/images/img6.jpg',
+      '/images/img7.jpg',
     ],
   },
   {
@@ -40,9 +40,9 @@ const programs = [
     description: 'Supporting regenerative farming practices that restore soil health and ensure food security for future generations.',
     imagePosition: 'left',
     images: [
-      'https://images.unsplash.com/photo-1625246333195-78d9c38ad449?auto=format&fit=crop&w=800&q=80',
-      'https://images.unsplash.com/photo-1574943320219-553eb213f72d?auto=format&fit=crop&w=800&q=80',
-      'https://images.unsplash.com/photo-1625246333195-78d9c38ad449?auto=format&fit=crop&w=800&q=80',
+      '/images/img8.jpg',
+      '/images/img1.jpg',
+      '/images/img2.jpg',
     ],
   },
 ];

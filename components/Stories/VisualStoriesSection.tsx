@@ -16,7 +16,7 @@ export const VisualStoriesSection: React.FC = () => {
         {/* Full-Width Image */}
         <div className="visual-image-container relative overflow-hidden rounded-lg shadow-2xl mb-8 mobile-small:mb-10 xs:mb-12">
           <img
-            src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&w=1400&q=80"
+            src="/images/img2.jpg"
             alt="Visual Story"
             className="w-full h-[400px] mobile-small:h-[450px] xs:h-[500px] sm:h-[600px] md:h-[700px] object-cover"
             loading="lazy"

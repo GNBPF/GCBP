@@ -27,7 +27,7 @@ export const AboutSection: React.FC = () => {
             We are dedicated to making a difference through these values. We believe that small actions lead to big change, and we promise to keep the planet, people, and animals healthy and safe.
           </p>
           <button 
-            className="learn-more-btn bg-transparent text-gcbp-primary border-2 border-dashed border-gcbp-primary px-6 mobile-small:px-7 xs:px-8 py-2.5 mobile-small:py-3 text-sm mobile-small:text-base rounded-full cursor-pointer font-medium transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-blue-900/20 active:scale-95 flex items-center gap-2 group"
+            className="learn-more-btn bg-transparent text-gcbp-primary border-2 border-dashed border-gcbp-primary px-6 mobile-small:px-7 xs:px-8 sm:px-9 md:px-10 py-3 mobile-small:py-3.5 xs:py-4 sm:py-4.5 text-sm mobile-small:text-base xs:text-lg sm:text-xl rounded-full cursor-pointer font-medium transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-blue-900/20 active:scale-95 flex items-center gap-2 group min-h-[44px] mobile-small:min-h-[48px]"
             onClick={() => {
               const element = document.querySelector('#impact');
               if (element) {
@@ -42,7 +42,7 @@ export const AboutSection: React.FC = () => {
           </button>
         </div>
         <div className="about-img h-[300px] mobile-small:h-[350px] xs:h-[400px] sm:h-[450px] md:h-[500px] lg:h-[550px] xl:h-[600px] 2xl:h-[650px] w-full rounded-xl overflow-hidden shadow-xl order-1 md:order-2">
-          <img src="https://images.unsplash.com/photo-1593113598332-cd288d649433?auto=format&fit=crop&w=800&q=80" alt="Hands forming heart" className="w-full h-full object-cover" />
+          <img src="/images/img1.jpg" alt="Hands forming heart" className="w-full h-full object-cover" loading="lazy" />
         </div>
       </div>
     </section>

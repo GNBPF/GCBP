@@ -20,7 +20,7 @@ export const NewsSection: React.FC = () => {
         
         <div className="news-grid grid grid-cols-1 md:grid-cols-2 gap-6 mobile-small:gap-8 xs:gap-10 sm:gap-12">
           <div className="news-card news-card-left aspect-[4/3] rounded-lg overflow-hidden relative transition-transform duration-300 hover:scale-[1.02] group cursor-pointer shadow-xl">
-            <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=800&q=80" alt="News 1" className="w-full h-full object-cover group-hover:brightness-75 transition-all duration-300" />
+            <img src="/images/img3.jpg" alt="News 1" className="w-full h-full object-cover group-hover:brightness-75 transition-all duration-300" loading="lazy" />
             <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex items-end p-4 mobile-small:p-5 xs:p-6 sm:p-7 md:p-8">
               <h4 className="text-white font-bold text-base mobile-small:text-lg sm:text-xl md:text-2xl lg:text-3xl relative">
                 <span className="relative z-10">Corporate Sustainability Summit 2024</span>
@@ -29,7 +29,7 @@ export const NewsSection: React.FC = () => {
             </div>
           </div>
           <div className="news-card news-card-right aspect-[4/3] rounded-lg overflow-hidden relative transition-transform duration-300 hover:scale-[1.02] group cursor-pointer shadow-xl">
-            <img src="https://images.unsplash.com/photo-1551845851-32f27f3dd0c2?auto=format&fit=crop&w=800&q=80" alt="News 2" className="w-full h-full object-cover group-hover:brightness-75 transition-all duration-300" />
+            <img src="/images/img4.jpg" alt="News 2" className="w-full h-full object-cover group-hover:brightness-75 transition-all duration-300" loading="lazy" />
             <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex items-end p-4 mobile-small:p-5 xs:p-6 sm:p-7 md:p-8">
               <h4 className="text-white font-bold text-base mobile-small:text-lg sm:text-xl md:text-2xl lg:text-3xl relative">
                 <span className="relative z-10">New Water Projects Launched in Kenya</span>

@@ -8,11 +8,11 @@ const contactFaqs = [
   },
   {
     question: 'How long does it take to get a response?',
-    answer: 'We typically respond to all inquiries within 24-48 hours during business days. For urgent matters, please call our direct line at +91 999-888-7777.',
+    answer: 'We typically respond to all inquiries within 24-48 hours during business days. For urgent matters, please email us at connect@gnbp.org.',
   },
   {
     question: 'Can I schedule a meeting with the team?',
-    answer: 'Absolutely! You can request a meeting through the contact form or by emailing us at hello@gcbp.org. We welcome the opportunity to discuss how you can get involved.',
+    answer: 'Absolutely! You can request a meeting through the contact form or by emailing us at connect@gnbp.org. We welcome the opportunity to discuss how you can get involved.',
   },
   {
     question: 'What information should I include in my message?',

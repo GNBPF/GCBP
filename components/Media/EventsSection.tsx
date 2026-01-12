@@ -8,7 +8,7 @@ const events = [
     description: 'JOIN EXPERTS ONLINE TO EXPLORE SUSTAINABLE PRACTICES THAT CAN TRANSFORM SCHOOLS INTO ECO-FRIENDLY LEARNING SPACES.',
     date: 'SEPT 28, 2025',
     type: 'VIRTUAL',
-    image: 'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&w=1200&q=80',
+    image: '/images/img5.jpg',
   },
   {
     id: 2,
@@ -16,7 +16,7 @@ const events = [
     description: 'A global gathering of leaders, activists, and changemakers committed to accelerating climate solutions.',
     date: 'OCT 15, 2024',
     type: 'HYBRID',
-    image: 'https://images.unsplash.com/photo-1542601906990-b4d3fb7d5c73?auto=format&fit=crop&w=1200&q=80',
+    image: '/images/img6.jpg',
   },
   {
     id: 3,
@@ -24,7 +24,7 @@ const events = [
     description: 'Join us for a day of tree planting and community engagement in local neighborhoods.',
     date: 'NOV 5, 2024',
     type: 'IN-PERSON',
-    image: 'https://images.unsplash.com/photo-1469571486292-0ba58a3f068b?auto=format&fit=crop&w=1200&q=80',
+    image: '/images/img7.jpg',
   },
 ];
 
@@ -72,12 +72,24 @@ export const EventsSection: React.FC<EventsSectionProps> = ({
                 index === currentEventIndex ? 'opacity-100 z-10' : 'opacity-0 z-0'
               }`}
             >
-              <img
-                src={event.image}
-                alt={event.title}
-                className="w-full h-full object-cover"
-                loading="lazy"
-              />
+              {index === 0 && currentEventIndex === 0 ? (
+                <video
+                  className="w-full h-full object-cover"
+                  loop
+                  muted
+                  playsInline
+                  autoPlay
+                >
+                  <source src="/images/vid4.mp4" type="video/mp4" />
+                </video>
+              ) : (
+                <img
+                  src={event.image}
+                  alt={event.title}
+                  className="w-full h-full object-cover"
+                  loading="lazy"
+                />
+              )}
               <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent flex flex-col justify-end p-6 mobile-small:p-8 xs:p-10 sm:p-12">
                 <div className="event-overlay-text opacity-0">
                   <h3 className="text-xl mobile-small:text-2xl xs:text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-3 mobile-small:mb-4 xs:mb-5">

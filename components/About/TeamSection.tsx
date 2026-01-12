@@ -1,10 +1,10 @@
 import React from 'react';
 
 const team = [
-  { name: 'Ava Patel', role: 'Impact Lead', img: 'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=400&q=80' },
-  { name: 'Liam Chen', role: 'Partnerships', img: 'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=400&q=80&sat=-50' },
-  { name: 'Maya Rivera', role: 'Programs', img: 'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=400&q=80&hue=20' },
-  { name: 'Noah Kim', role: 'Advocacy', img: 'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=400&q=80&sat=10' },
+  { name: 'Ava Patel', role: 'Impact Lead', img: '/images/img5.jpg' },
+  { name: 'Liam Chen', role: 'Partnerships', img: '/images/img6.jpg' },
+  { name: 'Maya Rivera', role: 'Programs', img: '/images/img7.jpg' },
+  { name: 'Noah Kim', role: 'Advocacy', img: '/images/img8.jpg' },
 ];
 
 export const TeamSection: React.FC = () => {

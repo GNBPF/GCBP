@@ -1,5 +1,5 @@
 import React from 'react';
-import { Mail, Phone, MapPin, Clock } from 'lucide-react';
+import { Mail, MapPin, Clock } from 'lucide-react';
 
 export const ContactInfoSection: React.FC = () => {
   return (
@@ -12,8 +12,8 @@ export const ContactInfoSection: React.FC = () => {
             <div>
               <h3 className="font-semibold text-slate-900 mb-1.5 mobile-small:mb-2 text-sm mobile-small:text-base xs:text-lg">Address</h3>
               <p className="text-[12px] mobile-small:text-sm xs:text-base sm:text-lg text-slate-700 leading-relaxed">
-                25-28 F1 St. No-2, Chakrata Road,<br />
-                Nirman Nagar, Dehradun, 248001<br />
+                C - 20, G Block Rd, G Block BKC,<br />
+                Bandra Kurla Complex, Bandra East,<br />
                 Mumbai, Maharashtra 400051
               </p>
             </div>
@@ -23,18 +23,8 @@ export const ContactInfoSection: React.FC = () => {
             <Mail className="w-5 mobile-small:w-6 h-5 mobile-small:h-6 text-gcbp-primary mt-0.5 mobile-small:mt-1 flex-shrink-0" />
             <div>
               <h3 className="font-semibold text-slate-900 mb-1.5 mobile-small:mb-2 text-sm mobile-small:text-base xs:text-lg">Email</h3>
-              <a href="mailto:hello@gcbp.org" className="text-[12px] mobile-small:text-sm xs:text-base sm:text-lg text-gcbp-primary hover:underline">
-                hello@gcbp.org
-              </a>
-            </div>
-          </div>
-
-          <div className="address-line flex items-start gap-3 mobile-small:gap-4">
-            <Phone className="w-5 mobile-small:w-6 h-5 mobile-small:h-6 text-gcbp-primary mt-0.5 mobile-small:mt-1 flex-shrink-0" />
-            <div>
-              <h3 className="font-semibold text-slate-900 mb-1.5 mobile-small:mb-2 text-sm mobile-small:text-base xs:text-lg">Phone</h3>
-              <a href="tel:+919998887777" className="text-[12px] mobile-small:text-sm xs:text-base sm:text-lg text-gcbp-primary hover:underline">
-                +91 999-888-7777
+              <a href="mailto:connect@gnbp.org" className="text-[12px] mobile-small:text-sm xs:text-base sm:text-lg text-gcbp-primary hover:underline">
+                connect@gnbp.org
               </a>
             </div>
           </div>

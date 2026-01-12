@@ -22,6 +22,8 @@ export const Home: React.FC = () => {
     if (!mainRef.current) return;
 
     const ctx = gsap.context(() => {
+      // Initial refresh to ensure proper setup
+      ScrollTrigger.refresh();
       // --- ANIMATION 1: HERO ROW SWAP ON SCROLL ---
       // Initial reveal on load
       gsap.set(".hero-img-inner", {
@@ -51,13 +53,27 @@ export const Home: React.FC = () => {
       });
 
       // ROW SWAP ANIMATION - Pinned scroll trigger
-      // Top row starts at ~8% from top, bottom row at ~53% from top
-      // Distance to swap: ~45% of viewport height (45vh)
+      // Responsive swap distance based on screen size
+      const getSwapDistance = () => {
+        const width = window.innerWidth;
+        const height = window.innerHeight;
+        // Calculate responsive distance: smaller screens need less movement
+        if (width < 640) return height * 0.4; // Mobile: 40vh
+        if (width < 1024) return height * 0.42; // Tablet: 42vh
+        return height * 0.45; // Desktop: 45vh
+      };
+      
       const heroSwapTimeline = gsap.timeline({
         scrollTrigger: {
           trigger: ".hero",
           start: "top top",
-          end: "+=2000", // Scroll distance for the swap
+          end: () => {
+            // Responsive scroll distance
+            const width = window.innerWidth;
+            if (width < 640) return "+=1500"; // Mobile: less scroll
+            if (width < 1024) return "+=1800"; // Tablet: medium scroll
+            return "+=2000"; // Desktop: full scroll
+          },
           pin: true,
           scrub: 1,
           anticipatePin: 1,
@@ -65,16 +81,15 @@ export const Home: React.FC = () => {
         }
       });
 
-      // Calculate the swap distance: from 8% to 53% = 45% of viewport height
       // TOP ROW (4 images) → Moves DOWN to bottom position
       heroSwapTimeline.to(".row-1", {
-        y: "45vh", // Moves down from 8% to 53% position (45vh)
+        y: () => getSwapDistance(),
         ease: "power2.inOut"
       }, 0);
 
       // BOTTOM ROW (3 images) → Moves UP to top position
       heroSwapTimeline.to(".row-2", {
-        y: "-45vh", // Moves up from 53% to 8% position (-45vh)
+        y: () => -getSwapDistance(),
         ease: "power2.inOut"
       }, 0);
 
@@ -109,13 +124,23 @@ export const Home: React.FC = () => {
         });
 
         // PHASE 1: Split GCBP text (0 → 0.4)
+        // Responsive split distance based on screen width
+        const getSplitDistance = () => {
+          const width = window.innerWidth;
+          if (width < 375) return -200; // mobile-small
+          if (width < 640) return -300; // xs
+          if (width < 768) return -350; // sm
+          if (width < 1024) return -400; // md
+          return -500; // lg and above
+        };
+        
         tl.to("#left-text", { 
-          x: -500, 
+          x: getSplitDistance(), 
           duration: 0.4,
           ease: "power2.inOut"
         }, 0)
         .to("#right-text", { 
-          x: 500, 
+          x: -getSplitDistance(), 
           duration: 0.4,
           ease: "power2.inOut"
         }, 0);
@@ -421,7 +446,14 @@ export const Home: React.FC = () => {
 
     }, mainRef);
 
+    // Handle window resize for responsive animations
+    const handleResize = () => {
+      ScrollTrigger.refresh();
+    };
+    window.addEventListener('resize', handleResize);
+
     return () => {
+      window.removeEventListener('resize', handleResize);
       ctx.revert();
       ScrollTrigger.getAll().forEach(trigger => trigger.kill());
     };

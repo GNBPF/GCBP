@@ -5,22 +5,22 @@ export const PillarsSection: React.FC = () => {
     { 
       title: 'OUR MISSION', 
       body: 'To catalyze global action for a sustainable future by empowering communities, fostering innovation, and building partnerships that drive meaningful environmental and social change.',
-      img: 'https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?auto=format&fit=crop&w=800&q=80'
+      img: '/images/img1.jpg'
     },
     { 
       title: 'OUR VISION', 
       body: 'A world where communities thrive in harmony with nature, where sustainable practices are the norm, and where collective action creates lasting positive impact for generations to come.',
-      img: 'https://images.unsplash.com/photo-1593113598332-cd288d649433?auto=format&fit=crop&w=800&q=80'
+      img: '/images/img2.jpg'
     },
     { 
       title: 'OUR FUNDING', 
       body: 'We are supported by individual donations, institutional grants, corporate partnerships, and community-driven crowdfunding initiatives that share our commitment to a better planet.',
-      img: 'https://images.unsplash.com/photo-1509099836639-18ba1795216d?auto=format&fit=crop&w=800&q=80'
+      img: '/images/img3.jpg'
     },
     { 
       title: 'OUR CHALLENGES', 
       body: 'We face the challenge of empowering communities with limited resources, scaling local solutions globally, and accelerating measurable climate outcomes in an ever-changing world.',
-      img: 'https://images.unsplash.com/photo-1532629345422-7515f3d16bb6?auto=format&fit=crop&w=800&q=80'
+      img: '/images/img4.jpg'
     },
   ];
 

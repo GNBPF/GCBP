@@ -223,7 +223,14 @@ export const Stories: React.FC = () => {
 
     }, rootRef);
 
+    // Handle window resize for responsive animations
+    const handleResize = () => {
+      ScrollTrigger.refresh();
+    };
+    window.addEventListener('resize', handleResize);
+
     return () => {
+      window.removeEventListener('resize', handleResize);
       ctx.revert();
       ScrollTrigger.getAll().forEach(trigger => trigger.kill());
     };

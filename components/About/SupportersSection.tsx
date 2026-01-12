@@ -1,10 +1,10 @@
 import React from 'react';
 
 const supporters = [
-  { quote: 'I AM INSPIRED BY THE DEDICATION AND POSITIVE IMPACT THIS NGO BRINGS TO OUR COMMUNITY.', name: 'VERA DESAI', img: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=200&q=80' },
-  { quote: 'I AM INSPIRED BY THE DEDICATION AND POSITIVE IMPACT THIS NGO BRINGS TO OUR COMMUNITY.', name: 'VERA DESAI', img: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=200&q=80' },
-  { quote: 'I AM INSPIRED BY THE DEDICATION AND POSITIVE IMPACT THIS NGO BRINGS TO OUR COMMUNITY.', name: 'VERA DESAI', img: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=200&q=80' },
-  { quote: 'I AM INSPIRED BY THE DEDICATION AND POSITIVE IMPACT THIS NGO BRINGS TO OUR COMMUNITY.', name: 'VERA DESAI', img: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=200&q=80' },
+  { quote: 'I AM INSPIRED BY THE DEDICATION AND POSITIVE IMPACT THIS NGO BRINGS TO OUR COMMUNITY.', name: 'VERA DESAI', img: '/images/img1.jpg' },
+  { quote: 'I AM INSPIRED BY THE DEDICATION AND POSITIVE IMPACT THIS NGO BRINGS TO OUR COMMUNITY.', name: 'VERA DESAI', img: '/images/img2.jpg' },
+  { quote: 'I AM INSPIRED BY THE DEDICATION AND POSITIVE IMPACT THIS NGO BRINGS TO OUR COMMUNITY.', name: 'VERA DESAI', img: '/images/img3.jpg' },
+  { quote: 'I AM INSPIRED BY THE DEDICATION AND POSITIVE IMPACT THIS NGO BRINGS TO OUR COMMUNITY.', name: 'VERA DESAI', img: '/images/img4.jpg' },
 ];
 
 export const SupportersSection: React.FC = () => {

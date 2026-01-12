@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import { Navbar } from './components/Navbar';
 import { Home } from './pages/Home';
 import { About } from './pages/About';
@@ -14,6 +14,25 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 // Register GSAP plugin
 gsap.registerPlugin(ScrollTrigger);
+
+// ScrollToTop component - scrolls to top on route change
+const ScrollToTop: React.FC = () => {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    // Scroll to top immediately when route changes
+    window.scrollTo(0, 0);
+    
+    // Also refresh ScrollTrigger after a brief delay to ensure layout is ready
+    const timer = setTimeout(() => {
+      ScrollTrigger.refresh();
+    }, 100);
+
+    return () => clearTimeout(timer);
+  }, [pathname]);
+
+  return null;
+};
 
 function App() {
   useEffect(() => {
@@ -72,6 +91,7 @@ function App() {
 
   return (
     <BrowserRouter>
+      <ScrollToTop />
       <div className="min-h-screen flex flex-col bg-white">
         <Navbar />
         <Routes>

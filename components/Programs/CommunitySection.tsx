@@ -1,12 +1,12 @@
 import React from 'react';
 
 const communityImages = [
-  'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&w=600&q=80',
-  'https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=600&q=80',
-  'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=600&q=80',
-  'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=600&q=80',
-  'https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=600&q=80',
-  'https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=600&q=80',
+  '/images/img3.jpg',
+  '/images/img4.jpg',
+  '/images/img5.jpg',
+  '/images/img6.jpg',
+  '/images/img7.jpg',
+  '/images/img8.jpg',
 ];
 
 export const CommunitySection: React.FC = () => {

@@ -24,7 +24,7 @@ export const SponsorshipSection: React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-[1fr_1.2fr] gap-8 mobile-small:gap-10 xs:gap-12 sm:gap-14 items-start">
           <div className="sponsorship-image order-2 md:order-1">
             <img
-              src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=800&q=80"
+              src="/images/img4.jpg"
               alt="Corporate Sponsorship"
               className="w-full h-[300px] mobile-small:h-[350px] xs:h-[400px] sm:h-[450px] md:h-[500px] object-cover rounded-lg shadow-xl"
               loading="lazy"

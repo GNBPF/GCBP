@@ -21,7 +21,7 @@ export const RevealSection: React.FC = () => {
         </p>
         <div className="hero-btn-group flex justify-center gap-2 mobile-small:gap-2.5 xs:gap-3 sm:gap-4 md:gap-5 mt-5 mobile-small:mt-6 sm:mt-7 md:mt-8 lg:mt-10 flex-wrap opacity-0">
           <button 
-            className="cta-btn-donate bg-gcbp-primary text-white px-4 mobile-small:px-5 xs:px-6 py-2 mobile-small:py-2.5 text-[12px] mobile-small:text-sm xs:text-base rounded-full border-none cursor-pointer font-medium relative overflow-hidden group transition-all duration-300 active:scale-[0.96] hover:shadow-[0px_8px_24px_rgba(30,64,175,0.3)]"
+            className="cta-btn-donate bg-gcbp-primary text-white px-4 mobile-small:px-5 xs:px-6 sm:px-7 md:px-8 py-2.5 mobile-small:py-3 xs:py-3.5 sm:py-4 text-[12px] mobile-small:text-sm xs:text-base sm:text-lg md:text-xl rounded-full border-none cursor-pointer font-medium relative overflow-hidden group transition-all duration-300 active:scale-[0.96] hover:shadow-[0px_8px_24px_rgba(30,64,175,0.3)] min-h-[44px] mobile-small:min-h-[48px]"
             onClick={() => {
               const element = document.querySelector('#contact');
               if (element) {
@@ -35,7 +35,7 @@ export const RevealSection: React.FC = () => {
             <span className="relative z-10">Donate</span>
           </button>
           <button 
-            className="cta-btn-volunteer bg-transparent text-gcbp-primary border border-gcbp-primary px-4 mobile-small:px-5 xs:px-6 py-2 mobile-small:py-2.5 text-[12px] mobile-small:text-sm xs:text-base rounded-full cursor-pointer font-medium relative overflow-hidden group transition-all duration-300 active:scale-[0.96] hover:shadow-[0px_8px_24px_rgba(0,0,0,0.08)]"
+            className="cta-btn-volunteer bg-transparent text-gcbp-primary border-2 border-gcbp-primary px-4 mobile-small:px-5 xs:px-6 sm:px-7 md:px-8 py-2.5 mobile-small:py-3 xs:py-3.5 sm:py-4 text-[12px] mobile-small:text-sm xs:text-base sm:text-lg md:text-xl rounded-full cursor-pointer font-medium relative overflow-hidden group transition-all duration-300 active:scale-[0.96] hover:shadow-[0px_8px_24px_rgba(0,0,0,0.08)] min-h-[44px] mobile-small:min-h-[48px]"
             onClick={() => {
               const element = document.querySelector('#contact');
               if (element) {
@@ -49,7 +49,7 @@ export const RevealSection: React.FC = () => {
             <span className="relative z-10">Volunteer</span>
           </button>
           <button 
-            className="cta-btn-join bg-gcbp-primary text-white px-4 mobile-small:px-5 xs:px-6 py-2 mobile-small:py-2.5 text-[12px] mobile-small:text-sm xs:text-base rounded-full border-none cursor-pointer font-medium relative overflow-hidden group transition-all duration-300 active:scale-[0.96] hover:shadow-[0px_8px_24px_rgba(30,64,175,0.2)]"
+            className="cta-btn-join bg-gcbp-primary text-white px-4 mobile-small:px-5 xs:px-6 sm:px-7 md:px-8 py-2.5 mobile-small:py-3 xs:py-3.5 sm:py-4 text-[12px] mobile-small:text-sm xs:text-base sm:text-lg md:text-xl rounded-full border-none cursor-pointer font-medium relative overflow-hidden group transition-all duration-300 active:scale-[0.96] hover:shadow-[0px_8px_24px_rgba(30,64,175,0.2)] min-h-[44px] mobile-small:min-h-[48px]"
             onClick={() => {
               const element = document.querySelector('#contact');
               if (element) {

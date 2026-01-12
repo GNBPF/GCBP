@@ -24,16 +24,16 @@ export const Footer: React.FC = () => {
         <div>
           <h4 className="font-semibold mb-2 mobile-small:mb-3 text-sm mobile-small:text-base xs:text-lg">Address</h4>
           <p className="text-blue-100 text-[12px] mobile-small:text-sm xs:text-base leading-relaxed">
-            25-28 F1 St. No-2, Chakrata Road,
-            <br /> Nirman Nagar, Dehradun, 248001
+            C - 20, G Block Rd, G Block BKC,<br />
+            Bandra Kurla Complex, Bandra East,<br />
+            Mumbai, Maharashtra 400051
           </p>
         </div>
 
         {/* Col 3: Contacts */}
         <div>
           <h4 className="font-semibold mb-2 mobile-small:mb-3 text-sm mobile-small:text-base xs:text-lg">Contacts</h4>
-          <p className="text-blue-100 text-[12px] mobile-small:text-sm xs:text-base leading-relaxed">hello@gcbp.org</p>
-          <p className="text-blue-100 text-[12px] mobile-small:text-sm xs:text-base leading-relaxed">+91 999-888-7777</p>
+          <p className="text-blue-100 text-[12px] mobile-small:text-sm xs:text-base leading-relaxed">connect@gnbp.org</p>
         </div>
 
         {/* Col 4: Links */}

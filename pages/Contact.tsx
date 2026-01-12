@@ -26,6 +26,9 @@ export const Contact: React.FC = () => {
     if (!rootRef.current) return;
 
     const ctx = gsap.context(() => {
+      // Initial refresh for responsive setup
+      ScrollTrigger.refresh();
+      
       // Hero animations
       gsap.from('.contact-hero-title', {
         y: 24,
@@ -95,7 +98,17 @@ export const Contact: React.FC = () => {
       });
     }, rootRef);
 
-    return () => ctx.revert();
+    // Handle window resize for responsive animations
+    const handleResize = () => {
+      ScrollTrigger.refresh();
+    };
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+      ctx.revert();
+      ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+    };
   }, []);
 
   const handleFaqToggle = (index: number) => {

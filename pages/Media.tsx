@@ -15,17 +15,17 @@ const events = [
   {
     id: 1,
     title: 'Green School Webinar',
-    image: 'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&w=1200&q=80',
+    image: '/images/img5.jpg',
   },
   {
     id: 2,
     title: 'Climate Action Summit 2024',
-    image: 'https://images.unsplash.com/photo-1542601906990-b4d3fb7d5c73?auto=format&fit=crop&w=1200&q=80',
+    image: '/images/img6.jpg',
   },
   {
     id: 3,
     title: 'Community Planting Day',
-    image: 'https://images.unsplash.com/photo-1469571486292-0ba58a3f068b?auto=format&fit=crop&w=1200&q=80',
+    image: '/images/img7.jpg',
   },
 ];
 
@@ -39,6 +39,9 @@ export const Media: React.FC = () => {
     if (!rootRef.current) return;
 
     const ctx = gsap.context(() => {
+      // Initial refresh for responsive setup
+      ScrollTrigger.refresh();
+      
       // ===== 1. PAGE LOAD — HERO SECTION =====
       // Set initial states
       gsap.set('.hero-gradient', { opacity: 0, scale: 1.05 });
@@ -305,7 +308,17 @@ export const Media: React.FC = () => {
       // (Already handled in Footer component)
     }, rootRef);
 
-    return () => ctx.revert();
+    // Handle window resize for responsive animations
+    const handleResize = () => {
+      ScrollTrigger.refresh();
+    };
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+      ctx.revert();
+      ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+    };
   }, []);
 
   // Auto-play carousel with pause on hover
