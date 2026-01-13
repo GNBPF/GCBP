@@ -33,7 +33,6 @@ export const Media: React.FC = () => {
   const rootRef = useRef<HTMLDivElement>(null);
   const [currentEventIndex, setCurrentEventIndex] = useState(0);
   const [openFaq, setOpenFaq] = useState<number | null>(null);
-  const [isVideoPlaying, setIsVideoPlaying] = useState(false);
 
   useLayoutEffect(() => {
     if (!rootRef.current) return;
@@ -414,10 +413,7 @@ export const Media: React.FC = () => {
       `}</style>
       <HeroSection />
       <BlogsSection />
-      <VolunteerSection 
-        isVideoPlaying={isVideoPlaying}
-        onVideoToggle={() => setIsVideoPlaying(!isVideoPlaying)}
-      />
+      <VolunteerSection />
       <DonationsSection />
       <SponsorshipSection />
       <EventsSection 

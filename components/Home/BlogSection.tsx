@@ -23,26 +23,32 @@ export const BlogSection: React.FC = () => {
   ];
 
   return (
-    <section className="blog-section min-h-screen flex flex-col justify-center py-8 mobile-small:py-10 xs:py-12 sm:py-14 md:py-16 lg:py-20 xl:py-24 px-3 mobile-small:px-4 xs:px-5 sm:px-6 md:px-8 lg:px-[8%] xl:px-[10%] 2xl:px-[12%]">
-      {/* Decorative Line */}
-      <div className="flex items-center justify-center mb-8 mobile-small:mb-10">
-        <div className="flex items-center w-full max-w-7xl px-4">
-          <div className="w-3 h-3 rounded-full bg-gcbp-primary"></div>
-          <div className="flex-1 h-0.5 bg-gcbp-primary mx-2"></div>
-          <div className="w-3 h-3 rounded-full bg-gcbp-primary"></div>
+    <section className="blog-section py-16 md:py-20 lg:py-24 px-6 sm:px-8 md:px-12 lg:px-16 bg-[#FFFAF0]">
+      <div className="max-w-7xl mx-auto">
+        {/* Section divider */}
+        <div className="flex items-center justify-center mb-12 md:mb-16">
+          <div className="flex items-center w-full max-w-7xl px-4">
+            <div className="w-3 h-3 rounded-full bg-[#163FA5]"></div>
+            <div className="flex-1 h-0.5 bg-[#163FA5] mx-2"></div>
+            <div className="w-3 h-3 rounded-full bg-[#163FA5]"></div>
+          </div>
         </div>
-      </div>
-      
-      <div className="max-w-7xl mx-auto w-full">
-        <h3 className="text-gcbp-primary font-bold text-[clamp(1.5rem,4vw,2.5rem)] mobile-small:text-[clamp(1.75rem,5vw,3rem)] sm:text-3xl md:text-4xl lg:text-5xl mb-2 mobile-small:mb-3 sm:mb-4">BLOGS AND INSIGHTS</h3>
-        <p className="text-slate-700 text-[clamp(0.875rem,2.5vw,1.125rem)] mobile-small:text-base sm:text-lg md:text-xl mb-8 mobile-small:mb-10 sm:mb-12">
-          COMPANY BLOG & INSIGHTS
-        </p>
         
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mobile-small:gap-8 xs:gap-10 sm:gap-12 lg:gap-14">
+        {/* Section header */}
+        <div className="text-center mb-12 md:mb-16">
+          <h3 className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-serif font-bold text-[#163FA5] mb-6 md:mb-8">
+            Blogs & Insights
+          </h3>
+          <p className="text-lg md:text-xl lg:text-2xl text-[#5A5A5F] max-w-3xl mx-auto font-sans leading-relaxed">
+            Company blog & insights
+          </p>
+        </div>
+        
+        {/* Blog cards */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10 lg:gap-12">
           {blogPosts.map((post) => (
-            <div key={post.id} className="blog-card group cursor-pointer">
-              <div className="aspect-[4/3] overflow-hidden rounded-lg shadow-xl mb-3 mobile-small:mb-4 xs:mb-5 sm:mb-6 relative">
+            <div key={post.id} className="blog-card group cursor-pointer opacity-0">
+              <div className="aspect-[4/3] overflow-hidden rounded-lg shadow-lg mb-6 md:mb-8 relative">
                 <img 
                   src={post.image} 
                   alt={post.title} 
@@ -51,12 +57,12 @@ export const BlogSection: React.FC = () => {
                 />
                 <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-all duration-300"></div>
               </div>
-              <p className="text-gcbp-primary font-bold text-xs mobile-small:text-sm xs:text-base sm:text-lg mb-2 mobile-small:mb-3 uppercase tracking-wider">
+              <p className="text-[#163FA5] font-sans font-bold text-sm md:text-base uppercase tracking-wider mb-3 md:mb-4">
                 {post.date}
               </p>
-              <h4 className="text-slate-900 font-bold text-sm mobile-small:text-base xs:text-lg sm:text-xl md:text-2xl leading-tight group-hover:text-gcbp-primary transition-colors flex items-center gap-2">
+              <h4 className="text-[#1F1F22] font-serif font-bold text-lg md:text-xl lg:text-2xl leading-tight group-hover:text-[#163FA5] transition-colors flex items-center gap-2">
                 <span>{post.title}</span>
-                <span className="blog-arrow opacity-0 group-hover:opacity-100 translate-x-[-8px] group-hover:translate-x-0 transition-all duration-300 text-lg mobile-small:text-xl sm:text-2xl">→</span>
+                <span className="blog-arrow opacity-0 group-hover:opacity-100 translate-x-[-8px] group-hover:translate-x-0 transition-all duration-300 text-xl md:text-2xl">→</span>
               </h4>
             </div>
           ))}

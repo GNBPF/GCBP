@@ -1,61 +1,114 @@
 import React from 'react';
 
 export const ImpactSection: React.FC = () => {
+  const metrics = [
+    {
+      value: 30000,
+      label: 'Trees Planted',
+      description: 'Reforesting communities across 10 countries',
+      suffix: '+'
+    },
+    {
+      value: 10000,
+      label: 'Lives Touched',
+      description: 'Direct impact through our programs and campaigns',
+      suffix: '+'
+    },
+    {
+      value: 25,
+      label: 'Communities',
+      description: 'Empowered with sustainable infrastructure',
+      suffix: ''
+    },
+    {
+      value: 50,
+      label: 'Partnerships',
+      description: 'Strategic alliances amplifying our impact',
+      suffix: '+'
+    },
+  ];
+
   return (
-    <section id="impact" className="min-h-screen flex flex-col justify-center py-8 mobile-small:py-10 xs:py-12 sm:py-14 md:py-16 lg:py-20 xl:py-24 px-3 mobile-small:px-4 xs:px-5 sm:px-6 md:px-8 lg:px-[8%] xl:px-[10%] 2xl:px-[12%]">
-      {/* Decorative Line */}
-      <div className="flex items-center justify-center mb-6 mobile-small:mb-8 xs:mb-10 sm:mb-12">
-        <div className="flex items-center w-full max-w-7xl px-4">
-          <div className="w-2 mobile-small:w-2.5 xs:w-3 h-2 mobile-small:h-2.5 xs:h-3 rounded-full bg-gcbp-primary"></div>
-          <div className="flex-1 h-0.5 bg-gcbp-primary mx-2"></div>
-          <div className="w-2 mobile-small:w-2.5 xs:w-3 h-2 mobile-small:h-2.5 xs:h-3 rounded-full bg-gcbp-primary"></div>
+    <section id="impact" className="impact-section py-16 md:py-20 lg:py-24 px-6 sm:px-8 md:px-12 lg:px-16 bg-[#FFFAF0]">
+      <div className="max-w-7xl mx-auto">
+        {/* Section divider */}
+        <div className="impact-divider relative mb-12 md:mb-16">
+          <svg className="w-full h-px" xmlns="http://www.w3.org/2000/svg">
+            <line 
+              x1="0" 
+              y1="0.5" 
+              x2="100%" 
+              y2="0.5" 
+              stroke="#163FA5" 
+              strokeWidth="1" 
+              className="divider-line"
+            />
+          </svg>
         </div>
-      </div>
-      
-      <div className="max-w-7xl mx-auto w-full">
-        <h3 className="text-gcbp-primary font-bold text-[clamp(1.5rem,4vw,2.5rem)] mobile-small:text-[clamp(1.75rem,5vw,3rem)] sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl mb-2 mobile-small:mb-3 sm:mb-4 text-center md:text-left">OUR WORK</h3>
-        <p className="text-slate-700 text-[clamp(0.875rem,2.5vw,1.125rem)] mobile-small:text-base sm:text-lg md:text-xl lg:text-2xl mb-6 mobile-small:mb-8 xs:mb-10 sm:mb-12 font-medium text-center md:text-left">
-          PROUD WE'RE NOT JUST TALKING, WE'RE ACTUALLY DOING THE WORK. RECEIPTS OF OUR GOOD DEEDS
-        </p>
-        
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mobile-small:gap-8 xs:gap-10 sm:gap-12 lg:gap-14 xl:gap-16 items-start">
-          <div className="order-2 md:order-1">
-            <div className="aspect-[4/3] overflow-hidden rounded-lg shadow-xl mb-4 mobile-small:mb-6 xs:mb-8">
-              <img src="/images/img2.jpg" alt="Our Work" className="w-full h-full object-cover" loading="lazy" />
-            </div>
-          </div>
-          
-          <div className="order-1 md:order-2 space-y-4 mobile-small:space-y-5 xs:space-y-6 sm:space-y-8">
-            <div className="bg-white border-2 border-gcbp-primary rounded-lg p-4 mobile-small:p-5 xs:p-6 sm:p-7 md:p-8 shadow-lg">
-              <div className="flex items-start justify-between mb-2 mobile-small:mb-3 xs:mb-4">
-                <h4 className="text-4xl mobile-small:text-5xl xs:text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-black text-gcbp-primary leading-none">01</h4>
+
+        {/* Section header */}
+        <div className="text-center mb-12 md:mb-16">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-serif font-bold text-[#1F1F22] mb-6 md:mb-8">
+            Our Impact
+          </h2>
+          <p className="text-lg md:text-xl lg:text-2xl text-[#5A5A5F] max-w-3xl mx-auto font-sans leading-relaxed">
+            Measurable outcomes that reflect our commitment to creating lasting, positive change.
+          </p>
+        </div>
+
+        {/* Impact metrics grid */}
+        <div className="impact-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-10 lg:gap-12">
+          {metrics.map((metric, index) => (
+            <div 
+              key={index} 
+              className={`impact-metric impact-metric-${index + 1} opacity-0`}
+            >
+              <div className="metric-value-wrapper mb-6 md:mb-8">
+                <div className="flex items-baseline gap-2 md:gap-3">
+                  <span 
+                    className="metric-value text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-serif font-bold text-[#163FA5] count-up-number" 
+                    data-target={metric.value}
+                  >
+                    0
+                  </span>
+                  {metric.suffix && (
+                    <span className="metric-suffix text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-serif font-bold text-[#163FA5]">
+                      {metric.suffix}
+                    </span>
+                  )}
+                </div>
               </div>
-              <h5 className="text-lg mobile-small:text-xl xs:text-2xl sm:text-3xl md:text-4xl font-bold text-slate-900 mb-2 mobile-small:mb-3">
-                <span className="count-up-number" data-target="30000">0</span> Trees Planted
-              </h5>
-              <p className="text-xs mobile-small:text-sm xs:text-base sm:text-lg text-slate-600 leading-relaxed">Reforesting 10 different countries with sustainable tree planting initiatives.</p>
-            </div>
-            
-            <div className="bg-white border-2 border-gcbp-primary rounded-lg p-4 mobile-small:p-5 xs:p-6 sm:p-7 md:p-8 shadow-lg">
-              <div className="flex items-start justify-between mb-2 mobile-small:mb-3 xs:mb-4">
-                <h4 className="text-4xl mobile-small:text-5xl xs:text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-black text-gcbp-primary leading-none">02</h4>
-              </div>
-              <h5 className="text-lg mobile-small:text-xl xs:text-2xl sm:text-3xl md:text-4xl font-bold text-slate-900 mb-2 mobile-small:mb-3">
-                <span className="count-up-number" data-target="10000">0</span> Lives Touched
-              </h5>
-              <p className="text-xs mobile-small:text-sm xs:text-base sm:text-lg text-slate-600 leading-relaxed">Campaigns and programs that have directly impacted thousands of lives.</p>
-            </div>
-            
-            <div className="bg-slate-50 rounded-lg p-4 mobile-small:p-5 xs:p-6 sm:p-7 md:p-8 border border-slate-200">
-              <h5 className="text-base mobile-small:text-lg xs:text-xl sm:text-2xl md:text-3xl font-bold text-slate-900 mb-2 mobile-small:mb-3 xs:mb-4">25 Communities Powered By</h5>
-              <p className="text-xs mobile-small:text-sm xs:text-base sm:text-lg text-slate-600 mb-3 mobile-small:mb-4 xs:mb-5 leading-relaxed">
-                People turning their lives around and working together globally.
+              <h3 className="text-xl md:text-2xl lg:text-3xl font-serif font-bold text-[#1F1F22] mb-3 md:mb-4">
+                {metric.label}
+              </h3>
+              <p className="text-[#5A5A5F] text-base md:text-lg leading-relaxed font-sans mb-6">
+                {metric.description}
               </p>
-              <div className="aspect-[3/2] overflow-hidden rounded-lg">
-                <img src="/images/img3.jpg" alt="Community" className="w-full h-full object-cover" loading="lazy" />
+              
+              {/* Progress line */}
+              <div className="progress-line-wrapper mt-6">
+                <svg className="w-full h-1" xmlns="http://www.w3.org/2000/svg">
+                  <line 
+                    x1="0" 
+                    y1="0.5" 
+                    x2="100%" 
+                    y2="0.5" 
+                    stroke="#E6E6E8" 
+                    strokeWidth="1"
+                  />
+                  <line 
+                    x1="0" 
+                    y1="0.5" 
+                    x2="100%" 
+                    y2="0.5" 
+                    stroke="#163FA5" 
+                    strokeWidth="1" 
+                    className="progress-line"
+                  />
+                </svg>
               </div>
             </div>
-          </div>
+          ))}
         </div>
       </div>
     </section>

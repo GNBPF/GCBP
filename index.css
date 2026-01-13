@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400;700;900&family=Playfair+Display:wght@400;500;700;900&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -11,9 +13,87 @@
 
 body {
   margin: 0;
-  font-family: 'Inter', sans-serif;
+  font-family: 'Source Sans Pro', sans-serif;
+  font-weight: 400;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  color: #1F1F22;
+  background-color: #FFFAF0;
+}
+
+h1, h2, h3, h4, h5, h6,
+.headline,
+.hero-title {
+  font-family: 'Playfair Display', serif;
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Line draw animation utility */
+.line-draw {
+  stroke-dasharray: 1000;
+  stroke-dashoffset: 1000;
+  animation: drawLine 1.5s ease-out forwards;
+}
+
+@keyframes drawLine {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+/* Hero CTA Primary - Fill animation */
+.cta-primary::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: #FFFAF0;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.4s ease;
+  z-index: 0;
+}
+
+.cta-primary:hover::after {
+  transform: scaleX(1);
+}
+
+.cta-primary:hover {
+  color: #163FA5;
+}
+
+/* Mobile optimizations */
+@media (max-width: 767px) {
+  /* Reduce animation complexity on mobile for better performance */
+  .hero-flowing-lines {
+    opacity: 0.05 !important;
+  }
+  
+  /* Ensure touch targets are at least 44px */
+  button, a {
+    min-height: 44px;
+    min-width: 44px;
+  }
+  
+  /* Smooth scrolling on mobile */
+  html {
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  /* Optimize images for mobile */
+  img, video {
+    image-rendering: -webkit-optimize-contrast;
+  }
+}
+
+/* Tablet optimizations */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .hero-flowing-lines {
+    opacity: 0.06 !important;
+  }
 }
 
 #root {

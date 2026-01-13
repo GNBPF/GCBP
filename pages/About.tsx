@@ -28,8 +28,18 @@ export const About: React.FC = () => {
     if (!rootRef.current) return;
 
     const ctx = gsap.context(() => {
+      // Detect mobile/tablet for performance optimization
+      const isMobile = window.innerWidth < 768;
+      const isTablet = window.innerWidth >= 768 && window.innerWidth < 1024;
+      
       // Initial refresh for responsive setup
       ScrollTrigger.refresh();
+      
+      // Configure ScrollTrigger for mobile/tablet
+      ScrollTrigger.config({
+        autoRefreshEvents: "visibilitychange,DOMContentLoaded,load",
+        ignoreMobileResize: false
+      });
       // ===== 1. HERO SECTION =====
       // Set initial states
       gsap.set('.hero-bg', { opacity: 0 });

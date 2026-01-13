@@ -22,288 +22,505 @@ export const Home: React.FC = () => {
     if (!mainRef.current) return;
 
     const ctx = gsap.context(() => {
+      // Detect mobile/tablet for performance optimization
+      const isMobile = window.innerWidth < 768;
+      const isTablet = window.innerWidth >= 768 && window.innerWidth < 1024;
+      
       // Initial refresh to ensure proper setup
       ScrollTrigger.refresh();
-      // --- ANIMATION 1: HERO ROW SWAP ON SCROLL ---
-      // Initial reveal on load
-      gsap.set(".hero-img-inner", {
-        y: 40,
-        scale: 1.05
-      });
-
-      gsap.set(".hero-img-mask", {
-        opacity: 1
-      });
-
-      // Bubble background: scale-in + opacity fade
-      gsap.to(".bubble-bg", {
-        scale: 1,
-        opacity: 1,
-        duration: 1.2,
-        ease: "power3.out"
-      });
-
-      // Images: Slide-in reveal with stagger
-      gsap.to(".hero-img-inner", {
-        y: 0,
-        scale: 1,
-        duration: 1.2,
-        ease: "power3.out",
-        stagger: 0.08
-      });
-
-      // ROW SWAP ANIMATION - Pinned scroll trigger
-      // Responsive swap distance based on screen size
-      const getSwapDistance = () => {
-        const width = window.innerWidth;
-        const height = window.innerHeight;
-        // Calculate responsive distance: smaller screens need less movement
-        if (width < 640) return height * 0.4; // Mobile: 40vh
-        if (width < 1024) return height * 0.42; // Tablet: 42vh
-        return height * 0.45; // Desktop: 45vh
-      };
       
-      const heroSwapTimeline = gsap.timeline({
-        scrollTrigger: {
-          trigger: ".hero",
-          start: "top top",
-          end: () => {
-            // Responsive scroll distance
-            const width = window.innerWidth;
-            if (width < 640) return "+=1500"; // Mobile: less scroll
-            if (width < 1024) return "+=1800"; // Tablet: medium scroll
-            return "+=2000"; // Desktop: full scroll
-          },
-          pin: true,
-          scrub: 1,
-          anticipatePin: 1,
-          invalidateOnRefresh: true
+      // Configure ScrollTrigger for mobile/tablet - ensure it works on touch devices
+      ScrollTrigger.config({
+        autoRefreshEvents: "visibilitychange,DOMContentLoaded,load",
+        ignoreMobileResize: false
+      });
+      
+      // Reduce animation complexity on mobile for better performance
+      const animationMultiplier = isMobile ? 0.7 : 1;
+      
+      // --- ANIMATION 1: HERO SECTION - Refined editorial entrance ---
+      // Set initial states
+      gsap.set(".hero-gradient", { opacity: 0 });
+      gsap.set(".hero-line-1, .hero-line-2", {
+        opacity: 0,
+        y: 32,
+        clipPath: "inset(0 0 100% 0)"
+      });
+      gsap.set(".hero-subtitle", { opacity: 0, y: 20 });
+      gsap.set(".hero-cta", { opacity: 0, y: 20 });
+      
+      // News section initial states
+      gsap.set(".news-card-left", { x: -60, opacity: 0 });
+      gsap.set(".news-card-right", { x: 60, opacity: 0 });
+      
+      // Mission section initial states
+      gsap.set(".mission-statement", { opacity: 0, y: 20 });
+      
+      // Pillars section initial states
+      gsap.set(".pillar-card", { opacity: 0, y: 20 });
+      
+      // Impact section initial states
+      gsap.set(".impact-metric", { opacity: 0, y: 20 });
+      
+      // Programs section initial states
+      gsap.set(".program-card", { opacity: 0, y: 20 });
+      
+      // Partners section initial states
+      gsap.set(".partner-item", { opacity: 0 });
+      
+      // CTA section initial states
+      gsap.set(".cta-section", { opacity: 0, y: 20 });
+      
+      // MediaHighlight section initial states
+      gsap.set(".gcbp-title, .gcbp-media", { opacity: 0 });
+      
+      // News section initial states
+      gsap.set(".news-card", { opacity: 0 });
+      
+      // Blog section initial states
+      gsap.set(".blog-card", { opacity: 0, y: 20 });
+
+      // Flowing lines - abstract community figures animation (continuous flow, no stopping)
+      // Optimized for mobile: reduced movement on smaller screens
+      const flowingMovement = isMobile ? 0.6 : 1;
+      
+      gsap.fromTo(".flowing-group-1", 
+        { y: 0, x: 0, rotation: 0 },
+        { 
+          y: `+=${60 * flowingMovement}`,
+          x: `-=${40 * flowingMovement}`,
+          rotation: 3 * flowingMovement,
+          duration: 30,
+          repeat: -1,
+          ease: "none"
+        }
+      );
+
+      gsap.fromTo(".flowing-group-2",
+        { y: 0, x: 0, rotation: 0 },
+        {
+          y: `-=${55 * flowingMovement}`,
+          x: `+=${35 * flowingMovement}`,
+          rotation: -2.5 * flowingMovement,
+          duration: 32,
+          repeat: -1,
+          ease: "none"
+        }
+      );
+
+      gsap.fromTo(".flowing-group-3",
+        { y: 0, x: 0, rotation: 0 },
+        {
+          y: `+=${65 * flowingMovement}`,
+          x: `-=${45 * flowingMovement}`,
+          rotation: 3.5 * flowingMovement,
+          duration: 35,
+          repeat: -1,
+          ease: "none"
+        }
+      );
+
+      gsap.fromTo(".flowing-group-4",
+        { y: 0, x: 0, rotation: 0 },
+        {
+          y: `-=${50 * flowingMovement}`,
+          x: `+=${50 * flowingMovement}`,
+          rotation: -3 * flowingMovement,
+          duration: 33,
+          repeat: -1,
+          ease: "none"
+        }
+      );
+
+      // Connecting lines - continuous flowing animation (infinite seamless loop)
+      // Optimized for mobile performance
+      const connectorSpeed = isMobile ? 1.2 : 1;
+      
+      gsap.fromTo(".flowing-connector-1",
+        { strokeDashoffset: 0 },
+        {
+          strokeDashoffset: -400,
+          duration: 20 * connectorSpeed,
+          repeat: -1,
+          ease: "none"
+        }
+      );
+
+      gsap.fromTo(".flowing-connector-2",
+        { strokeDashoffset: 0 },
+        {
+          strokeDashoffset: -450,
+          duration: 22 * connectorSpeed,
+          repeat: -1,
+          ease: "none"
+        }
+      );
+
+      gsap.fromTo(".flowing-connector-3",
+        { strokeDashoffset: 0 },
+        {
+          strokeDashoffset: -420,
+          duration: 24 * connectorSpeed,
+          repeat: -1,
+          ease: "none"
+        }
+      );
+
+      // System mesh - very slow, subtle movement
+      gsap.to(".mesh-line", {
+        x: "+=20",
+        y: "-=10",
+        duration: 25,
+        repeat: -1,
+        yoyo: true,
+        ease: "sine.inOut",
+        stagger: {
+          each: 3,
+          from: "random"
         }
       });
 
-      // TOP ROW (4 images) → Moves DOWN to bottom position
-      heroSwapTimeline.to(".row-1", {
-        y: () => getSwapDistance(),
-        ease: "power2.inOut"
-      }, 0);
-
-      // BOTTOM ROW (3 images) → Moves UP to top position
-      heroSwapTimeline.to(".row-2", {
-        y: () => -getSwapDistance(),
-        ease: "power2.inOut"
-      }, 0);
-
-      // Optional: Bubble blur during swap
-      heroSwapTimeline.to(".bubble-bg", {
-        filter: "blur(4px)",
-        opacity: 0.7,
-        ease: "none"
-      }, 0);
-
-      // --- ANIMATION 2: THE GCBP SPLIT REVEAL + TEXT REVEAL ---
-      const revealSection = document.querySelector("#reveal");
-      if (revealSection) {
-        // Set initial states - everything hidden
-        gsap.set(".hero-badge", { opacity: 0, y: 10 });
-        gsap.set(".hero-title-line", { opacity: 0, y: 20 });
-        gsap.set(".line-1, .line-2, .line-3", { opacity: 0, y: 20 });
-        gsap.set(".hero-btn-group", { opacity: 0, y: 10 });
-        gsap.set("#left-text", { x: 0 });
-        gsap.set("#right-text", { x: 0 });
-        
-        const tl = gsap.timeline({
-          scrollTrigger: {
-            trigger: "#reveal",
-            start: "top top",
-            end: "+=1500",
-            pin: true,
-            scrub: 1,
-            anticipatePin: 1,
-            invalidateOnRefresh: true
-          }
-        });
-
-        // PHASE 1: Split GCBP text (0 → 0.4)
-        // Responsive split distance based on screen width
-        const getSplitDistance = () => {
-          const width = window.innerWidth;
-          if (width < 375) return -200; // mobile-small
-          if (width < 640) return -300; // xs
-          if (width < 768) return -350; // sm
-          if (width < 1024) return -400; // md
-          return -500; // lg and above
-        };
-        
-        tl.to("#left-text", { 
-          x: getSplitDistance(), 
-          duration: 0.4,
-          ease: "power2.inOut"
-        }, 0)
-        .to("#right-text", { 
-          x: -getSplitDistance(), 
-          duration: 0.4,
-          ease: "power2.inOut"
-        }, 0);
-
-        // PHASE 2: Reveal content (0.5 → 1.0)
-        // Text appears after GCBP is fully split
-        tl.to(".hero-badge", { 
-          opacity: 1, 
-          y: 0, 
-          duration: 0.2,
-          ease: "power2.out"
-        }, 0.5)
-        .to(".hero-title-line", { 
-          opacity: 1, 
-          y: 0, 
-          duration: 0.25,
-          ease: "power2.out"
-        }, 0.55)
-        .to(".line-1", { 
-          opacity: 1, 
-          y: 0, 
-          duration: 0.2,
-          ease: "power2.out"
-        }, 0.65)
-        .to(".line-2", { 
-          opacity: 1, 
-          y: 0, 
-          duration: 0.2,
-          ease: "power2.out"
-        }, 0.7)
-        .to(".line-3", { 
-          opacity: 1, 
-          y: 0, 
-          duration: 0.2,
-          ease: "power2.out"
-        }, 0.75)
-        .to(".hero-btn-group", { 
-          opacity: 1, 
-          y: 0,
-          duration: 0.3,
-          ease: "power2.out"
-        }, 0.85);
-
-        // Timeline ends at 1.5, keeping text visible
-        // On reverse scroll (scrolling up):
-        // - Text fades out: 1.0 → 0.5 (completely hidden by 0.5)
-        // - GCBP closes: 0.4 → 0 (starts closing at 0.4)
-        // Text is hidden by 0.5, GCBP closes 0.4→0, so text is gone before GCBP closes
-      }
-
-      // --- ANIMATION 3: ABOUT SECTION (OUR DNA) ---
-      const aboutSection = document.querySelector("#who-we-are");
-      if (aboutSection) {
-        // Section fade + Y translate
-        gsap.from(".about-text", {
-        opacity: 0,
-          y: 24,
-          duration: 0.8,
-          ease: "power2.out",
-          scrollTrigger: {
-            trigger: "#who-we-are",
-            start: "top 80%",
-            toggleActions: "play none none reverse",
-            invalidateOnRefresh: true
-          }
-        });
-
-        // Divider width animation (0 → 100%)
-        gsap.from(".divider-line", {
-          scaleX: 0,
-          duration: 1.2,
-          ease: "power2.out",
-        scrollTrigger: {
-            trigger: "#who-we-are",
-            start: "top 80%",
-            toggleActions: "play none none reverse",
-            invalidateOnRefresh: true
-        }
+      // Brand gradient overlay fade-in
+      gsap.to(".hero-gradient", {
+        opacity: 1,
+        duration: 2,
+        ease: "power2.out"
       });
-      }
 
-      // --- ANIMATION 4: GALLERY CARDS (Animate in pairs) ---
-      const galleryCards = document.querySelectorAll(".gallery-card");
-      if (galleryCards.length > 0) {
-        gsap.from(".gallery-card", {
-          y: 40,
-        opacity: 0,
-          duration: 0.8,
-          stagger: {
-            each: 0.15,
-            from: "start",
-            grid: "auto"
-          },
-          ease: "power2.out",
-        scrollTrigger: {
-            trigger: ".gallery-card",
-          start: "top 85%",
-            toggleActions: "play none none reverse",
-            invalidateOnRefresh: true
-          }
-        });
-      }
+      // Brand gradient breathing - very slow organic movement
+      gsap.to(".hero-gradient > div", {
+        x: "5%",
+        y: "3%",
+        scale: 1.05,
+        duration: 30,
+        repeat: -1,
+        yoyo: true,
+        ease: "sine.inOut"
+      });
 
-      // --- ANIMATION 5: IMPACT SECTION (OUR WORK) - Count-up numbers ---
-      const impactSection = document.querySelector("#impact");
-      if (impactSection) {
-        // Animate cards
-        gsap.from("#impact .bg-white", {
-          y: 40,
-          opacity: 0,
-          duration: 0.8,
-          stagger: 0.2,
-          ease: "power2.out",
-          scrollTrigger: {
-            trigger: "#impact",
-            start: "top 80%",
-            toggleActions: "play none none reverse",
-            invalidateOnRefresh: true
-          }
-        });
+      // Title lines - editorial reveal with clipPath
+      gsap.to(".hero-line-1, .hero-line-2", {
+        opacity: 1,
+        y: 0,
+        clipPath: "inset(0 0 0% 0)",
+        duration: 1.2,
+        stagger: 0.15,
+        ease: "power3.out",
+        delay: 0.3
+      });
 
-        // Count-up animation for numbers
-        const countUpElements = document.querySelectorAll(".count-up-number");
-        countUpElements.forEach((el) => {
-          const target = parseInt(el.getAttribute("data-target") || "0");
-          const obj = { value: 0 };
-          gsap.to(obj, {
-            value: target,
-            duration: 2,
-            ease: "power1.out",
+      // Underline animation - after text settles
+      gsap.to(".hero-underline", {
+        scaleX: 1,
+        duration: 1,
+        delay: 0.6,
+        ease: "power2.out"
+      });
+
+      // Subtitle fade-in
+      gsap.to(".hero-subtitle", {
+        opacity: 1,
+        y: 0,
+        duration: 0.8,
+        ease: "power2.out",
+        delay: 0.7
+      });
+
+      // CTA buttons fade-in
+      gsap.to(".hero-cta", {
+        opacity: 1,
+        y: 0,
+        duration: 0.8,
+        ease: "power2.out",
+        delay: 0.9
+      });
+
+      // --- ANIMATION 2: MISSION SECTION - Progressive text reveals ---
+      const missionSection = document.querySelector("#mission");
+      if (missionSection) {
+        // Divider line draw
+        const dividerLine = missionSection.querySelector(".divider-line") as SVGLineElement;
+        if (dividerLine) {
+          const pathLength = dividerLine.getTotalLength();
+          gsap.set(dividerLine, {
+            strokeDasharray: pathLength,
+            strokeDashoffset: pathLength
+          });
+          gsap.to(dividerLine, {
+            strokeDashoffset: 0,
+            duration: 1.5,
+            ease: "power2.out",
             scrollTrigger: {
-              trigger: el.closest("#impact"),
-              start: "top 85%",
+              trigger: "#mission",
+              start: isMobile ? "top 85%" : "top 80%",
+              toggleActions: "play none none reverse",
+              invalidateOnRefresh: true,
+              markers: false
+            }
+          });
+        }
+
+        // Mission statements - progressive reveal with fade
+        gsap.utils.toArray(".mission-statement").forEach((statement: any, index: number) => {
+          gsap.to(statement, {
+            opacity: 1,
+            y: 0,
+            duration: 0.8,
+            ease: "power2.out",
+            scrollTrigger: {
+              trigger: statement,
+              start: isMobile ? "top 90%" : "top 85%",
+              toggleActions: "play none none reverse",
+              invalidateOnRefresh: true
+            }
+          });
+
+          // Previous statements fade slightly when new one appears
+          if (index > 0) {
+            gsap.utils.toArray(".mission-statement").slice(0, index).forEach((prev: any) => {
+              ScrollTrigger.create({
+                trigger: statement,
+                start: isMobile ? "top 90%" : "top 85%",
+                onEnter: () => {
+                  gsap.to(prev, { opacity: 0.6, duration: 0.3 });
+                },
+                onLeaveBack: () => {
+                  gsap.to(prev, { opacity: 1, duration: 0.3 });
+                }
+              });
+            });
+          }
+        });
+      }
+
+      // --- ANIMATION 3: PILLARS SECTION - Line draw icons & card reveals ---
+      const pillarsSection = document.querySelector("#what-we-do");
+      if (pillarsSection) {
+        // Divider line draw
+        const pillarsDivider = pillarsSection.querySelector(".divider-line") as SVGLineElement;
+        if (pillarsDivider) {
+          const pathLength = pillarsDivider.getTotalLength();
+          gsap.set(pillarsDivider, {
+            strokeDasharray: pathLength,
+            strokeDashoffset: pathLength
+          });
+          gsap.to(pillarsDivider, {
+            strokeDashoffset: 0,
+            duration: 1.5,
+            ease: "power2.out",
+            scrollTrigger: {
+              trigger: "#what-we-do",
+              start: isMobile ? "top 85%" : "top 80%",
+              toggleActions: "play none none reverse",
+              invalidateOnRefresh: true
+            }
+          });
+        }
+
+        // Icon stroke animations
+        gsap.utils.toArray(".icon-path").forEach((path: any) => {
+          const pathLength = path.getTotalLength();
+          gsap.set(path, {
+            strokeDasharray: pathLength,
+            strokeDashoffset: pathLength
+          });
+        });
+
+        // Pillar cards reveal
+        gsap.utils.toArray(".pillar-card").forEach((card: any, index: number) => {
+          gsap.to(card, {
+            opacity: 1,
+            y: 0,
+            duration: 0.8,
+            ease: "power2.out",
+            delay: index * 0.1,
+            scrollTrigger: {
+              trigger: card,
+              start: isMobile ? "top 90%" : "top 85%",
               toggleActions: "play none none reverse",
               invalidateOnRefresh: true
             },
-            onUpdate: () => {
-              const value = Math.floor(obj.value);
-              el.textContent = value.toLocaleString();
+            onComplete: () => {
+              // Animate icon paths after card appears
+              const iconPaths = card.querySelectorAll(".icon-path");
+              iconPaths.forEach((path: any, pathIndex: number) => {
+                const pathLength = path.getTotalLength();
+                gsap.to(path, {
+                  strokeDashoffset: 0,
+                  duration: 1,
+                  ease: "power2.out",
+                  delay: pathIndex * 0.1
+                });
+              });
             }
           });
         });
       }
 
-      // --- ANIMATION 6: GCBP VIDEO SECTION (Zoom-out) ---
+      // --- ANIMATION 4: IMPACT SECTION - Count-up numbers & progress lines ---
+      const impactSection = document.querySelector("#impact");
+      if (impactSection) {
+        // Divider line draw
+        const impactDivider = impactSection.querySelector(".divider-line") as SVGLineElement;
+        if (impactDivider) {
+          const pathLength = impactDivider.getTotalLength();
+          gsap.set(impactDivider, {
+            strokeDasharray: pathLength,
+            strokeDashoffset: pathLength
+          });
+          gsap.to(impactDivider, {
+            strokeDashoffset: 0,
+            duration: 1.5,
+            ease: "power2.out",
+            scrollTrigger: {
+              trigger: "#impact",
+              start: isMobile ? "top 85%" : "top 80%",
+              toggleActions: "play none none reverse",
+              invalidateOnRefresh: true
+            }
+          });
+        }
+
+        // Impact metrics reveal
+        gsap.utils.toArray(".impact-metric").forEach((metric: any, index: number) => {
+          gsap.to(metric, {
+            opacity: 1,
+            y: 0,
+            duration: 0.8,
+            ease: "power2.out",
+            delay: index * 0.1,
+            scrollTrigger: {
+              trigger: metric,
+              start: isMobile ? "top 90%" : "top 85%",
+              toggleActions: "play none none reverse",
+              invalidateOnRefresh: true
+            },
+            onComplete: () => {
+              // Count-up animation
+              const countEl = metric.querySelector(".count-up-number");
+              if (countEl) {
+                const target = parseInt(countEl.getAttribute("data-target") || "0");
+                const obj = { value: 0 };
+                gsap.to(obj, {
+                  value: target,
+                  duration: 2,
+                  ease: "power1.out",
+                  onUpdate: () => {
+                    const value = Math.floor(obj.value);
+                    countEl.textContent = value.toLocaleString();
+                  }
+                });
+
+                // Progress line animation
+                const progressLine = metric.querySelector(".progress-line");
+                if (progressLine) {
+                  const lineLength = progressLine.getTotalLength();
+                  gsap.set(progressLine, {
+                    strokeDasharray: lineLength,
+                    strokeDashoffset: lineLength
+                  });
+                  gsap.to(progressLine, {
+                    strokeDashoffset: 0,
+                    duration: 2,
+                    ease: "power1.out"
+                  });
+                }
+              }
+            }
+          });
+        });
+      }
+
+      // --- ANIMATION 5: PROGRAMS SECTION ---
+      const programsSection = document.querySelector("#programs");
+      if (programsSection) {
+        // Divider line draw
+        const programsDivider = programsSection.querySelector(".divider-line") as SVGLineElement;
+        if (programsDivider) {
+          const pathLength = programsDivider.getTotalLength();
+          gsap.set(programsDivider, {
+            strokeDasharray: pathLength,
+            strokeDashoffset: pathLength
+          });
+          gsap.to(programsDivider, {
+            strokeDashoffset: 0,
+            duration: 1.5,
+            ease: "power2.out",
+            scrollTrigger: {
+              trigger: "#programs",
+              start: isMobile ? "top 85%" : "top 80%",
+              toggleActions: "play none none reverse",
+              invalidateOnRefresh: true
+            }
+          });
+        }
+
+        // Program cards reveal
+        gsap.utils.toArray(".program-card").forEach((card: any, index: number) => {
+          gsap.to(card, {
+            opacity: 1, 
+            y: 0, 
+            duration: 0.8,
+            ease: "power2.out",
+            delay: index * 0.1,
+            scrollTrigger: {
+              trigger: card,
+              start: isMobile ? "top 90%" : "top 85%",
+              toggleActions: "play none none reverse",
+              invalidateOnRefresh: true
+            }
+          });
+        });
+      }
+
+      // --- ANIMATION 6: PARTNERS SECTION ---
+      const partnersSection = document.querySelector("#partners");
+      if (partnersSection) {
+        // Divider line draw
+        const partnersDivider = partnersSection.querySelector(".divider-line") as SVGLineElement;
+        if (partnersDivider) {
+          const pathLength = partnersDivider.getTotalLength();
+          gsap.set(partnersDivider, {
+            strokeDasharray: pathLength,
+            strokeDashoffset: pathLength
+          });
+          gsap.to(partnersDivider, {
+            strokeDashoffset: 0,
+            duration: 1.5,
+            ease: "power2.out",
+            scrollTrigger: {
+              trigger: "#partners",
+              start: isMobile ? "top 85%" : "top 80%",
+              toggleActions: "play none none reverse",
+              invalidateOnRefresh: true
+            }
+      });
+      }
+
+        // Partner items fade in
+        gsap.utils.toArray(".partner-item").forEach((item: any, index: number) => {
+          gsap.to(item, {
+            opacity: 1,
+            duration: 0.6,
+            ease: "power2.out",
+            delay: index * 0.1,
+        scrollTrigger: {
+              trigger: item,
+          start: "top 85%",
+            toggleActions: "play none none reverse",
+            invalidateOnRefresh: true
+          }
+          });
+        });
+      }
+
+      // --- ANIMATION 7: MEDIA HIGHLIGHT SECTION (GCBP Video) ---
       const gcbpHighlight = document.querySelector(".gcbp-highlight");
       if (gcbpHighlight) {
-        // Feature image: slow zoom-out (1.08 → 1)
-        gsap.from(".feature-image img", {
-          scale: 1.08,
-          duration: 2,
-          ease: "power1.out",
-          scrollTrigger: {
-            trigger: ".gcbp-highlight",
-            start: "top 80%",
-            toggleActions: "play none none reverse",
-            invalidateOnRefresh: true
-          }
-        });
-
-        gsap.from(".gcbp-title", {
-          opacity: 0,
-          scale: 0.9,
+        // Title fade in
+        gsap.to(".gcbp-title", {
+          opacity: 1,
+          scale: 1,
           duration: 1,
           ease: "power3.out",
           scrollTrigger: {
@@ -314,11 +531,13 @@ export const Home: React.FC = () => {
           }
         });
 
-        gsap.from(".gcbp-media", {
-          opacity: 0,
-          y: 40,
+        // Video fade in after title
+        gsap.to(".gcbp-media", {
+          opacity: 1,
+          y: 0,
           duration: 1,
           ease: "power3.out",
+          delay: 0.2,
           scrollTrigger: {
             trigger: ".gcbp-highlight",
             start: "top 80%",
@@ -328,89 +547,87 @@ export const Home: React.FC = () => {
         });
       }
 
-      // --- ANIMATION 7: NEWS SECTION (Alternate directions) ---
+      // --- ANIMATION 8: NEWS SECTION (Alternate directions) ---
       const newsCards = document.querySelectorAll(".news-card");
       if (newsCards.length > 0) {
-        gsap.from(".news-card-left", {
-          x: -60,
-          opacity: 0,
+        gsap.to(".news-card-left", {
+          x: 0,
+          opacity: 1,
           duration: 0.8,
           ease: "power2.out",
           scrollTrigger: {
             trigger: ".news-card-left",
-            start: "top 85%",
+            start: isMobile ? "top 90%" : "top 85%",
             toggleActions: "play none none reverse",
             invalidateOnRefresh: true
           }
         });
 
-        gsap.from(".news-card-right", {
-          x: 60,
-          opacity: 0,
+        gsap.to(".news-card-right", {
+          x: 0,
+          opacity: 1,
           duration: 0.8,
           ease: "power2.out",
           scrollTrigger: {
             trigger: ".news-card-right",
-            start: "top 85%",
+            start: isMobile ? "top 90%" : "top 85%",
             toggleActions: "play none none reverse",
             invalidateOnRefresh: true
           }
         });
-      }
-
-      // --- ANIMATION 8: PARTNERS SECTION (Infinite scroll) ---
-      const partnersScroll = document.querySelector(".partners-scroll");
-      if (partnersScroll) {
-        const scrollWidth = partnersScroll.scrollWidth / 2;
-        gsap.to(".partners-scroll", {
-          x: -scrollWidth,
-          duration: 30,
-          ease: "none",
-          repeat: -1
-        });
-
-        // Pause on hover
-        const container = document.querySelector(".partners-scroll-container");
-        if (container) {
-          container.addEventListener("mouseenter", () => {
-            gsap.to(".partners-scroll", { timeScale: 0 });
-          });
-          container.addEventListener("mouseleave", () => {
-            gsap.to(".partners-scroll", { timeScale: 1 });
-          });
-        }
       }
 
       // --- ANIMATION 9: BLOG SECTION ---
       const blogCards = document.querySelectorAll(".blog-card");
       if (blogCards.length > 0) {
-        gsap.from(".blog-card", {
-          y: 40,
-          opacity: 0,
+        gsap.to(".blog-card", {
+          y: 0,
+          opacity: 1,
           duration: 0.8,
           stagger: 0.15,
           ease: "power2.out",
           scrollTrigger: {
             trigger: ".blog-card",
-            start: "top 85%",
+            start: isMobile ? "top 90%" : "top 85%",
             toggleActions: "play none none reverse",
             invalidateOnRefresh: true
           }
         });
       }
 
-      // --- ANIMATION 10: SUPPORT SECTION FADE UP ---
-      const supportGrid = document.querySelector(".support-grid");
-      if (supportGrid) {
-      gsap.from(".support-card", {
-        y: 60,
-        opacity: 0,
-        duration: 1,
-        stagger: 0.15,
-        ease: "power3.out",
-        scrollTrigger: {
-          trigger: ".support-grid",
-          start: "top 85%",
+      // --- ANIMATION 10: CTA SECTION ---
+      const ctaSection = document.querySelector("#cta");
+      if (ctaSection) {
+        // Divider line draw
+        const ctaDivider = ctaSection.querySelector(".divider-line") as SVGLineElement;
+        if (ctaDivider) {
+          const pathLength = ctaDivider.getTotalLength();
+          gsap.set(ctaDivider, {
+            strokeDasharray: pathLength,
+            strokeDashoffset: pathLength
+          });
+          gsap.to(ctaDivider, {
+            strokeDashoffset: 0,
+            duration: 1.5,
+            ease: "power2.out",
+            scrollTrigger: {
+              trigger: "#cta",
+              start: isMobile ? "top 85%" : "top 80%",
+              toggleActions: "play none none reverse",
+              invalidateOnRefresh: true
+            }
+          });
+        }
+
+        // CTA content fade in
+        gsap.to(ctaSection, {
+          opacity: 1,
+          y: 0,
+          duration: 0.8,
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: "#cta",
+            start: isMobile ? "top 90%" : "top 85%",
             toggleActions: "play none none reverse",
             invalidateOnRefresh: true
           }

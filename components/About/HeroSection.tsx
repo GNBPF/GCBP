@@ -2,7 +2,7 @@ import React from 'react';
 
 export const HeroSection: React.FC = () => {
   return (
-    <section className="relative h-[50vh] mobile-small:h-[55vh] min-h-[400px] mobile-small:min-h-[450px] xs:min-h-[500px] sm:min-h-[550px] max-h-[700px] overflow-hidden">
+    <section className="relative h-[50vh] mobile-small:h-[55vh] min-h-[400px] mobile-small:min-h-[450px] xs:min-h-[500px] sm:min-h-[550px] max-h-[700px] overflow-hidden pt-16 xs:pt-20 sm:pt-24 md:pt-28 lg:pt-32">
       <div className="absolute inset-0 bg-gradient-to-b from-blue-100 via-blue-50 to-white hero-bg"></div>
       <div className="absolute inset-0 hero-gradient opacity-0" style={{ background: 'linear-gradient(to bottom, rgba(30, 64, 175, 0.1), rgba(30,64,175,0.05))' }} />
       

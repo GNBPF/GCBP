@@ -12,11 +12,11 @@ const mosaicImages = [
 
 export const HeroSection: React.FC = () => {
   return (
-    <section className="hero-section py-8 mobile-small:py-10 xs:py-12 sm:py-14 md:py-16 px-4 mobile-small:px-5 xs:px-6 sm:px-8 md:px-12 lg:px-16">
+    <section className="hero-section pt-24 mobile-small:pt-28 xs:pt-32 sm:pt-36 md:pt-40 lg:pt-48 pb-16 mobile-small:pb-20 xs:pb-24 sm:pb-28 md:pb-32 lg:pb-40 px-4 mobile-small:px-5 xs:px-6 sm:px-8 md:px-12 lg:px-16">
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-[1fr_1.2fr] gap-8 mobile-small:gap-10 xs:gap-12 sm:gap-14 items-center">
           {/* Mosaic Image Grid (Left) - 2 columns, 3 rows */}
-          <div className="mosaic-grid grid grid-cols-2 gap-3 mobile-small:gap-4 xs:gap-5 sm:gap-6">
+          <div className="mosaic-grid grid grid-cols-2 gap-3 xs:gap-4 sm:gap-5 md:gap-6 max-w-[350px] xs:max-w-[400px] sm:max-w-[500px] md:max-w-[600px] lg:max-w-none mx-auto md:mx-0">
             {mosaicImages.map((img, index) => (
               <div
                 key={index}

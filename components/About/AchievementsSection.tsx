@@ -17,44 +17,44 @@ export const AchievementsSection: React.FC = () => {
   ];
 
   return (
-    <section className="py-8 mobile-small:py-10 xs:py-12 sm:py-14 md:py-16 px-4 mobile-small:px-5 xs:px-6 sm:px-8 md:px-12 lg:px-16 achievements">
+    <section className="py-16 md:py-20 lg:py-24 px-6 sm:px-8 md:px-12 lg:px-16 bg-[#FFFAF0] achievements">
       <div className="max-w-7xl mx-auto w-full">
         {/* Decorative Line */}
-        <div className="flex items-center justify-center mb-6 mobile-small:mb-8">
+        <div className="flex items-center justify-center mb-12 md:mb-16">
           <div className="flex items-center w-full max-w-7xl px-4">
-            <div className="w-3 h-3 rounded-full bg-gcbp-primary"></div>
-            <div className="flex-1 h-0.5 bg-gcbp-primary mx-2"></div>
-            <div className="w-3 h-3 rounded-full bg-gcbp-primary"></div>
+            <div className="w-3 h-3 rounded-full bg-[#163FA5]"></div>
+            <div className="flex-1 h-0.5 bg-[#163FA5] mx-2"></div>
+            <div className="w-3 h-3 rounded-full bg-[#163FA5]"></div>
           </div>
         </div>
 
-        <h2 className="text-[clamp(1.5rem,4vw,2.5rem)] mobile-small:text-[clamp(1.75rem,5vw,3rem)] sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gcbp-primary mb-2 mobile-small:mb-3 text-center">ACHIEVEMENTS AND IMPACT</h2>
-        <p className="text-slate-600 text-center text-sm mobile-small:text-base xs:text-lg sm:text-xl mb-8 mobile-small:mb-10 xs:mb-12">
+        <h2 className="text-3xl md:text-4xl lg:text-5xl font-serif font-bold text-[#163FA5] mb-4 md:mb-6 text-center">ACHIEVEMENTS AND IMPACT</h2>
+        <p className="text-[#5A5A5F] text-center text-base md:text-lg lg:text-xl mb-12 md:mb-16 max-w-3xl mx-auto font-sans">
           EACH MILESTONE REPRESENTS OUR ACHIEVEMENT AND IMPACT IN ACTION—TURNING IDEAS INTO SUSTAINABLE SOLUTIONS THAT BENEFIT PEOPLE AND THE PLANET.
         </p>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mobile-small:gap-10 xs:gap-12 items-start">
-          <div className="space-y-4 mobile-small:space-y-5 xs:space-y-6">
-            <h3 className="text-xl mobile-small:text-2xl xs:text-3xl font-bold text-slate-900">ACHIEVEMENTS</h3>
-            <ul className="space-y-3 mobile-small:space-y-4 xs:space-y-5">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-12 lg:gap-16 items-start">
+          <div className="space-y-6 md:space-y-8">
+            <h3 className="text-2xl md:text-3xl lg:text-4xl font-serif font-bold text-[#1F1F22]">ACHIEVEMENTS</h3>
+            <ul className="space-y-4 md:space-y-6">
               {achievements.map((item, idx) => (
                 <li
                   key={idx}
-                  className="achievement-item flex items-start gap-3 mobile-small:gap-4"
+                  className="achievement-item flex items-start gap-4"
                 >
-                  <span className="mt-1.5 h-2 w-2 rounded-full bg-gcbp-primary flex-shrink-0"></span>
-                  <span className="text-sm mobile-small:text-base xs:text-lg sm:text-xl text-slate-700 font-medium">{item}</span>
+                  <span className="mt-1.5 h-2 w-2 rounded-full bg-[#163FA5] flex-shrink-0"></span>
+                  <span className="text-base md:text-lg lg:text-xl text-[#1F1F22] font-medium font-sans">{item}</span>
                 </li>
               ))}
             </ul>
-            <Link to="/contact" className="learn-more-btn inline-flex items-center gap-2 px-6 mobile-small:px-8 py-3 mobile-small:py-4 text-sm mobile-small:text-base border-2 border-gcbp-primary text-gcbp-primary rounded-full hover:bg-gcbp-primary hover:text-white transition-all group">
+            <Link to="/contact" className="learn-more-btn inline-flex items-center gap-2 px-8 py-4 text-base md:text-lg border-2 border-[#163FA5] text-[#163FA5] rounded-lg hover:bg-[#163FA5] hover:text-white transition-all group font-sans">
               Learn More
               <span className="arrow-icon transition-transform duration-300 group-hover:translate-x-1">→</span>
             </Link>
           </div>
 
-          <div className="space-y-4 mobile-small:space-y-5 xs:space-y-6">
-            <div className="relative overflow-hidden rounded-lg shadow-xl impact-video border border-slate-200 aspect-[4/3]">
+          <div className="space-y-6 md:space-y-8">
+            <div className="relative overflow-hidden rounded-lg shadow-xl impact-video border border-[#E6E6E8] aspect-[4/3]">
               <video
                 className="w-full h-full object-cover"
                 loop
@@ -66,19 +66,19 @@ export const AchievementsSection: React.FC = () => {
               </video>
             </div>
             
-            <div className="space-y-3 mobile-small:space-y-4">
-              <h3 className="text-xl mobile-small:text-2xl xs:text-3xl font-bold text-slate-900">Our Impact</h3>
-              <p className="text-sm mobile-small:text-base xs:text-lg text-slate-600">
+            <div className="space-y-4 md:space-y-6">
+              <h3 className="text-2xl md:text-3xl lg:text-4xl font-serif font-bold text-[#1F1F22]">Our Impact</h3>
+              <p className="text-base md:text-lg lg:text-xl text-[#5A5A5F] font-sans">
                 We work tirelessly to improve lives and protect our planet through sustainable solutions and community empowerment.
               </p>
               
-              <div className="mt-4 mobile-small:mt-5 xs:mt-6">
-                <h4 className="text-lg mobile-small:text-xl xs:text-2xl font-bold text-slate-900 mb-3 mobile-small:mb-4">Changes, One Project At A Time.</h4>
-                <ul className="space-y-2 mobile-small:space-y-3">
+              <div className="mt-6 md:mt-8">
+                <h4 className="text-xl md:text-2xl lg:text-3xl font-serif font-bold text-[#1F1F22] mb-4 md:mb-6">Changes, One Project At A Time.</h4>
+                <ul className="space-y-3 md:space-y-4">
                   {impactStats.map((stat, idx) => (
-                    <li key={idx} className="flex items-center gap-2 mobile-small:gap-3">
-                      <span className="h-1.5 w-1.5 rounded-full bg-gcbp-primary flex-shrink-0"></span>
-                      <span className="text-sm mobile-small:text-base xs:text-lg text-slate-700">
+                    <li key={idx} className="flex items-center gap-3">
+                      <span className="h-1.5 w-1.5 rounded-full bg-[#163FA5] flex-shrink-0"></span>
+                      <span className="text-base md:text-lg lg:text-xl text-[#1F1F22] font-sans">
                         <span className="font-bold">{stat.value.toLocaleString()}{stat.suffix}</span> {stat.label}
                       </span>
                     </li>
@@ -86,11 +86,11 @@ export const AchievementsSection: React.FC = () => {
                 </ul>
               </div>
               
-              <div className="flex flex-col xs:flex-row gap-3 mobile-small:gap-4 cta-buttons pt-4 mobile-small:pt-5">
-                <Link to="/contact" className="cta-btn px-6 mobile-small:px-8 py-3 mobile-small:py-4 text-sm mobile-small:text-base bg-gcbp-primary text-white rounded-full shadow-md hover:bg-blue-800 transition-all hover:scale-103 hover:shadow-lg hover:shadow-blue-900/30 text-center">
+              <div className="flex flex-col sm:flex-row gap-4 cta-buttons pt-6 md:pt-8">
+                <Link to="/contact" className="cta-btn px-8 py-4 text-base md:text-lg bg-[#163FA5] text-white rounded-lg shadow-md hover:bg-[#0F2E7A] transition-all hover:scale-105 hover:shadow-lg text-center font-sans">
                   Donate
                 </Link>
-                <Link to="/contact" className="cta-btn px-6 mobile-small:px-8 py-3 mobile-small:py-4 text-sm mobile-small:text-base bg-white text-gcbp-primary border-2 border-gcbp-primary rounded-full hover:bg-blue-50 transition-all hover:scale-103 text-center">
+                <Link to="/contact" className="cta-btn px-8 py-4 text-base md:text-lg bg-white text-[#163FA5] border-2 border-[#163FA5] rounded-lg hover:bg-[#FFFAF0] transition-all hover:scale-105 text-center font-sans">
                   Volunteer
                 </Link>
               </div>

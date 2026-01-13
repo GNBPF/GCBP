@@ -27,16 +27,21 @@ export default {
       },
       colors: {
         gcbp: {
-          primary: '#1e40af',
-          light: '#f3f4f6',
-          text: '#4b5563',
-          bg: '#fafafa',
-          dark: '#1e1b4b'
+          primary: '#163FA5', // Deep Brand Blue
+          background: '#FFFAF0', // Warm Off-White
+          text: '#1F1F22', // Near Black
+          'text-secondary': '#5A5A5F', // Dark Gray
+          border: '#E6E6E8', // Light Gray
+          accent: {
+            orange: '#FF9100',
+            coral: '#FF5334',
+            purple: '#3D0091'
+          }
         }
       },
       fontFamily: {
-        sans: ['Inter', 'sans-serif'],
-        serif: ['Georgia', 'serif']
+        sans: ['Source Sans Pro', 'sans-serif'],
+        serif: ['Playfair Display', 'serif']
       },
       spacing: {
         '18': '4.5rem',

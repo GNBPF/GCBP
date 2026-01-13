@@ -9,10 +9,10 @@ const supporters = [
 
 export const SupportersSection: React.FC = () => {
   return (
-    <section className="py-8 mobile-small:py-10 xs:py-12 sm:py-14 md:py-16 px-4 mobile-small:px-5 xs:px-6 sm:px-8 md:px-12 lg:px-16 bg-gcbp-primary text-white ripple-bg relative overflow-hidden">
+    <section className="py-16 md:py-20 lg:py-24 px-6 sm:px-8 md:px-12 lg:px-16 bg-[#163FA5] text-white ripple-bg relative overflow-hidden">
       <div className="max-w-7xl mx-auto w-full relative z-10">
         {/* Decorative Line */}
-        <div className="flex items-center justify-center mb-6 mobile-small:mb-8">
+        <div className="flex items-center justify-center mb-12 md:mb-16">
           <div className="flex items-center w-full max-w-7xl px-4">
             <div className="w-3 h-3 rounded-full bg-white"></div>
             <div className="flex-1 h-0.5 bg-white mx-2"></div>

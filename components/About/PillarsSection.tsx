@@ -25,31 +25,54 @@ export const PillarsSection: React.FC = () => {
   ];
 
   return (
-    <section className="py-8 mobile-small:py-10 xs:py-12 sm:py-14 md:py-16 px-4 mobile-small:px-5 xs:px-6 sm:px-8 md:px-12 lg:px-16 pillars">
-      <div className="max-w-7xl mx-auto w-full space-y-8 mobile-small:space-y-10 xs:space-y-12">
-        {pillars.map((pillar, i) => (
-          <div key={pillar.title} className="grid grid-cols-1 md:grid-cols-[1fr_1.5fr] gap-6 mobile-small:gap-8 xs:gap-10 items-center">
-            <div className={`pillar-img-${i === 0 ? 'top' : i === 1 ? 'mid' : 'bot'} relative overflow-hidden rounded-lg shadow-xl aspect-[4/3]`}>
-              <img 
-                src={pillar.img} 
-                alt={pillar.title} 
-                className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
-              />
-            </div>
-            
-            <div className="pillar-card">
-              <div className="bg-white border-t-2 border-gcbp-primary pt-4 mobile-small:pt-5 xs:pt-6">
-                <div className="flex items-center gap-2 mobile-small:gap-3 mb-3 mobile-small:mb-4">
-                  <div className="w-2 h-2 rounded-full bg-gcbp-primary"></div>
-                  <div className="divider-line flex-1 h-0.5 bg-gcbp-primary origin-left"></div>
-                  <div className="w-2 h-2 rounded-full bg-gcbp-primary"></div>
+    <section className="py-16 md:py-20 lg:py-24 px-6 sm:px-8 md:px-12 lg:px-16 bg-[#FFFAF0] pillars">
+      <div className="max-w-7xl mx-auto w-full">
+        {/* Section divider */}
+        <div className="flex items-center justify-center mb-12 md:mb-16">
+          <div className="flex items-center w-full max-w-7xl px-4">
+            <div className="w-3 h-3 rounded-full bg-[#163FA5]"></div>
+            <div className="flex-1 h-0.5 bg-[#163FA5] mx-2"></div>
+            <div className="w-3 h-3 rounded-full bg-[#163FA5]"></div>
+          </div>
+        </div>
+
+        <div className="space-y-12 md:space-y-16 lg:space-y-20">
+          {pillars.map((pillar, i) => (
+            <div 
+              key={pillar.title} 
+              className={`grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10 lg:gap-12 items-center ${
+                i % 2 === 1 ? 'md:grid-flow-dense' : ''
+              }`}
+            >
+              {/* Image - Alternate sides */}
+              <div 
+                className={`pillar-img-${i === 0 ? 'top' : i === 1 ? 'mid' : 'bot'} relative overflow-hidden rounded-lg shadow-xl aspect-[4/3] ${
+                  i % 2 === 1 ? 'md:col-start-2' : ''
+                }`}
+              >
+                <img 
+                  src={pillar.img} 
+                  alt={pillar.title} 
+                  className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+                  loading="lazy"
+                />
+              </div>
+              
+              {/* Content */}
+              <div className={`pillar-card ${i % 2 === 1 ? 'md:col-start-1 md:row-start-1' : ''}`}>
+                <div className="bg-white border-t-2 border-[#163FA5] pt-6 md:pt-8">
+                  <div className="flex items-center gap-2 md:gap-3 mb-4 md:mb-6">
+                    <div className="w-2 h-2 rounded-full bg-[#163FA5]"></div>
+                    <div className="divider-line flex-1 h-0.5 bg-[#163FA5] origin-left"></div>
+                    <div className="w-2 h-2 rounded-full bg-[#163FA5]"></div>
+                  </div>
+                  <h3 className="text-2xl md:text-3xl lg:text-4xl font-serif font-bold text-[#163FA5] mb-4 md:mb-6">{pillar.title}</h3>
+                  <p className="text-base md:text-lg lg:text-xl text-[#5A5A5F] leading-relaxed font-sans">{pillar.body}</p>
                 </div>
-                <h3 className="text-xl mobile-small:text-2xl xs:text-3xl sm:text-4xl font-bold text-gcbp-primary mb-3 mobile-small:mb-4">{pillar.title}</h3>
-                <p className="text-sm mobile-small:text-base xs:text-lg sm:text-xl text-slate-700 leading-relaxed">{pillar.body}</p>
               </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
     </section>
   );

@@ -15,6 +15,15 @@ export const Stories: React.FC = () => {
     if (!rootRef.current) return;
 
     const ctx = gsap.context(() => {
+      // Detect mobile/tablet for performance optimization
+      const isMobile = window.innerWidth < 768;
+      const isTablet = window.innerWidth >= 768 && window.innerWidth < 1024;
+      
+      // Configure ScrollTrigger for mobile/tablet
+      ScrollTrigger.config({
+        autoRefreshEvents: "visibilitychange,DOMContentLoaded,load",
+        ignoreMobileResize: false
+      });
       // ===== 1. MOSAIC IMAGE GRID (Top Left) =====
       // Images appear asynchronously: Opacity 0 → 100, Scale 0.95 → 1, Duration: 0.6s, Randomized delay (0–0.4s)
       gsap.utils.toArray<HTMLElement>('.mosaic-tile').forEach((tile, index) => {
@@ -75,7 +84,7 @@ export const Stories: React.FC = () => {
           ease: 'power2.out',
           scrollTrigger: {
             trigger: divider,
-            start: 'top 60%', // 40% in viewport
+            start: isMobile ? 'top 70%' : 'top 60%', // Adjusted for mobile
             toggleActions: 'play none none reverse',
             invalidateOnRefresh: true
           }
@@ -93,7 +102,7 @@ export const Stories: React.FC = () => {
         ease: 'power2.out',
         scrollTrigger: {
           trigger: '.all-stories-section',
-          start: 'top 80%',
+          start: isMobile ? 'top 85%' : 'top 80%',
           toggleActions: 'play none none reverse',
           invalidateOnRefresh: true
         }
@@ -112,27 +121,35 @@ export const Stories: React.FC = () => {
         ease: 'power2.out',
         scrollTrigger: {
           trigger: '.visual-stories-section',
-          start: 'top 80%',
+          start: isMobile ? 'top 85%' : 'top 80%',
           toggleActions: 'play none none reverse',
           invalidateOnRefresh: true
         }
       });
 
-      // Full-Width Image: Parallax effect (Image scrolls slower than page), Very subtle zoom-in on scroll (1 → 1.04)
-      gsap.to('.visual-image-container img', {
-        y: (i, target) => {
-          return ScrollTrigger.maxScroll(window) * 0.2; // Slower than page
-        },
-        scale: 1.04,
-        ease: 'none',
-        scrollTrigger: {
-          trigger: '.visual-image-container',
-          start: 'top bottom',
-          end: 'bottom top',
-          scrub: true,
-          invalidateOnRefresh: true
+      // Full-Width Image: Parallax effect (Image scrolls slower than page)
+      // Image moves at 50% speed relative to scroll, creating smooth parallax
+      const parallaxImage = document.querySelector('.visual-parallax-image') as HTMLElement;
+      if (parallaxImage) {
+        const container = parallaxImage.closest('.visual-image-container') as HTMLElement;
+        if (container) {
+          // Calculate the maximum movement (image is 120% height, container is 100%)
+          const containerHeight = container.offsetHeight;
+          const maxMovement = containerHeight * 0.2; // 20% of container height (120% - 100%)
+          
+          gsap.to(parallaxImage, {
+            y: -maxMovement,
+            ease: 'none',
+            scrollTrigger: {
+              trigger: container,
+              start: 'top bottom',
+              end: 'bottom top',
+              scrub: 1,
+              invalidateOnRefresh: true
+            }
+          });
         }
-      });
+      }
 
       // CTA Button: Hover arrow nudges right, Button glows slightly (handled by CSS)
 
@@ -146,7 +163,7 @@ export const Stories: React.FC = () => {
         ease: 'power2.out',
         scrollTrigger: {
           trigger: '.planet-stories-section',
-          start: 'top 80%',
+          start: isMobile ? 'top 85%' : 'top 80%',
           toggleActions: 'play none none reverse',
           invalidateOnRefresh: true
         }
@@ -161,7 +178,7 @@ export const Stories: React.FC = () => {
         ease: 'power2.out',
         scrollTrigger: {
           trigger: '.planet-stories-section',
-          start: 'top 80%',
+          start: isMobile ? 'top 85%' : 'top 80%',
           toggleActions: 'play none none reverse',
           invalidateOnRefresh: true
         }
@@ -178,7 +195,7 @@ export const Stories: React.FC = () => {
         ease: 'power2.out',
         scrollTrigger: {
           trigger: '.planet-stories-section',
-          start: 'top 80%',
+          start: isMobile ? 'top 85%' : 'top 80%',
           toggleActions: 'play none none reverse',
           invalidateOnRefresh: true
         }
@@ -192,7 +209,7 @@ export const Stories: React.FC = () => {
         ease: 'power2.out',
         scrollTrigger: {
           trigger: '.planet-stories-section',
-          start: 'top 80%',
+          start: isMobile ? 'top 85%' : 'top 80%',
           toggleActions: 'play none none reverse',
           invalidateOnRefresh: true
         }
@@ -210,7 +227,7 @@ export const Stories: React.FC = () => {
         ease: 'power2.out',
         scrollTrigger: {
           trigger: '.planet-stories-section',
-          start: 'top 80%',
+          start: isMobile ? 'top 85%' : 'top 80%',
           toggleActions: 'play none none reverse',
           invalidateOnRefresh: true
         }
