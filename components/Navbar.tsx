@@ -1,144 +1,171 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { NAV_ITEMS } from '../constants';
 import { Link, useLocation } from 'react-router-dom';
-import { NavItem } from '../types';
-import { Menu, X } from 'lucide-react';
-
-const navItems: NavItem[] = [
-  { label: 'About', href: '/about' },
-  { label: 'Our Programs', href: '/programs' },
-  { label: 'Media & Events', href: '/media' },
-  { label: 'Stories', href: '/stories' },
-];
 
 export const Navbar: React.FC = () => {
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const location = useLocation();
 
-  // Close mobile menu on scroll
-  React.useEffect(() => {
+  useEffect(() => {
     const handleScroll = () => {
-      if (isMobileMenuOpen) {
-        setIsMobileMenuOpen(false);
-      }
+      setScrolled(window.scrollY > 50);
     };
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
-  }, [isMobileMenuOpen]);
+  }, []);
 
-  const handleNavClick = (item: NavItem, e: React.MouseEvent) => {
-    if (item.isHash && location.pathname === '/') {
-      // If it's a hash link and we're on home page, scroll to section
-      e.preventDefault();
-      const element = document.querySelector(item.href);
-      if (element) {
-        const offset = 80;
-        const elementPosition = element.getBoundingClientRect().top + window.pageYOffset;
-        window.scrollTo({ top: elementPosition - offset, behavior: 'smooth' });
-        setIsMobileMenuOpen(false);
-      }
-    } else if (item.isHash) {
-      // If it's a hash link but we're on a different page, navigate to home first
-      e.preventDefault();
-      window.location.href = `/${item.href}`;
+  useEffect(() => {
+    // Close mobile menu when route changes
+    setMobileMenuOpen(false);
+  }, [location.pathname]);
+
+  useEffect(() => {
+    // Prevent body scroll when mobile menu is open
+    if (mobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
     } else {
-      setIsMobileMenuOpen(false);
+      document.body.style.overflow = 'unset';
     }
-  };
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [mobileMenuOpen]);
 
   return (
-    <nav className="fixed top-0 left-0 right-0 w-full z-50 flex justify-between items-center px-3 mobile-small:px-4 xs:px-5 sm:px-6 md:px-[6%] lg:px-[8%] py-2 mobile-small:py-2.5 xs:py-3 sm:py-3 md:py-2.5 lg:py-3 bg-[#FFFAF0]/95 backdrop-blur-sm transition-all duration-300 border-b border-[#E6E6E8]">
-      {/* Logo */}
-      <Link 
-        to="/"
-        className="flex items-center cursor-pointer"
-      >
-         <img 
-           src="/logo2.png" 
-           alt="GCBP Logo" 
-           className="h-14 mobile-small:h-16 xs:h-18 sm:h-20 md:h-24 lg:h-28 xl:h-32 w-auto object-contain"
-         />
-      </Link>
-
-      {/* Desktop Menu */}
-      <div className="hidden md:flex items-center">
-        {navItems.map((item) => (
-          item.isHash ? (
-            <a
-              key={item.label}
-              href={item.href}
-              className="mx-2 lg:mx-3 xl:mx-4 font-medium text-sm md:text-base lg:text-lg text-[#1F1F22] hover:text-[#163FA5] transition-colors font-sans"
-              onClick={(e) => handleNavClick(item, e)}
-            >
-              {item.label}
-            </a>
-          ) : (
-            <Link
-              key={item.label}
-              to={item.href}
-              className={`mx-2 lg:mx-3 xl:mx-4 font-medium text-sm md:text-base lg:text-lg transition-colors font-sans ${
-                location.pathname === item.href
-                  ? 'text-[#163FA5]'
-                  : 'text-[#1F1F22] hover:text-[#163FA5]'
-              }`}
-            >
-              {item.label}
-            </Link>
-          )
-        ))}
-      </div>
-
-      {/* CTA Button & Mobile Toggle */}
-      <div className="flex items-center gap-2 mobile-small:gap-3 xs:gap-4">
-        <Link
-          to="/contact"
-          className="hidden md:inline-block bg-[#163FA5] text-white px-6 lg:px-8 xl:px-10 py-2.5 lg:py-3 rounded-full font-medium text-sm md:text-base lg:text-lg hover:bg-[#0F2E7A] transition-colors shadow-lg shadow-[#163FA5]/10 active:scale-95 font-sans"
-        >
-          Contact Us
+    <nav 
+      className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
+        scrolled
+          ? 'bg-white shadow-md py-3' 
+          : 'bg-transparent py-4 md:py-6'
+      }`}
+    >
+      <div className="max-w-7xl mx-auto container-padding flex items-center justify-between">
+        {/* Logo Area */}
+        <Link to="/" className="flex items-center gap-2 md:gap-3 group z-50">
+          <div className={`w-8 h-8 md:w-10 md:h-10 flex items-center justify-center rounded-full transition-colors duration-300 ${scrolled ? 'bg-ngo-navy text-white' : 'bg-white text-ngo-navy'}`}>
+            <span className="font-serif font-bold text-lg md:text-xl">G</span>
+          </div>
+          <div className="flex flex-col">
+            <span className={`font-serif font-bold text-base md:text-lg leading-none tracking-tight transition-colors duration-300 ${scrolled ? 'text-ngo-navy' : 'text-white'}`}>
+              GCBP
+            </span>
+            <span className={`text-[9px] md:text-[10px] uppercase tracking-widest font-sans transition-colors duration-300 ${scrolled ? 'text-ngo-gray' : 'text-white/80'}`}>
+              Global Collective
+            </span>
+          </div>
         </Link>
-        
+
+        {/* Desktop Nav */}
+        <div className="hidden md:flex items-center space-x-6 lg:space-x-8">
+          {NAV_ITEMS.map((item) => {
+             const isAnchor = item.href.startsWith('#');
+             const isActive = location.pathname === item.href;
+             const baseClasses = `text-sm font-sans font-medium transition-colors duration-300 hover:text-ngo-accent ${
+                  scrolled ? 'text-ngo-navy' : 'text-white shadow-sm'
+                } ${isActive ? 'text-ngo-accent font-bold' : ''}`;
+
+             if (isAnchor) {
+               return (
+                  <a
+                    key={item.label}
+                    href={item.href}
+                    className={baseClasses}
+                  >
+                    {item.label}
+                  </a>
+               );
+             }
+
+             return (
+              <Link
+                key={item.label}
+                to={item.href}
+                className={baseClasses}
+              >
+                {item.label}
+              </Link>
+            );
+          })}
+          <Link
+             to="/donate"
+             className={`px-4 lg:px-6 py-2 md:py-2.5 rounded text-xs md:text-sm font-bold font-sans tracking-wide transition-all duration-300 ${
+               scrolled
+                 ? 'bg-ngo-green text-white hover:bg-ngo-navy' 
+                 : 'bg-white text-ngo-navy hover:bg-ngo-accent hover:text-ngo-navy'
+             }`}
+          >
+            Donate Now
+          </Link>
+        </div>
+
+        {/* Mobile Menu Button */}
         <button
-          className="md:hidden text-[#5A5A5F] p-1 active:scale-95"
-          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+          className={`md:hidden z-50 p-2 rounded transition-colors ${
+            scrolled ? 'text-ngo-navy' : 'text-white'
+          }`}
+          aria-label="Toggle menu"
         >
-          {isMobileMenuOpen ? <X size={20} className="mobile-small:w-6 mobile-small:h-6" /> : <Menu size={20} className="mobile-small:w-6 mobile-small:h-6" />}
+          {mobileMenuOpen ? (
+            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          ) : (
+            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+          )}
         </button>
       </div>
 
       {/* Mobile Menu */}
-      {isMobileMenuOpen && (
-        <div className="absolute top-full left-0 right-0 bg-white border-b border-slate-100 p-4 mobile-small:p-5 xs:p-6 flex flex-col space-y-3 mobile-small:space-y-4 shadow-xl md:hidden">
-          {navItems.map((item) => (
-            item.isHash ? (
-              <a
-                key={item.label}
-                href={item.href}
-                className="text-[#1F1F22] font-medium text-base mobile-small:text-lg xs:text-xl py-2 hover:text-[#163FA5] transition-colors font-sans"
-                onClick={(e) => handleNavClick(item, e)}
-              >
-                {item.label}
-              </a>
-            ) : (
+      <div
+        className={`fixed inset-0 bg-ngo-navy z-40 transform transition-transform duration-300 ease-in-out md:hidden ${
+          mobileMenuOpen ? 'translate-x-0' : 'translate-x-full'
+        }`}
+      >
+        <div className="flex flex-col h-full pt-20 px-6 pb-8">
+          {NAV_ITEMS.map((item) => {
+            const isAnchor = item.href.startsWith('#');
+            const isActive = location.pathname === item.href;
+            const baseClasses = `text-lg font-sans font-medium py-4 border-b border-white/10 transition-colors ${
+              isActive ? 'text-ngo-accent' : 'text-white'
+            }`;
+
+            if (isAnchor) {
+              return (
+                <a
+                  key={item.label}
+                  href={item.href}
+                  className={baseClasses}
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  {item.label}
+                </a>
+              );
+            }
+
+            return (
               <Link
                 key={item.label}
                 to={item.href}
-                className={`text-[#1F1F22] font-medium text-base mobile-small:text-lg xs:text-xl py-2 hover:text-[#163FA5] transition-colors font-sans ${
-                  location.pathname === item.href ? 'text-[#163FA5]' : ''
-                }`}
-                onClick={() => setIsMobileMenuOpen(false)}
+                className={baseClasses}
+                onClick={() => setMobileMenuOpen(false)}
               >
                 {item.label}
               </Link>
-            )
-          ))}
+            );
+          })}
           <Link
-            to="/contact"
-            className="bg-[#163FA5] text-white text-center py-2.5 mobile-small:py-3 rounded-full font-bold text-sm mobile-small:text-base w-full active:scale-95 font-sans"
-            onClick={() => setIsMobileMenuOpen(false)}
+            to="/donate"
+            className="mt-6 px-6 py-4 bg-ngo-green text-white rounded text-center font-bold font-sans tracking-wide transition-all duration-300 hover:bg-ngo-accent hover:text-ngo-navy"
+            onClick={() => setMobileMenuOpen(false)}
           >
-            Contact Us
+            Donate Now
           </Link>
         </div>
-      )}
+      </div>
     </nav>
   );
 };

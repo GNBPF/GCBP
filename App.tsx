@@ -1,111 +1,55 @@
-import React, { useEffect } from 'react';
-import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
+import React from 'react';
+import { HashRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { Navbar } from './components/Navbar';
-import { Home } from './pages/Home';
-import { About } from './pages/About';
-import { Programs } from './pages/Programs';
-import { Media } from './pages/Media';
-import { Contact } from './pages/Contact';
-import { Stories } from './pages/Stories';
+import { HomePage } from './components/pages/HomePage';
+import { MissionPage } from './components/pages/MissionPage';
+import { ProgramsPage } from './components/pages/ProgramsPage';
+import { EventsPage } from './components/pages/EventsPage';
+import { StoryPage } from './components/pages/StoryPage';
+import { DonatePage } from './components/pages/DonatePage';
 import { Footer } from './components/Footer';
-import Lenis from 'lenis';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useEffect } from 'react';
 
-// Register GSAP plugin
-gsap.registerPlugin(ScrollTrigger);
-
-// ScrollToTop component - scrolls to top on route change
-const ScrollToTop: React.FC = () => {
+// Scroll to top helper
+const ScrollToTop = () => {
   const { pathname } = useLocation();
-
   useEffect(() => {
-    // Scroll to top immediately when route changes
-    window.scrollTo(0, 0);
-    
-    // Also refresh ScrollTrigger after a brief delay to ensure layout is ready
-    const timer = setTimeout(() => {
-      ScrollTrigger.refresh();
-    }, 100);
-
-    return () => clearTimeout(timer);
+    // Only scroll to top if not a hash link
+    if (!window.location.hash.includes('#/')) {
+       // logic specifically for HashRouter handling
+    } else {
+       window.scrollTo(0, 0);
+    }
   }, [pathname]);
-
   return null;
 };
 
 function App() {
-  useEffect(() => {
-    // Only initialize Lenis on client side
-    if (typeof window === 'undefined') return;
-
-    let lenis: Lenis | null = null;
-    let rafId: number | null = null;
-
-    try {
-      lenis = new Lenis({
-        duration: 1.2,
-        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-      });
-
-      // Connect Lenis to ScrollTrigger
-      const scrollHandler = () => {
-        ScrollTrigger.update();
-      };
-      
-      if (lenis.on) {
-        lenis.on('scroll', scrollHandler);
-      }
-
-      function raf(time: number) {
-        if (lenis) {
-          lenis.raf(time);
-          rafId = requestAnimationFrame(raf);
-        }
-      }
-
-      rafId = requestAnimationFrame(raf);
-
-      return () => {
-        try {
-          if (rafId !== null) {
-            cancelAnimationFrame(rafId);
-          }
-          if (lenis) {
-            if (lenis.off && scrollHandler) {
-              lenis.off('scroll', scrollHandler);
-            }
-            if (lenis.destroy) {
-              lenis.destroy();
-            }
-          }
-        } catch (e) {
-          console.error('Error cleaning up Lenis:', e);
-        }
-      };
-    } catch (error) {
-      console.error('Error initializing Lenis (continuing without smooth scroll):', error);
-      // App continues to work without smooth scroll
-    }
-  }, []);
+  const location = useLocation();
+  // Hide default footer on Events page as it has its own custom footer in the design
+  const showDefaultFooter = location.pathname !== '/events';
 
   return (
-    <BrowserRouter>
-      <ScrollToTop />
-      <div className="min-h-screen flex flex-col bg-white">
-        <Navbar />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/programs" element={<Programs />} />
-          <Route path="/media" element={<Media />} />
-          <Route path="/stories" element={<Stories />} />
-          <Route path="/contact" element={<Contact />} />
-        </Routes>
-        <Footer />
-      </div>
-    </BrowserRouter>
+    <main className="w-full bg-ngo-sand text-ngo-text selection:bg-ngo-green selection:text-white">
+      <Navbar />
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/story" element={<StoryPage />} />
+        <Route path="/mission" element={<MissionPage />} />
+        <Route path="/programs" element={<ProgramsPage />} />
+        <Route path="/events" element={<EventsPage />} />
+        <Route path="/donate" element={<DonatePage />} />
+      </Routes>
+      {showDefaultFooter && <Footer />}
+    </main>
   );
 }
 
-export default App;
+export default function AppWrapper() {
+  return (
+    <Router>
+      <ScrollToTop />
+      <App />
+    </Router>
+  );
+}

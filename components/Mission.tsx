@@ -1,0 +1,86 @@
+import React from 'react';
+import { Section } from './ui/Section';
+import { motion } from 'framer-motion';
+
+export const Mission: React.FC = () => {
+  return (
+    <Section id="mission" className="bg-white">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-10 items-center">
+        <motion.div
+           initial={{ opacity: 0, x: -30 }}
+           whileInView={{ opacity: 1, x: 0 }}
+           viewport={{ once: true }}
+           transition={{ duration: 0.8 }}
+        >
+           <h4 className="font-sans text-ngo-blue font-bold uppercase tracking-widest text-xs mb-3">Who We Are</h4>
+           <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl text-ngo-navy font-bold leading-tight mb-4">
+             Bridging the gap between <span className="text-ngo-green italic">policy</span> and <span className="text-ngo-green italic">people.</span>
+           </h2>
+           <p className="font-sans text-ngo-gray text-sm sm:text-base leading-relaxed mb-4">
+             The Global Collective for Better Planet (GCBP) was founded on a simple principle: complex global problems require collaborative local solutions. 
+           </p>
+           <p className="font-sans text-ngo-gray text-sm sm:text-base leading-relaxed mb-6">
+             We don't just advocate; we implement. From restoring coastal mangroves to funding girls' education in the Global South, our work is tangible, measurable, and rooted in the UN Sustainable Development Goals.
+           </p>
+           
+           <div className="flex items-center gap-4">
+             <div className="h-px bg-ngo-gray/20 flex-grow"></div>
+             <span className="font-serif text-ngo-navy italic font-medium text-xs sm:text-sm">Est. 1989</span>
+           </div>
+        </motion.div>
+
+        <motion.div
+           className="relative mt-8 lg:mt-0"
+           initial={{ opacity: 0, x: 30 }}
+           whileInView={{ opacity: 1, x: 0 }}
+           viewport={{ once: true }}
+           transition={{ duration: 0.8 }}
+        >
+          {/* Image Grid */}
+          <div className="grid grid-cols-2 gap-2 sm:gap-3">
+             <img 
+               src="/img1.jpeg" 
+               alt="Community Meeting" 
+               className="rounded object-cover h-40 sm:h-48 md:h-56 w-full" 
+             />
+             <img 
+               src="/img2.jpeg" 
+               alt="Reforestation" 
+               className="rounded object-cover h-40 sm:h-48 md:h-56 w-full mt-4 sm:mt-6 md:mt-8" 
+             />
+          </div>
+          
+          {/* SDG Badge */}
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white p-3 sm:p-4 rounded-full shadow-lg text-center border border-gray-100">
+             <span className="block font-serif text-xl sm:text-2xl font-bold text-ngo-navy">17</span>
+             <span className="block text-[7px] sm:text-[8px] uppercase font-bold text-ngo-gray tracking-widest">Goals</span>
+          </div>
+        </motion.div>
+      </div>
+
+      {/* SDG Color Strip */}
+      <div className="mt-12 md:mt-16 pt-6 md:pt-8 border-t border-ngo-gray/10">
+        <p className="text-center font-sans text-[10px] sm:text-xs text-ngo-gray mb-3 md:mb-4">Aligned with the UN Sustainable Development Goals</p>
+        <div className="flex w-full h-1.5 sm:h-2 rounded-full overflow-hidden">
+          <div className="flex-1 bg-[#E5243B]"></div> {/* SDG 1 */}
+          <div className="flex-1 bg-[#DDA63A]"></div> {/* SDG 2 */}
+          <div className="flex-1 bg-[#4C9F38]"></div> {/* SDG 3 */}
+          <div className="flex-1 bg-[#C5192D]"></div> {/* SDG 4 */}
+          <div className="flex-1 bg-[#FF3A21]"></div> {/* SDG 5 */}
+          <div className="flex-1 bg-[#26BDE2]"></div> {/* SDG 6 */}
+          <div className="flex-1 bg-[#FCC30B]"></div> {/* SDG 7 */}
+          <div className="flex-1 bg-[#A21942]"></div> {/* SDG 8 */}
+          <div className="flex-1 bg-[#FD6925]"></div> {/* SDG 9 */}
+          <div className="flex-1 bg-[#DD1367]"></div> {/* SDG 10 */}
+          <div className="flex-1 bg-[#FD9D24]"></div> {/* SDG 11 */}
+          <div className="flex-1 bg-[#BF8B2E]"></div> {/* SDG 12 */}
+          <div className="flex-1 bg-[#3F7E44]"></div> {/* SDG 13 */}
+          <div className="flex-1 bg-[#0A97D9]"></div> {/* SDG 14 */}
+          <div className="flex-1 bg-[#56C02B]"></div> {/* SDG 15 */}
+          <div className="flex-1 bg-[#00689D]"></div> {/* SDG 16 */}
+          <div className="flex-1 bg-[#19486A]"></div> {/* SDG 17 */}
+        </div>
+      </div>
+    </Section>
+  );
+};
