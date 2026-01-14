@@ -31,7 +31,7 @@ export const DonatePage: React.FC = () => {
           <span className="inline-block py-1 px-3 sm:px-4 border border-ngo-navy/20 rounded-full text-ngo-navy text-[10px] sm:text-xs font-bold uppercase tracking-widest mb-4 sm:mb-6">
             Invest in Humanity
           </span>
-          <h1 className="font-serif text-3xl sm:text-4xl md:text-5xl lg:text-7xl xl:text-8xl font-bold leading-none mb-4 sm:mb-6">
+          <h1 className="font-serif text-2xl sm:text-3xl md:text-4xl lg:text-6xl xl:text-7xl 2xl:text-8xl font-bold leading-tight sm:leading-none mb-4 sm:mb-6 break-words">
              Your Capital. <br/>
              <span className="text-transparent bg-clip-text bg-gradient-to-r from-ngo-green to-ngo-blue">Our Action.</span>
           </h1>

@@ -17,7 +17,7 @@ export const StoryPage: React.FC = () => {
           <span className="block text-ngo-accent font-bold uppercase tracking-widest text-[10px] sm:text-xs md:text-sm mb-3 sm:mb-4">
              Since 1989
           </span>
-          <h1 className="font-serif text-4xl sm:text-5xl md:text-6xl lg:text-8xl xl:text-[9rem] leading-[0.85] font-bold text-ngo-navy tracking-tighter mb-6 sm:mb-8 md:mb-10">
+          <h1 className="font-serif text-3xl sm:text-4xl md:text-5xl lg:text-7xl xl:text-8xl 2xl:text-[9rem] leading-[0.9] sm:leading-[0.85] font-bold text-ngo-navy tracking-tighter mb-6 sm:mb-8 md:mb-10 break-words">
             UNSTOPPABLE <br/>
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-ngo-green to-ngo-blue">FORCE.</span>
           </h1>

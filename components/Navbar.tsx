@@ -36,8 +36,8 @@ export const Navbar: React.FC = () => {
     <nav 
       className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
         scrolled
-          ? 'bg-white shadow-lg py-3' 
-          : 'bg-ngo-navy/80 backdrop-blur-md shadow-lg py-4 md:py-6'
+          ? 'bg-white shadow-lg py-2 sm:py-3' 
+          : 'bg-ngo-navy/80 backdrop-blur-md shadow-lg py-3 sm:py-4 md:py-6'
       }`}
     >
       <div className="max-w-7xl mx-auto container-padding flex items-center justify-between">
@@ -46,7 +46,7 @@ export const Navbar: React.FC = () => {
           <img 
             src={scrolled ? "/logo4.png" : "/logo2.png"} 
             alt="GCBP Logo" 
-            className={`h-10 w-auto md:h-14 transition-opacity duration-300 ${!scrolled ? 'drop-shadow-md' : ''}`}
+            className={`h-8 w-auto sm:h-10 md:h-12 lg:h-14 transition-opacity duration-300 ${!scrolled ? 'drop-shadow-md' : ''}`}
           />
         </Link>
 

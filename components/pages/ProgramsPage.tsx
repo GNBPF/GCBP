@@ -18,7 +18,7 @@ export const ProgramsPage: React.FC = () => {
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 1, ease: "easeOut" }}
           >
-             <h1 className="font-serif text-[12vw] sm:text-[15vw] leading-[0.8] font-bold text-center tracking-tighter">
+             <h1 className="font-serif text-[10vw] sm:text-[12vw] md:text-[15vw] leading-[0.85] sm:leading-[0.8] font-bold text-center tracking-tighter break-words">
                 {/* Masked Text Effect */}
                 <span className="block bg-[url('/img3.jpeg')] bg-cover bg-clip-text text-transparent bg-center">
                   GLOBAL
