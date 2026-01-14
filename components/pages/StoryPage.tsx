@@ -72,15 +72,15 @@ export const StoryPage: React.FC = () => {
                         <img 
                            src={sdg.imageUrl} 
                            alt={sdg.title}
-                           className="absolute inset-0 w-full h-full object-cover opacity-40 group-hover:opacity-50 transition-opacity duration-500 scale-100 group-hover:scale-110"
+                           className="absolute inset-0 w-full h-full object-cover opacity-80 group-hover:opacity-90 transition-opacity duration-500 scale-100 group-hover:scale-110"
                            onError={(e) => {
                               // Hide image if it fails to load (placeholder not yet available)
                               e.currentTarget.style.display = 'none';
                            }}
                         />
-                        {/* Gradient overlay to maintain text readability and preserve SDG color identity */}
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-transparent"></div>
-                        <div className="absolute inset-0" style={{ backgroundColor: `${sdg.color}DD` }}></div>
+                        {/* Light gradient overlay for text readability and subtle color fade */}
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent"></div>
+                        <div className="absolute inset-0" style={{ backgroundColor: `${sdg.color}30` }}></div>
                      </>
                   )}
                   

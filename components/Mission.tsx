@@ -1,11 +1,12 @@
 import React from 'react';
 import { Section } from './ui/Section';
 import { motion } from 'framer-motion';
+import { SDG_GOALS } from '../constants';
 
 export const Mission: React.FC = () => {
   return (
-    <Section id="mission" className="bg-white">
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-10 items-center">
+    <Section id="mission" className="bg-white min-h-screen flex items-center py-0">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-10 items-center w-full py-8 md:py-12">
         <motion.div
            initial={{ opacity: 0, x: -30 }}
            whileInView={{ opacity: 1, x: 0 }}
@@ -58,27 +59,31 @@ export const Mission: React.FC = () => {
         </motion.div>
       </div>
 
-      {/* SDG Color Strip */}
+      {/* SDG Color Strip with Images */}
       <div className="mt-12 md:mt-16 pt-6 md:pt-8 border-t border-ngo-gray/10">
         <p className="text-center font-sans text-[10px] sm:text-xs text-ngo-gray mb-3 md:mb-4">Aligned with the UN Sustainable Development Goals</p>
-        <div className="flex w-full h-1.5 sm:h-2 rounded-full overflow-hidden">
-          <div className="flex-1 bg-[#E5243B]"></div> {/* SDG 1 */}
-          <div className="flex-1 bg-[#DDA63A]"></div> {/* SDG 2 */}
-          <div className="flex-1 bg-[#4C9F38]"></div> {/* SDG 3 */}
-          <div className="flex-1 bg-[#C5192D]"></div> {/* SDG 4 */}
-          <div className="flex-1 bg-[#FF3A21]"></div> {/* SDG 5 */}
-          <div className="flex-1 bg-[#26BDE2]"></div> {/* SDG 6 */}
-          <div className="flex-1 bg-[#FCC30B]"></div> {/* SDG 7 */}
-          <div className="flex-1 bg-[#A21942]"></div> {/* SDG 8 */}
-          <div className="flex-1 bg-[#FD6925]"></div> {/* SDG 9 */}
-          <div className="flex-1 bg-[#DD1367]"></div> {/* SDG 10 */}
-          <div className="flex-1 bg-[#FD9D24]"></div> {/* SDG 11 */}
-          <div className="flex-1 bg-[#BF8B2E]"></div> {/* SDG 12 */}
-          <div className="flex-1 bg-[#3F7E44]"></div> {/* SDG 13 */}
-          <div className="flex-1 bg-[#0A97D9]"></div> {/* SDG 14 */}
-          <div className="flex-1 bg-[#56C02B]"></div> {/* SDG 15 */}
-          <div className="flex-1 bg-[#00689D]"></div> {/* SDG 16 */}
-          <div className="flex-1 bg-[#19486A]"></div> {/* SDG 17 */}
+        <div className="flex w-full h-8 sm:h-12 md:h-16 rounded-lg overflow-hidden shadow-md">
+          {SDG_GOALS.map((sdg) => (
+            <div 
+              key={sdg.id} 
+              className="flex-1 relative group overflow-hidden"
+              style={{ backgroundColor: sdg.color }}
+            >
+              <img 
+                src={sdg.imageUrl} 
+                alt={sdg.title}
+                className="absolute inset-0 w-full h-full object-cover opacity-30 group-hover:opacity-50 transition-opacity duration-300"
+                onError={(e) => {
+                  e.currentTarget.style.display = 'none';
+                }}
+              />
+              {/* Color fade overlay */}
+              <div 
+                className="absolute inset-0 transition-opacity duration-300 group-hover:opacity-80"
+                style={{ backgroundColor: `${sdg.color}CC` }}
+              ></div>
+            </div>
+          ))}
         </div>
       </div>
     </Section>

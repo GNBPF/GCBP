@@ -11,7 +11,7 @@ export const Hero: React.FC = () => {
   }, []);
 
   return (
-    <section className="relative min-h-[500px] sm:min-h-[600px] lg:h-[80vh] w-full overflow-hidden flex flex-col justify-center">
+    <section className="relative h-screen w-full overflow-hidden flex flex-col justify-center">
       {/* Background Video - Abstract Ocean */}
       <div className="absolute inset-0 z-0 bg-ngo-navy">
         <video 
