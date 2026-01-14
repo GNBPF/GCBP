@@ -44,7 +44,7 @@ export const Navbar: React.FC = () => {
         {/* Logo Area */}
         <Link to="/" className="flex items-center gap-2 md:gap-3 group z-50">
           <img 
-            src="/logo2.png" 
+            src={scrolled ? "/logo4.png" : "/logo2.png"} 
             alt="GCBP Logo" 
             className={`h-10 w-auto md:h-14 transition-opacity duration-300 ${!scrolled ? 'drop-shadow-md' : ''}`}
           />

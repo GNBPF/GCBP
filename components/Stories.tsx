@@ -6,12 +6,12 @@ import { motion } from 'framer-motion';
 export const Stories: React.FC = () => {
   return (
     <Section id="stories" className="bg-white">
-      <div className="text-center mb-8 md:mb-10">
-        <h2 className="font-serif text-2xl sm:text-3xl text-ngo-navy font-bold mb-2">Stories from the Field</h2>
-        <div className="w-12 sm:w-16 h-1 bg-ngo-green mx-auto"></div>
+      <div className="text-center mb-6 sm:mb-8 md:mb-10">
+        <h2 className="font-serif text-xl sm:text-2xl md:text-3xl lg:text-4xl text-ngo-navy font-bold mb-2 sm:mb-3">Stories from the Field</h2>
+        <div className="w-10 sm:w-12 md:w-16 h-0.5 sm:h-1 bg-ngo-green mx-auto"></div>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5 md:gap-6">
         {STORIES.map((story, index) => (
           <motion.article 
             key={story.id}
@@ -21,24 +21,24 @@ export const Stories: React.FC = () => {
             viewport={{ once: true }}
             transition={{ delay: index * 0.2 }}
           >
-            <div className="relative overflow-hidden rounded mb-4 shadow-sm aspect-[3/2]">
+            <div className="relative overflow-hidden rounded mb-3 sm:mb-4 shadow-sm aspect-[3/2]">
               <img 
                 src={story.imageUrl} 
                 alt={story.title}
                 className="object-cover w-full h-full transform group-hover:scale-105 transition-transform duration-700"
               />
-              <div className="absolute top-3 left-3 bg-white px-2 py-1 text-[10px] font-bold uppercase tracking-wide text-ngo-navy rounded shadow-sm">
+              <div className="absolute top-2 sm:top-3 left-2 sm:left-3 bg-white px-1.5 sm:px-2 py-0.5 sm:py-1 text-[8px] sm:text-[9px] md:text-[10px] font-bold uppercase tracking-wide text-ngo-navy rounded shadow-sm">
                 {story.category}
               </div>
             </div>
             
-            <h3 className="font-serif text-lg sm:text-xl text-ngo-navy font-bold mb-2 leading-tight group-hover:text-ngo-blue transition-colors">
+            <h3 className="font-serif text-base sm:text-lg md:text-xl text-ngo-navy font-bold mb-1 sm:mb-2 leading-tight group-hover:text-ngo-blue transition-colors">
               {story.title}
             </h3>
-            <p className="font-sans text-ngo-gray text-xs sm:text-sm leading-relaxed mb-3 flex-grow">
+            <p className="font-sans text-ngo-gray text-[11px] sm:text-xs md:text-sm leading-relaxed mb-2 sm:mb-3 flex-grow">
               {story.excerpt}
             </p>
-            <span className="text-ngo-green font-bold text-[10px] sm:text-xs flex items-center gap-1">
+            <span className="text-ngo-green font-bold text-[9px] sm:text-[10px] md:text-xs flex items-center gap-1">
               Read Story <span className="group-hover:translate-x-1 transition-transform">&rarr;</span>
             </span>
           </motion.article>

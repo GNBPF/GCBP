@@ -6,21 +6,21 @@ import { SDG_GOALS } from '../constants';
 export const Mission: React.FC = () => {
   return (
     <Section id="mission" className="bg-white min-h-screen flex items-center py-0">
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-10 items-center w-full py-8 md:py-12">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 md:gap-10 lg:gap-12 items-center w-full py-6 sm:py-8 md:py-10 lg:py-12">
         <motion.div
            initial={{ opacity: 0, x: -30 }}
            whileInView={{ opacity: 1, x: 0 }}
            viewport={{ once: true }}
            transition={{ duration: 0.8 }}
         >
-           <h4 className="font-sans text-ngo-blue font-bold uppercase tracking-widest text-xs mb-3">Who We Are</h4>
-           <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl text-ngo-navy font-bold leading-tight mb-4">
+           <h4 className="font-sans text-ngo-blue font-bold uppercase tracking-widest text-[10px] sm:text-xs mb-2 sm:mb-3">Who We Are</h4>
+           <h2 className="font-serif text-xl sm:text-2xl md:text-3xl lg:text-4xl text-ngo-navy font-bold leading-tight mb-3 sm:mb-4">
              Bridging the gap between <span className="text-ngo-green italic">policy</span> and <span className="text-ngo-green italic">people.</span>
            </h2>
-           <p className="font-sans text-ngo-gray text-sm sm:text-base leading-relaxed mb-4">
+           <p className="font-sans text-ngo-gray text-xs sm:text-sm md:text-base leading-relaxed mb-3 sm:mb-4">
              The Global Collective for Better Planet (GCBP) was founded on a simple principle: complex global problems require collaborative local solutions. 
            </p>
-           <p className="font-sans text-ngo-gray text-sm sm:text-base leading-relaxed mb-6">
+           <p className="font-sans text-ngo-gray text-xs sm:text-sm md:text-base leading-relaxed mb-4 sm:mb-6">
              We don't just advocate; we implement. From restoring coastal mangroves to funding girls' education in the Global South, our work is tangible, measurable, and rooted in the UN Sustainable Development Goals.
            </p>
            
@@ -38,31 +38,31 @@ export const Mission: React.FC = () => {
            transition={{ duration: 0.8 }}
         >
           {/* Image Grid */}
-          <div className="grid grid-cols-2 gap-2 sm:gap-3">
+          <div className="grid grid-cols-2 gap-2 sm:gap-3 md:gap-4">
              <img 
                src="/img1.jpeg" 
                alt="Community Meeting" 
-               className="rounded object-cover h-40 sm:h-48 md:h-56 w-full" 
+               className="rounded object-cover h-32 sm:h-40 md:h-48 lg:h-56 w-full" 
              />
              <img 
                src="/img2.jpeg" 
                alt="Reforestation" 
-               className="rounded object-cover h-40 sm:h-48 md:h-56 w-full mt-4 sm:mt-6 md:mt-8" 
+               className="rounded object-cover h-32 sm:h-40 md:h-48 lg:h-56 w-full mt-3 sm:mt-4 md:mt-6 lg:mt-8" 
              />
           </div>
           
           {/* SDG Badge */}
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white p-3 sm:p-4 rounded-full shadow-lg text-center border border-gray-100">
-             <span className="block font-serif text-xl sm:text-2xl font-bold text-ngo-navy">17</span>
-             <span className="block text-[7px] sm:text-[8px] uppercase font-bold text-ngo-gray tracking-widest">Goals</span>
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white p-2 sm:p-3 md:p-4 rounded-full shadow-lg text-center border border-gray-100">
+             <span className="block font-serif text-lg sm:text-xl md:text-2xl font-bold text-ngo-navy">17</span>
+             <span className="block text-[6px] sm:text-[7px] md:text-[8px] uppercase font-bold text-ngo-gray tracking-widest">Goals</span>
           </div>
         </motion.div>
       </div>
 
       {/* SDG Color Strip with Images */}
-      <div className="mt-12 md:mt-16 pt-6 md:pt-8 border-t border-ngo-gray/10">
-        <p className="text-center font-sans text-[10px] sm:text-xs text-ngo-gray mb-3 md:mb-4">Aligned with the UN Sustainable Development Goals</p>
-        <div className="flex w-full h-8 sm:h-12 md:h-16 rounded-lg overflow-hidden shadow-md">
+      <div className="mt-8 sm:mt-10 md:mt-12 lg:mt-16 pt-4 sm:pt-5 md:pt-6 lg:pt-8 border-t border-ngo-gray/10">
+        <p className="text-center font-sans text-[9px] sm:text-[10px] md:text-xs text-ngo-gray mb-2 sm:mb-3 md:mb-4">Aligned with the UN Sustainable Development Goals</p>
+        <div className="flex w-full h-6 sm:h-8 md:h-12 lg:h-16 rounded-lg overflow-hidden shadow-md">
           {SDG_GOALS.map((sdg) => (
             <div 
               key={sdg.id} 
