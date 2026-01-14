@@ -36,24 +36,18 @@ export const Navbar: React.FC = () => {
     <nav 
       className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
         scrolled
-          ? 'bg-white shadow-md py-3' 
-          : 'bg-transparent py-4 md:py-6'
+          ? 'bg-white shadow-lg py-3' 
+          : 'bg-ngo-navy/80 backdrop-blur-md shadow-lg py-4 md:py-6'
       }`}
     >
       <div className="max-w-7xl mx-auto container-padding flex items-center justify-between">
         {/* Logo Area */}
         <Link to="/" className="flex items-center gap-2 md:gap-3 group z-50">
-          <div className={`w-8 h-8 md:w-10 md:h-10 flex items-center justify-center rounded-full transition-colors duration-300 ${scrolled ? 'bg-ngo-navy text-white' : 'bg-white text-ngo-navy'}`}>
-            <span className="font-serif font-bold text-lg md:text-xl">G</span>
-          </div>
-          <div className="flex flex-col">
-            <span className={`font-serif font-bold text-base md:text-lg leading-none tracking-tight transition-colors duration-300 ${scrolled ? 'text-ngo-navy' : 'text-white'}`}>
-              GCBP
-            </span>
-            <span className={`text-[9px] md:text-[10px] uppercase tracking-widest font-sans transition-colors duration-300 ${scrolled ? 'text-ngo-gray' : 'text-white/80'}`}>
-              Global Collective
-            </span>
-          </div>
+          <img 
+            src="/logo2.png" 
+            alt="GCBP Logo" 
+            className={`h-10 w-auto md:h-14 transition-opacity duration-300 ${!scrolled ? 'drop-shadow-md' : ''}`}
+          />
         </Link>
 
         {/* Desktop Nav */}
@@ -62,7 +56,7 @@ export const Navbar: React.FC = () => {
              const isAnchor = item.href.startsWith('#');
              const isActive = location.pathname === item.href;
              const baseClasses = `text-sm font-sans font-medium transition-colors duration-300 hover:text-ngo-accent ${
-                  scrolled ? 'text-ngo-navy' : 'text-white shadow-sm'
+                  scrolled ? 'text-ngo-navy' : 'text-white drop-shadow-md'
                 } ${isActive ? 'text-ngo-accent font-bold' : ''}`;
 
              if (isAnchor) {
@@ -103,7 +97,7 @@ export const Navbar: React.FC = () => {
         <button
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           className={`md:hidden z-50 p-2 rounded transition-colors ${
-            scrolled ? 'text-ngo-navy' : 'text-white'
+            scrolled ? 'text-ngo-navy' : 'text-white drop-shadow-md'
           }`}
           aria-label="Toggle menu"
         >
@@ -126,6 +120,13 @@ export const Navbar: React.FC = () => {
         }`}
       >
         <div className="flex flex-col h-full pt-20 px-6 pb-8">
+          <div className="mb-8">
+            <img 
+              src="/logo3.png" 
+              alt="GCBP Logo" 
+              className="h-10 w-auto"
+            />
+          </div>
           {NAV_ITEMS.map((item) => {
             const isAnchor = item.href.startsWith('#');
             const isActive = location.pathname === item.href;

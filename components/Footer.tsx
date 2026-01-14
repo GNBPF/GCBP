@@ -6,7 +6,11 @@ export const Footer: React.FC = () => {
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-10 md:gap-12 mb-12 sm:mb-16">
           <div className="col-span-1 sm:col-span-2 lg:col-span-1">
-            <span className="font-serif text-xl sm:text-2xl font-bold block mb-4 sm:mb-6">GCBP</span>
+            <img 
+              src="/logo3.png" 
+              alt="GCBP Logo" 
+              className="h-10 w-auto sm:h-12 mb-4 sm:mb-6"
+            />
             <p className="font-sans text-xs sm:text-sm leading-relaxed text-white/70 mb-4 sm:mb-6">
               Global Collective for Better Planet.<br/>
               A registered 501(c)(3) non-profit organization.<br/>
