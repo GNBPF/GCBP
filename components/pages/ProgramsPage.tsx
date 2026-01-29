@@ -14,11 +14,16 @@ export const ProgramsPage: React.FC = () => {
       <section className="relative pt-8 sm:pt-10 pb-12 sm:pb-16 md:pb-20 px-4 md:px-8 overflow-hidden">
         <div className="max-w-7xl mx-auto text-center">
           <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
+            initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 1, ease: "easeOut" }}
+            transition={{ duration: 1.2, ease: "easeOut" }}
           >
-             <h1 className="font-serif text-[10vw] sm:text-[12vw] md:text-[15vw] leading-[0.85] sm:leading-[0.8] font-bold text-center tracking-tighter break-words">
+             <motion.h1 
+               className="font-serif text-[10vw] sm:text-[12vw] md:text-[15vw] leading-[0.85] sm:leading-[0.8] font-bold text-center tracking-tighter break-words"
+               initial={{ y: 50 }}
+               animate={{ y: 0 }}
+               transition={{ delay: 0.2, duration: 0.8 }}
+             >
                 {/* Masked Text Effect */}
                 <span className="block bg-[url('/img3.jpeg')] bg-cover bg-clip-text text-transparent bg-center">
                   GLOBAL
@@ -26,7 +31,7 @@ export const ProgramsPage: React.FC = () => {
                 <span className="block text-ngo-navy">
                   ACTION
                 </span>
-             </h1>
+             </motion.h1>
           </motion.div>
           
           <motion.p 
@@ -167,14 +172,23 @@ export const ProgramsPage: React.FC = () => {
 
          {/* Scroll Container */}
          <div className="flex overflow-x-auto gap-4 sm:gap-6 px-4 md:px-8 pb-6 sm:pb-10 scrollbar-hide snap-x">
-            {PROGRAM_STORIES.map((story) => (
+            {PROGRAM_STORIES.map((story, index) => (
                <motion.div 
                  key={story.id}
                  className="min-w-[260px] sm:min-w-[280px] md:min-w-[320px] h-[400px] sm:h-[450px] md:h-[500px] relative rounded-[2rem] sm:rounded-[2.5rem] md:rounded-[3rem] overflow-hidden group cursor-pointer snap-center"
-                 whileHover={{ y: -10 }}
-                 transition={{ duration: 0.4 }}
+                 initial={{ opacity: 0, scale: 0.9, rotateY: -15 }}
+                 whileInView={{ opacity: 1, scale: 1, rotateY: 0 }}
+                 viewport={{ once: true, amount: 0.3 }}
+                 transition={{ delay: index * 0.1, duration: 0.6 }}
+                 whileHover={{ y: -15, scale: 1.02 }}
                >
-                  <img src={story.imageUrl} alt={story.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
+                  <motion.img 
+                    src={story.imageUrl} 
+                    alt={story.title} 
+                    className="w-full h-full object-cover"
+                    whileHover={{ scale: 1.15 }}
+                    transition={{ duration: 0.6 }}
+                  />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
                   
                   <div className="absolute bottom-0 left-0 w-full p-4 sm:p-6 md:p-8 text-white">

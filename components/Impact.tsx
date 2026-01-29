@@ -1,7 +1,36 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Section } from './ui/Section';
 import { METRICS } from '../constants';
-import { motion } from 'framer-motion';
+import { motion, useMotionValue, useTransform, animate } from 'framer-motion';
+
+const Counter: React.FC<{ value: string; suffix: string; delay: number }> = ({ value, suffix, delay }) => {
+  const [displayValue, setDisplayValue] = useState(0);
+  const numericValue = parseInt(value);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      let current = 0;
+      const increment = numericValue / 50;
+      const interval = setInterval(() => {
+        current += increment;
+        if (current >= numericValue) {
+          setDisplayValue(numericValue);
+          clearInterval(interval);
+        } else {
+          setDisplayValue(Math.floor(current));
+        }
+      }, 30);
+      return () => clearInterval(interval);
+    }, delay * 1000);
+    return () => clearTimeout(timer);
+  }, [numericValue, delay]);
+
+  return (
+    <>
+      {displayValue}<span className="text-ngo-accent text-lg sm:text-xl md:text-2xl lg:text-3xl">{suffix}</span>
+    </>
+  );
+};
 
 export const Impact: React.FC = () => {
   return (
@@ -21,13 +50,14 @@ export const Impact: React.FC = () => {
           <motion.div 
             key={metric.id}
             className="text-center md:text-left"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: index * 0.1 }}
+            initial={{ opacity: 0, y: 30, scale: 0.8 }}
+            whileInView={{ opacity: 1, y: 0, scale: 1 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ delay: index * 0.15, duration: 0.6, type: "spring" }}
+            whileHover={{ scale: 1.05, y: -5 }}
           >
             <div className="font-serif text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-1 sm:mb-2">
-              {metric.value}<span className="text-ngo-accent text-lg sm:text-xl md:text-2xl lg:text-3xl">{metric.suffix}</span>
+              <Counter value={metric.value} suffix={metric.suffix} delay={0.2 + index * 0.15} />
             </div>
             <p className="font-sans text-white/60 text-[9px] sm:text-[10px] md:text-xs font-bold uppercase tracking-widest leading-tight">
               {metric.label}

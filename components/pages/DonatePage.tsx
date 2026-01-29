@@ -108,11 +108,12 @@ export const DonatePage: React.FC = () => {
                <AnimatePresence mode="wait">
                   <motion.div 
                      key={activeTier.amount}
-                     initial={{ opacity: 0, x: 20 }}
-                     animate={{ opacity: 1, x: 0 }}
-                     exit={{ opacity: 0, x: -20 }}
-                     transition={{ duration: 0.4 }}
+                     initial={{ opacity: 0, scale: 0.9, rotateY: 90 }}
+                     animate={{ opacity: 1, scale: 1, rotateY: 0 }}
+                     exit={{ opacity: 0, scale: 0.9, rotateY: -90 }}
+                     transition={{ duration: 0.5, type: "spring" }}
                      className="bg-white text-ngo-navy rounded-2xl sm:rounded-3xl p-6 sm:p-8 shadow-2xl relative overflow-hidden"
+                     whileHover={{ scale: 1.02 }}
                   >
                      <div className="absolute top-0 right-0 w-24 h-24 sm:w-32 sm:h-32 bg-ngo-sand rounded-bl-full -mr-6 -mt-6 sm:-mr-10 sm:-mt-10 z-0"></div>
                      

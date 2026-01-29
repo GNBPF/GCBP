@@ -16,21 +16,27 @@ export const Stories: React.FC = () => {
           <motion.article 
             key={story.id}
             className="group cursor-pointer flex flex-col h-full"
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ delay: index * 0.2 }}
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ delay: index * 0.15, duration: 0.6, type: "spring" }}
+            whileHover={{ y: -10, transition: { duration: 0.3 } }}
           >
-            <div className="relative overflow-hidden rounded mb-3 sm:mb-4 shadow-sm aspect-[3/2]">
-              <img 
+            <motion.div 
+              className="relative overflow-hidden rounded mb-3 sm:mb-4 shadow-sm aspect-[3/2]"
+              whileHover={{ scale: 1.02 }}
+            >
+              <motion.img 
                 src={story.imageUrl} 
                 alt={story.title}
-                className="object-cover w-full h-full transform group-hover:scale-105 transition-transform duration-700"
+                className="object-cover w-full h-full"
+                whileHover={{ scale: 1.1 }}
+                transition={{ duration: 0.6 }}
               />
               <div className="absolute top-2 sm:top-3 left-2 sm:left-3 bg-white px-1.5 sm:px-2 py-0.5 sm:py-1 text-[8px] sm:text-[9px] md:text-[10px] font-bold uppercase tracking-wide text-ngo-navy rounded shadow-sm">
                 {story.category}
               </div>
-            </div>
+            </motion.div>
             
             <h3 className="font-serif text-base sm:text-lg md:text-xl text-ngo-navy font-bold mb-1 sm:mb-2 leading-tight group-hover:text-ngo-blue transition-colors">
               {story.title}

@@ -1,10 +1,22 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { EVENTS } from '../../constants';
-import { motion } from 'framer-motion';
+import { motion, useScroll, useSpring } from 'framer-motion';
 
 export const EventsPage: React.FC = () => {
+  const { scrollYProgress } = useScroll();
+  const scaleX = useSpring(scrollYProgress, {
+    stiffness: 100,
+    damping: 30,
+    restDelta: 0.001
+  });
+  
   return (
     <div className="pt-16 sm:pt-20 md:pt-24 min-h-screen bg-[#E5E7EB] text-[#1A1A1A] font-sans">
+      {/* Scroll Progress Bar */}
+      <motion.div
+        className="fixed top-0 left-0 right-0 h-1 bg-gradient-to-r from-orange-500 to-ngo-green origin-left z-50"
+        style={{ scaleX }}
+      />
       
       <div className="max-w-7xl mx-auto container-padding">
         
@@ -70,10 +82,11 @@ export const EventsPage: React.FC = () => {
                  <motion.div 
                     key={event.id}
                     className="group border-b border-gray-300 py-6 sm:py-8 md:py-10 grid grid-cols-12 gap-3 sm:gap-4 items-start hover:bg-white/50 transition-colors duration-300 px-2 -mx-2"
-                    initial={{ opacity: 0 }}
-                    whileInView={{ opacity: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: index * 0.1 }}
+                    initial={{ opacity: 0, x: -30 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true, amount: 0.2 }}
+                    transition={{ delay: index * 0.08, duration: 0.5 }}
+                    whileHover={{ x: 10, backgroundColor: "rgba(255,255,255,0.8)", transition: { duration: 0.2 } }}
                  >
                     {/* Date Column */}
                     <div className="col-span-12 sm:col-span-2 md:col-span-1 text-left sm:text-center md:text-left mb-2 sm:mb-0">
@@ -84,14 +97,21 @@ export const EventsPage: React.FC = () => {
                     {/* Image & Content */}
                     <div className="col-span-12 sm:col-span-10 md:col-span-11 flex flex-col md:flex-row gap-4 sm:gap-6 md:gap-12 items-start">
                        {/* Thumbnail */}
-                       <div className="w-full md:w-48 h-40 sm:h-32 flex-shrink-0 overflow-hidden relative">
-                          <img 
+                       <motion.div 
+                         className="w-full md:w-48 h-40 sm:h-32 flex-shrink-0 overflow-hidden relative"
+                         whileHover={{ scale: 1.05 }}
+                       >
+                          <motion.img 
                             src={event.imageUrl} 
                             alt={event.title} 
-                            className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500"
+                            className="w-full h-full object-cover"
+                            initial={{ filter: "grayscale(100%)" }}
+                            whileInView={{ filter: "grayscale(0%)" }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.8 }}
                           />
                           <div className="absolute inset-y-0 left-0 w-1 bg-orange-500 scale-y-0 group-hover:scale-y-100 transition-transform origin-bottom duration-300"></div>
-                       </div>
+                       </motion.div>
                        
                        {/* Details */}
                        <div className="flex-grow">

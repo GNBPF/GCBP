@@ -29,12 +29,20 @@ export const CTA: React.FC = () => {
            viewport={{ once: true }}
            transition={{ delay: 0.2 }}
         >
-          <button className="bg-ngo-accent text-ngo-navy px-5 sm:px-6 md:px-8 py-2 sm:py-2.5 md:py-3 rounded font-bold uppercase tracking-wide shadow-lg hover:bg-white transition-colors duration-300 text-[11px] sm:text-xs md:text-sm">
+          <motion.button 
+            className="bg-ngo-accent text-ngo-navy px-5 sm:px-6 md:px-8 py-2 sm:py-2.5 md:py-3 rounded font-bold uppercase tracking-wide shadow-lg hover:bg-white transition-colors duration-300 text-[11px] sm:text-xs md:text-sm"
+            whileHover={{ scale: 1.05, y: -3, boxShadow: "0 10px 30px rgba(0,0,0,0.2)" }}
+            whileTap={{ scale: 0.98 }}
+          >
             Donate Monthly
-          </button>
-          <button className="bg-transparent border-2 border-white text-white px-5 sm:px-6 md:px-8 py-2 sm:py-2.5 md:py-3 rounded font-bold uppercase tracking-wide hover:bg-white hover:text-ngo-green transition-colors duration-300 text-[11px] sm:text-xs md:text-sm">
+          </motion.button>
+          <motion.button 
+            className="bg-transparent border-2 border-white text-white px-5 sm:px-6 md:px-8 py-2 sm:py-2.5 md:py-3 rounded font-bold uppercase tracking-wide hover:bg-white hover:text-ngo-green transition-colors duration-300 text-[11px] sm:text-xs md:text-sm"
+            whileHover={{ scale: 1.05, y: -3, boxShadow: "0 10px 30px rgba(255,255,255,0.3)" }}
+            whileTap={{ scale: 0.98 }}
+          >
             Volunteer
-          </button>
+          </motion.button>
         </motion.div>
       </div>
     </Section>

@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { Section } from '../ui/Section';
 import { SDG_GOALS } from '../../constants';
-import { motion } from 'framer-motion';
+import { motion, useScroll, useTransform } from 'framer-motion';
 
 export const StoryPage: React.FC = () => {
   return (
@@ -34,17 +34,26 @@ export const StoryPage: React.FC = () => {
       </section>
 
       {/* 2. Visual Breaker */}
-      <div className="w-full h-[300px] sm:h-[400px] md:h-[500px] lg:h-[600px] overflow-hidden relative">
-         <img 
+      <motion.div 
+        className="w-full h-[300px] sm:h-[400px] md:h-[500px] lg:h-[600px] overflow-hidden relative"
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.8 }}
+      >
+         <motion.img 
             src="/img2.jpeg" 
             alt="Women Leadership" 
-            className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-1000"
+            className="w-full h-full object-cover grayscale"
+            whileInView={{ grayscale: 0 }}
+            transition={{ duration: 1.5 }}
+            whileHover={{ scale: 1.05 }}
          />
          <div className="absolute inset-0 bg-black/20"></div>
          <div className="absolute bottom-6 sm:bottom-8 md:bottom-10 left-4 sm:left-6 md:left-12 text-white">
             <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold">We Empower.</h2>
          </div>
-      </div>
+      </motion.div>
 
       {/* 3. The 17 Goals - Our DNA */}
       <Section className="bg-ngo-sand">
