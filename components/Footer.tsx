@@ -13,34 +13,34 @@ export const Footer: React.FC = () => {
             />
             <p className="font-sans text-[11px] sm:text-xs md:text-sm leading-relaxed text-white/70 mb-3 sm:mb-4 md:mb-6">
               Global Collective for Better Planet.<br/>
-              A registered 501(c)(3) non-profit organization.<br/>
-              Geneva, Switzerland.
+              A registered non-profit organization.<br/>
+              New Delhi, India
             </p>
             <div className="flex gap-2 sm:gap-3 md:gap-4">
-              {/* Social Icons Placeholders */}
-              <div className="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 bg-white/10 rounded-full flex items-center justify-center hover:bg-ngo-accent hover:text-ngo-navy transition-colors cursor-pointer text-[10px] sm:text-xs md:text-sm">X</div>
-              <div className="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 bg-white/10 rounded-full flex items-center justify-center hover:bg-ngo-accent hover:text-ngo-navy transition-colors cursor-pointer text-[10px] sm:text-xs md:text-sm">in</div>
-              <div className="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 bg-white/10 rounded-full flex items-center justify-center hover:bg-ngo-accent hover:text-ngo-navy transition-colors cursor-pointer text-[10px] sm:text-xs md:text-sm">Ig</div>
+              {/* Social Icons with real links */}
+              <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 bg-white/10 rounded-full flex items-center justify-center hover:bg-ngo-accent hover:text-ngo-navy transition-colors cursor-pointer text-[10px] sm:text-xs md:text-sm">X</a>
+              <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 bg-white/10 rounded-full flex items-center justify-center hover:bg-ngo-accent hover:text-ngo-navy transition-colors cursor-pointer text-[10px] sm:text-xs md:text-sm">in</a>
+              <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 bg-white/10 rounded-full flex items-center justify-center hover:bg-ngo-accent hover:text-ngo-navy transition-colors cursor-pointer text-[10px] sm:text-xs md:text-sm">Ig</a>
             </div>
           </div>
           
           <div>
             <h4 className="font-sans text-[10px] sm:text-xs md:text-sm font-bold uppercase tracking-widest text-ngo-accent mb-3 sm:mb-4 md:mb-6">Our Work</h4>
             <ul className="space-y-1.5 sm:space-y-2 md:space-y-3 font-sans text-[11px] sm:text-xs md:text-sm text-white/80">
-              <li><a href="#" className="hover:text-white transition-colors">Climate Resilience</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Ocean Conservation</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Social Justice</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Sustainable Agriculture</a></li>
+              <li><a href="/mission" className="hover:text-white transition-colors">Our Mission</a></li>
+              <li><a href="/programs" className="hover:text-white transition-colors">Programs</a></li>
+              <li><a href="/story" className="hover:text-white transition-colors">Our Story</a></li>
+              <li><a href="/events" className="hover:text-white transition-colors">Events & Media</a></li>
             </ul>
           </div>
 
           <div>
             <h4 className="font-sans text-[10px] sm:text-xs md:text-sm font-bold uppercase tracking-widest text-ngo-accent mb-3 sm:mb-4 md:mb-6">Get Involved</h4>
             <ul className="space-y-1.5 sm:space-y-2 md:space-y-3 font-sans text-[11px] sm:text-xs md:text-sm text-white/80">
-              <li><a href="#" className="hover:text-white transition-colors">Donate</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Partner With Us</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Careers</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Contact</a></li>
+              <li><a href="/donate" className="hover:text-white transition-colors">Donate</a></li>
+              <li><a href="/programs" className="hover:text-white transition-colors">Partner With Us</a></li>
+              <li><a href="/story" className="hover:text-white transition-colors">About Us</a></li>
+              <li><a href="/" className="hover:text-white transition-colors">Contact</a></li>
             </ul>
           </div>
 

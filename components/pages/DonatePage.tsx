@@ -2,15 +2,15 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const IMPACT_TIERS = [
-  { amount: 25, label: 'Seed', impact: 'Provides school supplies for 2 children.', icon: '🌱', color: '#4C9F38' },
-  { amount: 50, label: 'Sprout', impact: 'Funds a micro-loan for a female entrepreneur.', icon: '👩‍🌾', color: '#DDA63A' },
-  { amount: 100, label: 'Bloom', impact: 'Plants 150 trees in the Amazon basin.', icon: '🌳', color: '#2E5C38' },
-  { amount: 500, label: 'Harvest', impact: 'Installs a solar pump for a village water well.', icon: '💧', color: '#0A97D9' },
-  { amount: 1000, label: 'Ecosystem', impact: 'Sponsors a full year of education for a classroom.', icon: '🎓', color: '#E5243B' },
+  { amount: 500, label: 'Seed', impact: 'Provides school supplies for 2 children.', icon: '🌱', color: '#4C9F38' },
+  { amount: 1000, label: 'Sprout', impact: 'Funds a micro-loan for a female entrepreneur.', icon: '👩‍🌾', color: '#DDA63A' },
+  { amount: 2500, label: 'Bloom', impact: 'Plants 150 trees in the Amazon basin.', icon: '🌳', color: '#2E5C38' },
+  { amount: 5000, label: 'Harvest', impact: 'Installs a solar pump for a village water well.', icon: '💧', color: '#0A97D9' },
+  { amount: 10000, label: 'Ecosystem', impact: 'Sponsors a full year of education for a classroom.', icon: '🎓', color: '#E5243B' },
 ];
 
 export const DonatePage: React.FC = () => {
-  const [amount, setAmount] = useState(100);
+  const [amount, setAmount] = useState(2500);
   const [frequency, setFrequency] = useState<'monthly' | 'one-time'>('monthly');
 
   // Find the closest tier for impact visualization
@@ -64,7 +64,7 @@ export const DonatePage: React.FC = () => {
                </div>
 
                <div className="mb-6 sm:mb-8 md:mb-10">
-                  <label className="block text-[10px] sm:text-xs font-bold uppercase tracking-widest text-ngo-accent mb-3 sm:mb-4">Select Investment Amount (USD)</label>
+                  <label className="block text-[10px] sm:text-xs font-bold uppercase tracking-widest text-ngo-accent mb-3 sm:mb-4">Select Investment Amount (INR)</label>
                   <div className="grid grid-cols-3 gap-2 sm:gap-3 md:gap-4 mb-4 sm:mb-6">
                      {IMPACT_TIERS.map((tier) => (
                         <motion.button
@@ -74,14 +74,14 @@ export const DonatePage: React.FC = () => {
                            whileTap={{ scale: 0.95 }}
                            className={`py-3 sm:py-4 rounded-lg sm:rounded-xl border-2 font-bold text-sm sm:text-base md:text-lg transition-all duration-200 ${amount === tier.amount ? 'border-ngo-accent bg-ngo-accent text-ngo-navy' : 'border-white/20 text-white hover:border-white/50'}`}
                         >
-                           ${tier.amount}
+                           ₹{tier.amount}
                         </motion.button>
                      ))}
                   </div>
                   
                   {/* Custom Slider / Input */}
                   <div className="bg-white/5 rounded-lg sm:rounded-xl p-4 sm:p-6 flex items-center gap-3 sm:gap-4 border border-white/10">
-                     <span className="text-xl sm:text-2xl font-serif">$</span>
+                     <span className="text-xl sm:text-2xl font-serif">₹</span>
                      <input 
                         type="number" 
                         value={amount}
@@ -144,7 +144,7 @@ export const DonatePage: React.FC = () => {
 
                         <h4 className="font-serif text-xl sm:text-2xl font-bold mb-2">Impact Output</h4>
                         <p className="font-sans text-ngo-gray text-sm sm:text-base md:text-lg leading-relaxed">
-                           With a contribution of <strong className="text-ngo-navy">${amount}</strong>, you will directly support initiatives that:
+                           With a contribution of <strong className="text-ngo-navy">₹{amount}</strong>, you will directly support initiatives that:
                         </p>
                         <p className="mt-3 sm:mt-4 font-bold text-base sm:text-lg md:text-xl" style={{ color: activeTier.color }}>
                            {activeTier.impact}

@@ -15,7 +15,7 @@ export const StoryPage: React.FC = () => {
            transition={{ duration: 0.8 }}
         >
           <span className="block text-ngo-accent font-bold uppercase tracking-widest text-[10px] sm:text-xs md:text-sm mb-3 sm:mb-4">
-             Since 1989
+             Since 1982 | 42 Years Active
           </span>
           <h1 className="font-serif text-3xl sm:text-4xl md:text-5xl lg:text-7xl xl:text-8xl 2xl:text-[9rem] leading-[0.9] sm:leading-[0.85] font-bold text-ngo-navy tracking-tighter mb-6 sm:mb-8 md:mb-10 break-words">
             UNSTOPPABLE <br/>
@@ -27,7 +27,7 @@ export const StoryPage: React.FC = () => {
                <span className="italic text-ngo-gray">We built the infrastructure to make it inevitable.</span>
              </p>
              <p className="font-sans text-ngo-gray text-sm sm:text-base md:text-lg leading-relaxed">
-               For over three decades, GCBP has been the silent engine behind some of the world's most transformative social and environmental breakthroughs. We are not just a charity; we are a global institution of change, operating with the precision of a corporation and the heart of a movement. We stand tall, proud of the 12 Billion USD we have deployed directly into the hands of those who need it most.
+               For over four decades, GCBP has been the silent engine behind some of the world's most transformative social and environmental breakthroughs. We are not just a charity; we are a global institution of change, operating with the precision of a corporation and the heart of a movement. We stand tall, proud of the 12 USD we have deployed directly into the hands of those who need it most.
              </p>
           </div>
         </motion.div>

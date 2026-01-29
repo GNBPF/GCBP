@@ -1,12 +1,10 @@
 import { NavItem, Pillar, Metric, Story, Partner, TeamMember, Testimonial, SDGGoal } from './types';
 
 export const NAV_ITEMS: NavItem[] = [
-  { label: 'Home', href: '/' },
   { label: 'Our Story', href: '/story' },
   { label: 'Mission', href: '/mission' },
   { label: 'Programs', href: '/programs' },
   { label: 'Media & Events', href: '/events' },
-  { label: 'Donate', href: '/donate' },
 ];
 
 export const SDG_GOALS: SDGGoal[] = [
@@ -59,8 +57,8 @@ export const PILLARS: Pillar[] = [
 export const METRICS: Metric[] = [
   { id: 'm1', value: '42', label: 'Countries Active', suffix: '' },
   { id: 'm2', value: '180', label: 'Partner Institutions', suffix: '+' },
-  { id: 'm3', value: '12', label: 'Billion USD Deployed', suffix: 'B' },
-  { id: 'm4', value: '35', label: 'Years of Operation', suffix: '' },
+  { id: 'm3', value: '12', label: 'USD Deployed', suffix: '' },
+  { id: 'm4', value: '42', label: 'Years of Operation', suffix: '' },
 ];
 
 export const STORIES: Story[] = [

@@ -75,20 +75,16 @@ export const Hero: React.FC = () => {
             <div className="flex justify-between items-center">
               <div className="text-center flex-1">
                 <span className="block font-serif text-lg font-bold">35+</span>
-                <span className="text-[9px] uppercase opacity-70">Years Active</span>
+                <span className="text-[9px] uppercase opacity-70">Active Years</span>
               </div>
               <div className="text-center flex-1">
-                <span className="block font-serif text-lg font-bold">120</span>
-                <span className="text-[9px] uppercase opacity-70">Countries</span>
+                <span className="block font-serif text-lg font-bold">42</span>
+                <span className="text-[9px] uppercase opacity-70">Active Countries</span>
               </div>
               <div className="text-center flex-1">
-                <span className="block font-serif text-lg font-bold">17</span>
-                <span className="text-[9px] uppercase opacity-70">SDGs Targeted</span>
+                <span className="block font-serif text-lg font-bold">12</span>
+                <span className="text-[9px] uppercase opacity-70">Billion USD Impact</span>
               </div>
-            </div>
-            <div className="flex items-center justify-center gap-2 text-[10px] font-bold">
-              <span>Scroll to Explore</span>
-              <svg className="w-3 h-3 animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path></svg>
             </div>
           </div>
           {/* Desktop: Horizontal layout */}
@@ -96,20 +92,16 @@ export const Hero: React.FC = () => {
             <div className="flex gap-8 lg:gap-12">
               <div>
                 <span className="block font-serif text-xl font-bold">35+</span>
-                <span className="text-[10px] uppercase opacity-70">Years Active</span>
+                <span className="text-[10px] uppercase opacity-70">Active Years</span>
               </div>
               <div>
-                <span className="block font-serif text-xl font-bold">120</span>
-                <span className="text-[10px] uppercase opacity-70">Countries</span>
+                <span className="block font-serif text-xl font-bold">42</span>
+                <span className="text-[10px] uppercase opacity-70">Active Countries</span>
               </div>
               <div>
-                <span className="block font-serif text-xl font-bold">17</span>
-                <span className="text-[10px] uppercase opacity-70">SDGs Targeted</span>
+                <span className="block font-serif text-xl font-bold">12</span>
+                <span className="text-[10px] uppercase opacity-70">Billion USD Impact</span>
               </div>
-            </div>
-            <div className="flex items-center gap-2 text-xs font-bold">
-              <span>Scroll to Explore</span>
-              <svg className="w-4 h-4 animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path></svg>
             </div>
           </div>
         </div>

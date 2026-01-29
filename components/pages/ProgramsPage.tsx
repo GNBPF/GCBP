@@ -48,7 +48,7 @@ export const ProgramsPage: React.FC = () => {
                  IMPACT <span className="text-ngo-accent">IN ACTION</span>
               </h2>
               <p className="font-sans text-ngo-gray leading-relaxed mb-4 sm:mb-6 text-sm sm:text-base">
-                 GCBP supports grassroots leaders, educators, and advocates who fight for equity, dignity, and justice. We focus on scalable solutions that empower local communities to manage their own resources.
+                 Crafting excellence as a team. GCBP supports grassroots leaders, educators, and advocates who fight for equity, dignity, and justice. We focus on scalable solutions that empower local communities to manage their own resources.
               </p>
               <div className="flex flex-wrap gap-2 sm:gap-4">
                  <span className="inline-block px-3 sm:px-4 py-1.5 sm:py-2 border border-ngo-navy rounded-full text-[10px] sm:text-xs font-bold uppercase tracking-widest text-ngo-navy">Equal Rights</span>
@@ -64,7 +64,7 @@ export const ProgramsPage: React.FC = () => {
                  <p className="text-[9px] sm:text-xs text-ngo-gray mt-2">Local solutions that change lives, from climate to girls' education.</p>
               </div>
               <div className="bg-white border border-gray-100 shadow-xl p-4 sm:p-6 md:p-8 rounded-2xl sm:rounded-3xl flex flex-col justify-between h-48 sm:h-56 md:h-64">
-                 <span className="text-[9px] sm:text-xs font-bold uppercase tracking-widest text-ngo-gray">Children Safe</span>
+                 <span className="text-[9px] sm:text-xs font-bold uppercase tracking-widest text-ngo-gray">Children's Safety</span>
                  <div className="font-serif text-4xl sm:text-5xl md:text-6xl font-bold text-ngo-navy">3.2k<span className="text-ngo-accent">+</span></div>
                  <p className="text-[9px] sm:text-xs text-ngo-gray mt-2">Supported shelters and trained community leaders to protect children.</p>
               </div>
@@ -126,9 +126,9 @@ export const ProgramsPage: React.FC = () => {
                     </p>
                  </div>
 
-                 <button className="w-full py-3 sm:py-4 bg-[#FF6B4A] text-white rounded-full font-bold uppercase tracking-wide shadow-lg hover:bg-[#E55A3B] transition-colors text-xs sm:text-sm">
+                 <a href="/donate" className="block w-full py-3 sm:py-4 bg-[#FF6B4A] text-white rounded-full font-bold uppercase tracking-wide shadow-lg hover:bg-[#E55A3B] transition-colors text-xs sm:text-sm text-center">
                     Donate Now
-                 </button>
+                 </a>
               </div>
 
               {/* Right: Text Context */}
@@ -191,16 +191,16 @@ export const ProgramsPage: React.FC = () => {
             ))}
             
             {/* "See All" Card */}
-            <div className="min-w-[260px] sm:min-w-[280px] md:min-w-[320px] h-[400px] sm:h-[450px] md:h-[500px] rounded-[2rem] sm:rounded-[2.5rem] md:rounded-[3rem] border-2 border-dashed border-ngo-navy/20 flex flex-col items-center justify-center text-ngo-navy hover:bg-white transition-colors cursor-pointer snap-center">
+            <a href="/programs" className="min-w-[260px] sm:min-w-[280px] md:min-w-[320px] h-[400px] sm:h-[450px] md:h-[500px] rounded-[2rem] sm:rounded-[2.5rem] md:rounded-[3rem] border-2 border-dashed border-ngo-navy/20 flex flex-col items-center justify-center text-ngo-navy hover:bg-white transition-colors cursor-pointer snap-center">
                <span className="font-serif text-lg sm:text-xl font-bold mb-2">See All Stories</span>
                <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-ngo-navy text-white flex items-center justify-center text-sm sm:text-base">&rarr;</div>
-            </div>
+            </a>
          </div>
          
          <div className="text-center mt-6 sm:mt-8">
-            <button className="px-6 sm:px-8 py-2.5 sm:py-3 bg-[#FF6B4A] text-white rounded-full text-[10px] sm:text-xs font-bold uppercase tracking-widest shadow-lg hover:bg-ngo-navy transition-colors">
+            <a href="/programs" className="inline-block px-6 sm:px-8 py-2.5 sm:py-3 bg-[#FF6B4A] text-white rounded-full text-[10px] sm:text-xs font-bold uppercase tracking-widest shadow-lg hover:bg-ngo-navy transition-colors">
                Tell My Story
-            </button>
+            </a>
          </div>
       </section>
 

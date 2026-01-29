@@ -26,7 +26,7 @@ export const Mission: React.FC = () => {
            
            <div className="flex items-center gap-4">
              <div className="h-px bg-ngo-gray/20 flex-grow"></div>
-             <span className="font-serif text-ngo-navy italic font-medium text-xs sm:text-sm">Est. 1989</span>
+             <span className="font-serif text-ngo-navy italic font-medium text-xs sm:text-sm">Est. 1982 | 42 Years</span>
            </div>
         </motion.div>
 
