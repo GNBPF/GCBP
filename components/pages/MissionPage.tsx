@@ -6,9 +6,9 @@ import { METRICS, TEAM, TESTIMONIALS } from '../../constants';
 export const MissionPage: React.FC = () => {
   const { scrollYProgress } = useScroll();
   const scaleX = useSpring(scrollYProgress, {
-    stiffness: 100,
-    damping: 30,
-    restDelta: 0.001
+    stiffness: 80,
+    damping: 25,
+    restDelta: 0.0005
   });
   
   return (
@@ -53,36 +53,36 @@ export const MissionPage: React.FC = () => {
                 src="/img3.jpeg"
                 alt="Volunteers"
                 className="absolute right-0 top-0 w-4/5 h-4/5 object-cover rounded-tr-[40px] sm:rounded-tr-[60px] md:rounded-tr-[80px] rounded-bl-[40px] sm:rounded-bl-[60px] md:rounded-bl-[80px] shadow-xl z-10"
-                initial={{ x: 50, opacity: 0 }}
+                initial={{ x: 60, opacity: 0 }}
                 whileInView={{ x: 0, opacity: 1 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.2, duration: 0.6 }}
-                whileHover={{ scale: 1.05, rotate: 2 }}
+                viewport={{ once: true, amount: 0.3 }}
+                transition={{ delay: 0.2, duration: 0.8, ease: [0.34, 1.56, 0.64, 1] }}
+                whileHover={{ scale: 1.06, rotate: 3, transition: { duration: 0.3, ease: "easeOut" } }}
               />
               {/* Secondary Image overlapping */}
               <motion.img 
                 src="/img4.jpeg"
                 alt="Technology"
                 className="absolute left-0 bottom-0 w-3/5 h-3/5 object-cover rounded-tl-[30px] sm:rounded-tl-[45px] md:rounded-tl-[60px] rounded-br-[30px] sm:rounded-br-[45px] md:rounded-br-[60px] border-2 sm:border-4 border-white shadow-lg z-20"
-                initial={{ x: -50, opacity: 0 }}
+                initial={{ x: -60, opacity: 0 }}
                 whileInView={{ x: 0, opacity: 1 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.4, duration: 0.6 }}
-                whileHover={{ scale: 1.05, rotate: -2 }}
+                viewport={{ once: true, amount: 0.3 }}
+                transition={{ delay: 0.4, duration: 0.8, ease: [0.34, 1.56, 0.64, 1] }}
+                whileHover={{ scale: 1.06, rotate: -3, transition: { duration: 0.3, ease: "easeOut" } }}
               />
               {/* Circular Badge */}
               <motion.div 
                 className="absolute top-[60%] left-[45%] -translate-x-1/2 -translate-y-1/2 w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 bg-white rounded-full flex items-center justify-center z-30 shadow-md"
                 initial={{ scale: 0, rotate: -180 }}
                 whileInView={{ scale: 1, rotate: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.6, duration: 0.8, type: "spring" }}
-                whileHover={{ scale: 1.15, rotate: 360 }}
+                viewport={{ once: true, amount: 0.3 }}
+                transition={{ delay: 0.7, duration: 1, type: "spring", stiffness: 180, damping: 14 }}
+                whileHover={{ scale: 1.2, rotate: 360, transition: { duration: 0.5, ease: "easeOut" } }}
               >
                  <div className="w-12 h-12 sm:w-16 sm:h-16 md:w-20 md:h-20 border border-dashed border-ngo-navy rounded-full flex items-center justify-center">
                     <span className="font-serif font-bold text-ngo-navy text-sm sm:text-base md:text-xl">17+</span>
                  </div>
-              </div>
+              </motion.div>
            </motion.div>
         </div>
       </Section>

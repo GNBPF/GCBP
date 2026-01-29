@@ -10,9 +10,9 @@ export const StoryPage: React.FC = () => {
       {/* 1. Hero / Manifesto */}
       <section className="relative px-4 md:px-8 py-12 sm:py-16 md:py-20 lg:py-32 max-w-7xl mx-auto">
         <motion.div
-           initial={{ opacity: 0, y: 30 }}
+           initial={{ opacity: 0, y: 50 }}
            animate={{ opacity: 1, y: 0 }}
-           transition={{ duration: 0.8 }}
+           transition={{ duration: 1.1, ease: [0.22, 1, 0.36, 1] }}
         >
           <span className="block text-ngo-accent font-bold uppercase tracking-widest text-[10px] sm:text-xs md:text-sm mb-3 sm:mb-4">
              Since 1982 | 42 Years Active
@@ -22,13 +22,25 @@ export const StoryPage: React.FC = () => {
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-ngo-green to-ngo-blue">FORCE.</span>
           </h1>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-10 md:gap-12 mt-10 sm:mt-12 md:mt-16">
-             <p className="font-serif text-xl sm:text-2xl md:text-3xl leading-snug">
+             <motion.p 
+               className="font-serif text-xl sm:text-2xl md:text-3xl leading-snug"
+               initial={{ opacity: 0, y: 40 }}
+               whileInView={{ opacity: 1, y: 0 }}
+               viewport={{ once: true, amount: 0.3 }}
+               transition={{ duration: 1, ease: [0.25, 0.46, 0.45, 0.94], delay: 0.2 }}
+             >
                We don't just dream of a better world. <br className="hidden sm:block"/>
                <span className="italic text-ngo-gray">We built the infrastructure to make it inevitable.</span>
-             </p>
-             <p className="font-sans text-ngo-gray text-sm sm:text-base md:text-lg leading-relaxed">
+             </motion.p>
+             <motion.p 
+               className="font-sans text-ngo-gray text-sm sm:text-base md:text-lg leading-relaxed"
+               initial={{ opacity: 0, y: 40 }}
+               whileInView={{ opacity: 1, y: 0 }}
+               viewport={{ once: true, amount: 0.3 }}
+               transition={{ duration: 1, ease: [0.25, 0.46, 0.45, 0.94], delay: 0.4 }}
+             >
                For over four decades, GCBP has been the silent engine behind some of the world's most transformative social and environmental breakthroughs. We are not just a charity; we are a global institution of change, operating with the precision of a corporation and the heart of a movement. We stand tall, proud of the 12 USD we have deployed directly into the hands of those who need it most.
-             </p>
+             </motion.p>
           </div>
         </motion.div>
       </section>
@@ -38,17 +50,26 @@ export const StoryPage: React.FC = () => {
         className="w-full h-[300px] sm:h-[400px] md:h-[500px] lg:h-[600px] overflow-hidden relative"
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.8 }}
+        viewport={{ once: true, amount: 0.3 }}
+        transition={{ duration: 1 }}
       >
-         <motion.img 
-            src="/img2.jpeg" 
-            alt="Women Leadership" 
-            className="w-full h-full object-cover grayscale"
-            whileInView={{ grayscale: 0 }}
-            transition={{ duration: 1.5 }}
-            whileHover={{ scale: 1.05 }}
-         />
+         <motion.div
+           className="w-full h-full overflow-hidden"
+           initial={{ clipPath: "inset(50% 50% 50% 50%)" }}
+           whileInView={{ clipPath: "inset(0% 0% 0% 0%)" }}
+           viewport={{ once: true, amount: 0.3 }}
+           transition={{ duration: 1.5, ease: [0.22, 1, 0.36, 1] }}
+         >
+           <motion.img 
+              src="/img2.jpeg" 
+              alt="Women Leadership" 
+              className="w-full h-full object-cover"
+              initial={{ scale: 1.4 }}
+              whileInView={{ scale: 1 }}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{ duration: 1.5, ease: "easeOut" }}
+           />
+         </motion.div>
          <div className="absolute inset-0 bg-black/20"></div>
          <div className="absolute bottom-6 sm:bottom-8 md:bottom-10 left-4 sm:left-6 md:left-12 text-white">
             <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold">We Empower.</h2>
@@ -57,12 +78,18 @@ export const StoryPage: React.FC = () => {
 
       {/* 3. The 17 Goals - Our DNA */}
       <Section className="bg-ngo-sand">
-         <div className="text-center mb-10 sm:mb-12 md:mb-16">
+         <motion.div 
+           className="text-center mb-10 sm:mb-12 md:mb-16"
+           initial={{ opacity: 0, y: 40 }}
+           whileInView={{ opacity: 1, y: 0 }}
+           viewport={{ once: true, amount: 0.3 }}
+           transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
+         >
             <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl lg:text-6xl font-bold mb-4 sm:mb-6">Our Mandate</h2>
             <p className="font-sans text-ngo-gray max-w-2xl mx-auto text-sm sm:text-base md:text-lg px-4">
                We are the architects of the future, strictly aligning every dollar, every hour, and every resource to the United Nations Sustainable Development Goals. This is not a wishlist. It is our checklist.
             </p>
-         </div>
+         </motion.div>
 
          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-2 sm:gap-3 md:gap-4">
             {SDG_GOALS.map((sdg, index) => (
@@ -70,10 +97,11 @@ export const StoryPage: React.FC = () => {
                  key={sdg.id}
                  className={`p-3 sm:p-4 md:p-6 rounded-lg sm:rounded-xl text-white flex flex-col justify-between h-32 sm:h-40 md:h-48 group relative overflow-hidden cursor-default shadow-sm hover:shadow-2xl transition-all duration-300 ${index === 16 ? 'col-span-2 sm:col-span-3 md:col-span-4 lg:col-span-2' : ''}`}
                  style={{ backgroundColor: sdg.color }}
-                 initial={{ opacity: 0, scale: 0.9 }}
-                 whileInView={{ opacity: 1, scale: 1 }}
-                 viewport={{ once: true }}
-                 transition={{ delay: index * 0.05 }}
+                 initial={{ opacity: 0, scale: 0.85, y: 20 }}
+                 whileInView={{ opacity: 1, scale: 1, y: 0 }}
+                 viewport={{ once: true, amount: 0.2 }}
+                 transition={{ delay: index * 0.04, duration: 0.6, ease: [0.34, 1.56, 0.64, 1] }}
+                 whileHover={{ scale: 1.08, y: -5, transition: { duration: 0.25, ease: "easeOut" } }}
                >
                   {/* Background Image with Overlay */}
                   {sdg.imageUrl && sdg.imageUrl.trim() !== '' && (
@@ -113,18 +141,30 @@ export const StoryPage: React.FC = () => {
       {/* 4. The Legacy Timeline */}
       <Section className="bg-ngo-navy text-white">
          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 sm:gap-16 md:gap-20">
-            <div className="lg:sticky lg:top-32 h-fit mb-8 lg:mb-0">
+            <motion.div 
+              className="lg:sticky lg:top-32 h-fit mb-8 lg:mb-0"
+              initial={{ opacity: 0, x: -50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{ duration: 0.8 }}
+            >
                <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-bold leading-none mb-4 sm:mb-6">
                   A Legacy <br/>
                   <span className="text-ngo-accent">Written in Stone.</span>
                </h2>
-               <p className="font-sans text-white/70 text-sm sm:text-base md:text-lg leading-relaxed mb-6 sm:mb-8">
+               <motion.p 
+                 className="font-sans text-white/70 text-sm sm:text-base md:text-lg leading-relaxed mb-6 sm:mb-8"
+                 initial={{ opacity: 0 }}
+                 whileInView={{ opacity: 1 }}
+                 viewport={{ once: true }}
+                 transition={{ delay: 0.3, duration: 0.8 }}
+               >
                   From our humble beginnings in a small Geneva office to operating in 42 nations, our history is a testament to the power of unwavering resolve. We didn't just witness history; we made it.
-               </p>
+               </motion.p>
                <a href="#join" className="inline-block border border-white px-6 sm:px-8 py-2.5 sm:py-3 rounded-full hover:bg-white hover:text-ngo-navy transition-colors font-bold uppercase tracking-widest text-xs sm:text-sm">
                   Join the Future
                </a>
-            </div>
+            </motion.div>
 
             <div className="border-l border-white/20 pl-4 sm:pl-6 md:pl-8 lg:pl-16 space-y-12 sm:space-y-16 md:space-y-20 lg:space-y-24">
                {[
@@ -136,9 +176,10 @@ export const StoryPage: React.FC = () => {
                ].map((item, i) => (
                   <motion.div 
                     key={item.year}
-                    initial={{ opacity: 0, x: 20 }}
+                    initial={{ opacity: 0, x: i % 2 === 0 ? -80 : 80 }}
                     whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true, margin: "-100px" }}
+                    viewport={{ once: true, amount: 0.3, margin: "-100px" }}
+                    transition={{ duration: 0.8, delay: 0.2, type: "spring", stiffness: 80 }}
                   >
                      <span className="font-serif text-4xl sm:text-5xl md:text-6xl lg:text-8xl font-bold text-white/10 block -ml-2 sm:-ml-4 md:-ml-8 mb-[-1.5rem] sm:mb-[-2rem]">
                         {item.year}

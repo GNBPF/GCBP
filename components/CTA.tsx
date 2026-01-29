@@ -11,9 +11,10 @@ export const CTA: React.FC = () => {
       <div className="max-w-4xl mx-auto text-center relative z-10 text-white px-4 sm:px-6">
         <motion.h2 
           className="font-serif text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold mb-3 sm:mb-4"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          initial={{ opacity: 0, y: 30, scale: 0.95 }}
+          whileInView={{ opacity: 1, y: 0, scale: 1 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
         >
           Be the change the world needs.
         </motion.h2>
@@ -26,20 +27,22 @@ export const CTA: React.FC = () => {
            className="flex flex-col sm:flex-row justify-center gap-2 sm:gap-3"
            initial={{ opacity: 0, y: 20 }}
            whileInView={{ opacity: 1, y: 0 }}
-           viewport={{ once: true }}
-           transition={{ delay: 0.2 }}
+           viewport={{ once: true, amount: 0.3 }}
+           transition={{ delay: 0.3, duration: 0.7, ease: "easeOut" }}
         >
           <motion.button 
             className="bg-ngo-accent text-ngo-navy px-5 sm:px-6 md:px-8 py-2 sm:py-2.5 md:py-3 rounded font-bold uppercase tracking-wide shadow-lg hover:bg-white transition-colors duration-300 text-[11px] sm:text-xs md:text-sm"
-            whileHover={{ scale: 1.05, y: -3, boxShadow: "0 10px 30px rgba(0,0,0,0.2)" }}
-            whileTap={{ scale: 0.98 }}
+            whileHover={{ scale: 1.08, y: -5, boxShadow: "0 15px 40px rgba(0,0,0,0.25)" }}
+            whileTap={{ scale: 0.96 }}
+            transition={{ duration: 0.2, ease: "easeOut" }}
           >
             Donate Monthly
           </motion.button>
           <motion.button 
             className="bg-transparent border-2 border-white text-white px-5 sm:px-6 md:px-8 py-2 sm:py-2.5 md:py-3 rounded font-bold uppercase tracking-wide hover:bg-white hover:text-ngo-green transition-colors duration-300 text-[11px] sm:text-xs md:text-sm"
-            whileHover={{ scale: 1.05, y: -3, boxShadow: "0 10px 30px rgba(255,255,255,0.3)" }}
-            whileTap={{ scale: 0.98 }}
+            whileHover={{ scale: 1.08, y: -5, boxShadow: "0 15px 40px rgba(255,255,255,0.3)" }}
+            whileTap={{ scale: 0.96 }}
+            transition={{ duration: 0.2, ease: "easeOut" }}
           >
             Volunteer
           </motion.button>

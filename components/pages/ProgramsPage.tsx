@@ -14,15 +14,15 @@ export const ProgramsPage: React.FC = () => {
       <section className="relative pt-8 sm:pt-10 pb-12 sm:pb-16 md:pb-20 px-4 md:px-8 overflow-hidden">
         <div className="max-w-7xl mx-auto text-center">
           <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
+            initial={{ opacity: 0, scale: 0.85 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 1.2, ease: "easeOut" }}
+            transition={{ duration: 1.4, ease: [0.22, 1, 0.36, 1] }}
           >
              <motion.h1 
                className="font-serif text-[10vw] sm:text-[12vw] md:text-[15vw] leading-[0.85] sm:leading-[0.8] font-bold text-center tracking-tighter break-words"
-               initial={{ y: 50 }}
+               initial={{ y: 60 }}
                animate={{ y: 0 }}
-               transition={{ delay: 0.2, duration: 0.8 }}
+               transition={{ delay: 0.3, duration: 1, ease: [0.16, 1, 0.3, 1] }}
              >
                 {/* Masked Text Effect */}
                 <span className="block bg-[url('/img3.jpeg')] bg-cover bg-clip-text text-transparent bg-center">
@@ -48,32 +48,90 @@ export const ProgramsPage: React.FC = () => {
       {/* 2. Impact Stats & Intro (Reference: "IMPACT IN ACTION") */}
       <Section className="bg-white rounded-t-[2rem] sm:rounded-t-[3rem] mt-4 sm:mt-8 pb-16 sm:pb-24 md:pb-32">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 md:gap-16 mb-12 sm:mb-16 md:mb-20">
-           <div>
+           <motion.div
+             initial={{ opacity: 0, x: -30 }}
+             whileInView={{ opacity: 1, x: 0 }}
+             viewport={{ once: true, amount: 0.3 }}
+             transition={{ duration: 0.8 }}
+           >
               <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-ngo-navy font-bold mb-4 sm:mb-6">
                  IMPACT <span className="text-ngo-accent">IN ACTION</span>
               </h2>
               <p className="font-sans text-ngo-gray leading-relaxed mb-4 sm:mb-6 text-sm sm:text-base">
                  Crafting excellence as a team. GCBP supports grassroots leaders, educators, and advocates who fight for equity, dignity, and justice. We focus on scalable solutions that empower local communities to manage their own resources.
               </p>
-              <div className="flex flex-wrap gap-2 sm:gap-4">
-                 <span className="inline-block px-3 sm:px-4 py-1.5 sm:py-2 border border-ngo-navy rounded-full text-[10px] sm:text-xs font-bold uppercase tracking-widest text-ngo-navy">Equal Rights</span>
-                 <span className="inline-block px-3 sm:px-4 py-1.5 sm:py-2 border border-ngo-navy rounded-full text-[10px] sm:text-xs font-bold uppercase tracking-widest text-ngo-navy">Protection</span>
-                 <span className="inline-block px-3 sm:px-4 py-1.5 sm:py-2 border border-ngo-navy rounded-full text-[10px] sm:text-xs font-bold uppercase tracking-widest text-ngo-navy">Planet</span>
-              </div>
-           </div>
+              <motion.div 
+                className="flex flex-wrap gap-2 sm:gap-4"
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6 }}
+              >
+                 <motion.span 
+                   className="inline-block px-3 sm:px-4 py-1.5 sm:py-2 border border-ngo-navy rounded-full text-[10px] sm:text-xs font-bold uppercase tracking-widest text-ngo-navy"
+                   initial={{ scale: 0, rotate: -180 }}
+                   whileInView={{ scale: 1, rotate: 0 }}
+                   viewport={{ once: true, amount: 0.3 }}
+                   transition={{ delay: 0.2, duration: 0.6, type: "spring", stiffness: 200, damping: 12 }}
+                   whileHover={{ scale: 1.15, borderColor: "#4C9F38", transition: { duration: 0.2 } }}
+                 >
+                   Equal Rights
+                 </motion.span>
+                 <motion.span 
+                   className="inline-block px-3 sm:px-4 py-1.5 sm:py-2 border border-ngo-navy rounded-full text-[10px] sm:text-xs font-bold uppercase tracking-widest text-ngo-navy"
+                   initial={{ scale: 0, rotate: -180 }}
+                   whileInView={{ scale: 1, rotate: 0 }}
+                   viewport={{ once: true, amount: 0.3 }}
+                   transition={{ delay: 0.4, duration: 0.6, type: "spring", stiffness: 200, damping: 12 }}
+                   whileHover={{ scale: 1.15, borderColor: "#4C9F38", transition: { duration: 0.2 } }}
+                 >
+                   Protection
+                 </motion.span>
+                 <motion.span 
+                   className="inline-block px-3 sm:px-4 py-1.5 sm:py-2 border border-ngo-navy rounded-full text-[10px] sm:text-xs font-bold uppercase tracking-widest text-ngo-navy"
+                   initial={{ scale: 0, rotate: -180 }}
+                   whileInView={{ scale: 1, rotate: 0 }}
+                   viewport={{ once: true, amount: 0.3 }}
+                   transition={{ delay: 0.6, duration: 0.6, type: "spring", stiffness: 200, damping: 12 }}
+                   whileHover={{ scale: 1.15, borderColor: "#4C9F38", transition: { duration: 0.2 } }}
+                 >
+                   Planet
+                 </motion.span>
+              </motion.div>
+           </motion.div>
            
-           <div className="grid grid-cols-2 gap-3 sm:gap-4 md:gap-6">
-              <div className="bg-ngo-sand p-4 sm:p-6 md:p-8 rounded-2xl sm:rounded-3xl flex flex-col justify-between h-48 sm:h-56 md:h-64">
+           <motion.div 
+             className="grid grid-cols-2 gap-3 sm:gap-4 md:gap-6"
+             initial={{ opacity: 0 }}
+             whileInView={{ opacity: 1 }}
+             viewport={{ once: true, amount: 0.3 }}
+             transition={{ duration: 0.6 }}
+           >
+              <motion.div 
+                className="bg-ngo-sand p-4 sm:p-6 md:p-8 rounded-2xl sm:rounded-3xl flex flex-col justify-between h-48 sm:h-56 md:h-64"
+                initial={{ opacity: 0, y: 40, scale: 0.95 }}
+                whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                viewport={{ once: true, amount: 0.3 }}
+                transition={{ delay: 0.2, duration: 0.8, ease: [0.34, 1.56, 0.64, 1] }}
+                whileHover={{ y: -10, scale: 1.03, boxShadow: "0 25px 50px rgba(0,0,0,0.2)", transition: { duration: 0.25, ease: "easeOut" } }}
+              >
                  <span className="text-[9px] sm:text-xs font-bold uppercase tracking-widest text-ngo-gray">Programs Funded</span>
                  <div className="font-serif text-4xl sm:text-5xl md:text-6xl font-bold text-ngo-navy">70<span className="text-ngo-accent">+</span></div>
                  <p className="text-[9px] sm:text-xs text-ngo-gray mt-2">Local solutions that change lives, from climate to girls' education.</p>
-              </div>
-              <div className="bg-white border border-gray-100 shadow-xl p-4 sm:p-6 md:p-8 rounded-2xl sm:rounded-3xl flex flex-col justify-between h-48 sm:h-56 md:h-64">
+              </motion.div>
+              <motion.div 
+                className="bg-white border border-gray-100 shadow-xl p-4 sm:p-6 md:p-8 rounded-2xl sm:rounded-3xl flex flex-col justify-between h-48 sm:h-56 md:h-64"
+                initial={{ opacity: 0, y: 40, scale: 0.95 }}
+                whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                viewport={{ once: true, amount: 0.3 }}
+                transition={{ delay: 0.4, duration: 0.8, ease: [0.34, 1.56, 0.64, 1] }}
+                whileHover={{ y: -10, scale: 1.03, boxShadow: "0 25px 50px rgba(0,0,0,0.2)", transition: { duration: 0.25, ease: "easeOut" } }}
+              >
                  <span className="text-[9px] sm:text-xs font-bold uppercase tracking-widest text-ngo-gray">Children's Safety</span>
                  <div className="font-serif text-4xl sm:text-5xl md:text-6xl font-bold text-ngo-navy">3.2k<span className="text-ngo-accent">+</span></div>
                  <p className="text-[9px] sm:text-xs text-ngo-gray mt-2">Supported shelters and trained community leaders to protect children.</p>
-              </div>
-           </div>
+              </motion.div>
+           </motion.div>
         </div>
       </Section>
 

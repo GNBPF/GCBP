@@ -8,12 +8,20 @@ export const Mission: React.FC = () => {
     <Section id="mission" className="bg-white min-h-screen flex items-center py-0">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 md:gap-10 lg:gap-12 items-center w-full py-6 sm:py-8 md:py-10 lg:py-12">
         <motion.div
-           initial={{ opacity: 0, x: -30 }}
+           initial={{ opacity: 0, x: -50 }}
            whileInView={{ opacity: 1, x: 0 }}
-           viewport={{ once: true }}
-           transition={{ duration: 0.8 }}
+           viewport={{ once: true, amount: 0.2 }}
+           transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
         >
-           <h4 className="font-sans text-ngo-blue font-bold uppercase tracking-widest text-[10px] sm:text-xs mb-2 sm:mb-3">Who We Are</h4>
+           <motion.h4 
+             className="font-sans text-ngo-blue font-bold uppercase tracking-widest text-[10px] sm:text-xs mb-2 sm:mb-3"
+             initial={{ opacity: 0, y: -10 }}
+             whileInView={{ opacity: 1, y: 0 }}
+             viewport={{ once: true }}
+             transition={{ delay: 0.2, duration: 0.6, ease: "easeOut" }}
+           >
+             Who We Are
+           </motion.h4>
            <h2 className="font-serif text-xl sm:text-2xl md:text-3xl lg:text-4xl text-ngo-navy font-bold leading-tight mb-3 sm:mb-4">
              Bridging the gap between <span className="text-ngo-green italic">policy</span> and <span className="text-ngo-green italic">people.</span>
            </h2>
@@ -43,21 +51,21 @@ export const Mission: React.FC = () => {
                src="/img1.jpeg" 
                alt="Community Meeting" 
                className="rounded object-cover h-32 sm:h-40 md:h-48 lg:h-56 w-full" 
-               initial={{ opacity: 0, scale: 0.8 }}
+               initial={{ opacity: 0, scale: 0.85 }}
                whileInView={{ opacity: 1, scale: 1 }}
-               viewport={{ once: true }}
-               transition={{ delay: 0.2, duration: 0.6 }}
-               whileHover={{ scale: 1.05 }}
+               viewport={{ once: true, amount: 0.3 }}
+               transition={{ delay: 0.3, duration: 0.8, ease: [0.34, 1.56, 0.64, 1] }}
+               whileHover={{ scale: 1.08, transition: { duration: 0.3, ease: "easeOut" } }}
              />
              <motion.img 
                src="/img2.jpeg" 
                alt="Reforestation" 
                className="rounded object-cover h-32 sm:h-40 md:h-48 lg:h-56 w-full mt-3 sm:mt-4 md:mt-6 lg:mt-8" 
-               initial={{ opacity: 0, scale: 0.8 }}
+               initial={{ opacity: 0, scale: 0.85 }}
                whileInView={{ opacity: 1, scale: 1 }}
-               viewport={{ once: true }}
-               transition={{ delay: 0.4, duration: 0.6 }}
-               whileHover={{ scale: 1.05 }}
+               viewport={{ once: true, amount: 0.3 }}
+               transition={{ delay: 0.5, duration: 0.8, ease: [0.34, 1.56, 0.64, 1] }}
+               whileHover={{ scale: 1.08, transition: { duration: 0.3, ease: "easeOut" } }}
              />
           </div>
           
@@ -66,9 +74,9 @@ export const Mission: React.FC = () => {
             className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white p-2 sm:p-3 md:p-4 rounded-full shadow-lg text-center border border-gray-100"
             initial={{ opacity: 0, scale: 0, rotate: -180 }}
             whileInView={{ opacity: 1, scale: 1, rotate: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.6, duration: 0.8, type: "spring" }}
-            whileHover={{ scale: 1.1, rotate: 5 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ delay: 0.7, duration: 1, type: "spring", stiffness: 200, damping: 15 }}
+            whileHover={{ scale: 1.15, rotate: 8, transition: { duration: 0.3, ease: "easeOut" } }}
           >
              <span className="block font-serif text-lg sm:text-xl md:text-2xl font-bold text-ngo-navy">17</span>
              <span className="block text-[6px] sm:text-[7px] md:text-[8px] uppercase font-bold text-ngo-gray tracking-widest">Goals</span>
@@ -91,11 +99,11 @@ export const Mission: React.FC = () => {
               key={sdg.id} 
               className="flex-1 relative group overflow-hidden"
               style={{ backgroundColor: sdg.color }}
-              initial={{ scaleY: 0 }}
-              whileInView={{ scaleY: 1 }}
-              viewport={{ once: true }}
-              transition={{ delay: index * 0.05, duration: 0.4 }}
-              whileHover={{ scaleY: 1.2, zIndex: 10 }}
+              initial={{ scaleY: 0, opacity: 0 }}
+              whileInView={{ scaleY: 1, opacity: 1 }}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{ delay: index * 0.04, duration: 0.5, ease: [0.34, 1.56, 0.64, 1] }}
+              whileHover={{ scaleY: 1.3, zIndex: 10, transition: { duration: 0.2, ease: "easeOut" } }}
             >
               <img 
                 src={sdg.imageUrl} 

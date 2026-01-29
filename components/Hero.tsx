@@ -11,11 +11,11 @@ export const Hero: React.FC = () => {
     offset: ["start start", "end start"]
   });
   
-  const y = useTransform(scrollYProgress, [0, 1], [0, 200]);
-  const opacity = useTransform(scrollYProgress, [0, 0.5, 1], [1, 0.8, 0]);
-  const scale = useTransform(scrollYProgress, [0, 1], [1, 1.1]);
+  const y = useTransform(scrollYProgress, [0, 1], [0, 300]);
+  const opacity = useTransform(scrollYProgress, [0, 0.4, 0.8], [1, 0.9, 0]);
+  const scale = useTransform(scrollYProgress, [0, 1], [1, 1.15]);
   
-  const smoothY = useSpring(y, { stiffness: 100, damping: 30 });
+  const smoothY = useSpring(y, { stiffness: 50, damping: 20, mass: 0.5 });
 
   useEffect(() => {
     if (videoRef.current) {
@@ -55,30 +55,30 @@ export const Hero: React.FC = () => {
       >
         <div className="max-w-3xl">
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, ease: "easeOut" }}
+            transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
           >
             <motion.span 
               className="inline-block py-1 px-2 sm:px-3 border border-white/30 rounded text-white/90 text-[9px] sm:text-[10px] md:text-xs font-sans font-bold uppercase tracking-widest mb-3 sm:mb-4 backdrop-blur-sm"
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.2, duration: 0.6 }}
+              initial={{ opacity: 0, scale: 0.8, y: -10 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              transition={{ delay: 0.3, duration: 0.7, ease: [0.34, 1.56, 0.64, 1] }}
             >
               Non-Profit Organization
             </motion.span>
             <motion.h1 
               className="font-serif text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl text-white font-bold leading-tight mb-3 sm:mb-4 md:mb-5 drop-shadow-md break-words"
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 40 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.4, duration: 0.8, ease: "easeOut" }}
+              transition={{ delay: 0.5, duration: 1, ease: [0.16, 1, 0.3, 1] }}
             >
               Collective action for <br className="hidden sm:block"/>
               <motion.span 
                 className="italic text-ngo-accent"
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ delay: 0.7, duration: 0.6 }}
+                initial={{ opacity: 0, scale: 0.95, y: 10 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                transition={{ delay: 0.9, duration: 0.8, ease: [0.34, 1.56, 0.64, 1] }}
               >
                 a resilient earth.
               </motion.span>
@@ -89,36 +89,36 @@ export const Hero: React.FC = () => {
             className="font-sans text-xs sm:text-sm md:text-base lg:text-lg text-white/90 leading-relaxed mb-5 sm:mb-6 md:mb-8 max-w-xl drop-shadow-sm break-words"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.9, duration: 0.8 }}
+            transition={{ delay: 1.1, duration: 0.9, ease: [0.25, 0.46, 0.45, 0.94] }}
           >
             We unite communities, policymakers, and scientists to achieve the 17 Sustainable Development Goals. Real impact, measured in lives changed and ecosystems restored.
           </motion.p>
 
           <motion.div 
             className="flex flex-col sm:flex-row gap-2 sm:gap-3"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 1.1, duration: 0.5 }}
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 1.4, duration: 0.6 }}
           >
             <motion.a 
               href="#mission" 
               className="px-4 sm:px-5 md:px-6 py-2.5 sm:py-3 md:py-3.5 bg-ngo-accent text-ngo-navy font-sans font-bold text-xs sm:text-sm md:text-base tracking-wide rounded hover:bg-white transition-colors duration-300 text-center min-h-[44px] flex items-center justify-center"
-              initial={{ opacity: 0, x: -20 }}
+              initial={{ opacity: 0, x: -15 }}
               animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 1.2, duration: 0.5 }}
-              whileHover={{ scale: 1.05, y: -2 }}
-              whileTap={{ scale: 0.98 }}
+              transition={{ delay: 1.5, duration: 0.6, ease: [0.34, 1.56, 0.64, 1] }}
+              whileHover={{ scale: 1.05, y: -3, boxShadow: "0 12px 24px rgba(0,0,0,0.2)" }}
+              whileTap={{ scale: 0.97 }}
             >
               Our Projects
             </motion.a>
             <motion.a 
               href="#join" 
               className="px-4 sm:px-5 md:px-6 py-2.5 sm:py-3 md:py-3.5 bg-transparent border border-white text-white font-sans font-bold text-xs sm:text-sm md:text-base tracking-wide rounded hover:bg-white hover:text-ngo-navy transition-colors duration-300 text-center min-h-[44px] flex items-center justify-center"
-              initial={{ opacity: 0, x: 20 }}
+              initial={{ opacity: 0, x: 15 }}
               animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 1.4, duration: 0.5 }}
-              whileHover={{ scale: 1.05, y: -2 }}
-              whileTap={{ scale: 0.98 }}
+              transition={{ delay: 1.6, duration: 0.6, ease: [0.34, 1.56, 0.64, 1] }}
+              whileHover={{ scale: 1.05, y: -3, boxShadow: "0 12px 24px rgba(255,255,255,0.2)" }}
+              whileTap={{ scale: 0.97 }}
             >
               Join the Collective
             </motion.a>
@@ -139,27 +139,27 @@ export const Hero: React.FC = () => {
             <div className="flex justify-between items-center">
               <motion.div 
                 className="text-center flex-1"
-                initial={{ opacity: 0, y: 10 }}
+                initial={{ opacity: 0, y: 15 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 1.7, duration: 0.5 }}
+                transition={{ delay: 1.9, duration: 0.7, ease: [0.34, 1.56, 0.64, 1] }}
               >
                 <span className="block font-serif text-lg font-bold">35+</span>
                 <span className="text-[9px] uppercase opacity-70">Active Years</span>
               </motion.div>
               <motion.div 
                 className="text-center flex-1"
-                initial={{ opacity: 0, y: 10 }}
+                initial={{ opacity: 0, y: 15 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 1.8, duration: 0.5 }}
+                transition={{ delay: 2.05, duration: 0.7, ease: [0.34, 1.56, 0.64, 1] }}
               >
                 <span className="block font-serif text-lg font-bold">42</span>
                 <span className="text-[9px] uppercase opacity-70">Active Countries</span>
               </motion.div>
               <motion.div 
                 className="text-center flex-1"
-                initial={{ opacity: 0, y: 10 }}
+                initial={{ opacity: 0, y: 15 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 1.9, duration: 0.5 }}
+                transition={{ delay: 2.2, duration: 0.7, ease: [0.34, 1.56, 0.64, 1] }}
               >
                 <span className="block font-serif text-lg font-bold">12</span>
                 <span className="text-[9px] uppercase opacity-70">Billion USD Impact</span>
@@ -170,25 +170,25 @@ export const Hero: React.FC = () => {
           <div className="hidden md:flex justify-between text-white">
             <div className="flex gap-8 lg:gap-12">
               <motion.div
-                initial={{ opacity: 0, x: -20 }}
+                initial={{ opacity: 0, x: -25 }}
                 animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 1.7, duration: 0.5 }}
+                transition={{ delay: 1.9, duration: 0.7, ease: [0.34, 1.56, 0.64, 1] }}
               >
                 <span className="block font-serif text-xl font-bold">35+</span>
                 <span className="text-[10px] uppercase opacity-70">Active Years</span>
               </motion.div>
               <motion.div
-                initial={{ opacity: 0, x: -20 }}
+                initial={{ opacity: 0, x: -25 }}
                 animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 1.8, duration: 0.5 }}
+                transition={{ delay: 2.05, duration: 0.7, ease: [0.34, 1.56, 0.64, 1] }}
               >
                 <span className="block font-serif text-xl font-bold">42</span>
                 <span className="text-[10px] uppercase opacity-70">Active Countries</span>
               </motion.div>
               <motion.div
-                initial={{ opacity: 0, x: -20 }}
+                initial={{ opacity: 0, x: -25 }}
                 animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 1.9, duration: 0.5 }}
+                transition={{ delay: 2.2, duration: 0.7, ease: [0.34, 1.56, 0.64, 1] }}
               >
                 <span className="block font-serif text-xl font-bold">12</span>
                 <span className="text-[10px] uppercase opacity-70">Billion USD Impact</span>

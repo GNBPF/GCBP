@@ -16,22 +16,22 @@ export const Stories: React.FC = () => {
           <motion.article 
             key={story.id}
             className="group cursor-pointer flex flex-col h-full"
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, y: 60, scale: 0.9 }}
+            whileInView={{ opacity: 1, y: 0, scale: 1 }}
             viewport={{ once: true, amount: 0.2 }}
-            transition={{ delay: index * 0.15, duration: 0.6, type: "spring" }}
-            whileHover={{ y: -10, transition: { duration: 0.3 } }}
+            transition={{ delay: index * 0.12, duration: 0.8, ease: [0.34, 1.56, 0.64, 1] }}
+            whileHover={{ y: -12, transition: { duration: 0.25, ease: "easeOut" } }}
           >
             <motion.div 
               className="relative overflow-hidden rounded mb-3 sm:mb-4 shadow-sm aspect-[3/2]"
-              whileHover={{ scale: 1.02 }}
+              whileHover={{ scale: 1.03, boxShadow: "0 10px 30px rgba(0,0,0,0.15)", transition: { duration: 0.3 } }}
             >
               <motion.img 
                 src={story.imageUrl} 
                 alt={story.title}
                 className="object-cover w-full h-full"
-                whileHover={{ scale: 1.1 }}
-                transition={{ duration: 0.6 }}
+                whileHover={{ scale: 1.15 }}
+                transition={{ duration: 0.5, ease: "easeOut" }}
               />
               <div className="absolute top-2 sm:top-3 left-2 sm:left-3 bg-white px-1.5 sm:px-2 py-0.5 sm:py-1 text-[8px] sm:text-[9px] md:text-[10px] font-bold uppercase tracking-wide text-ngo-navy rounded shadow-sm">
                 {story.category}

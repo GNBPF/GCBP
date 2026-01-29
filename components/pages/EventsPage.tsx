@@ -5,9 +5,9 @@ import { motion, useScroll, useSpring } from 'framer-motion';
 export const EventsPage: React.FC = () => {
   const { scrollYProgress } = useScroll();
   const scaleX = useSpring(scrollYProgress, {
-    stiffness: 100,
-    damping: 30,
-    restDelta: 0.001
+    stiffness: 80,
+    damping: 25,
+    restDelta: 0.0005
   });
   
   return (
@@ -41,9 +41,9 @@ export const EventsPage: React.FC = () => {
         <header className="py-10 sm:py-12 md:py-16 lg:py-20">
            <motion.h1 
              className="font-serif text-4xl sm:text-5xl md:text-6xl lg:text-8xl xl:text-9xl leading-[0.85] tracking-tight uppercase"
-             initial={{ opacity: 0, y: 30 }}
+             initial={{ opacity: 0, y: 50 }}
              animate={{ opacity: 1, y: 0 }}
-             transition={{ duration: 0.8 }}
+             transition={{ duration: 1.1, ease: [0.22, 1, 0.36, 1] }}
            >
              All <span className="italic font-light">Events</span>
            </motion.h1>
@@ -82,11 +82,11 @@ export const EventsPage: React.FC = () => {
                  <motion.div 
                     key={event.id}
                     className="group border-b border-gray-300 py-6 sm:py-8 md:py-10 grid grid-cols-12 gap-3 sm:gap-4 items-start hover:bg-white/50 transition-colors duration-300 px-2 -mx-2"
-                    initial={{ opacity: 0, x: -30 }}
+                    initial={{ opacity: 0, x: -40 }}
                     whileInView={{ opacity: 1, x: 0 }}
                     viewport={{ once: true, amount: 0.2 }}
-                    transition={{ delay: index * 0.08, duration: 0.5 }}
-                    whileHover={{ x: 10, backgroundColor: "rgba(255,255,255,0.8)", transition: { duration: 0.2 } }}
+                    transition={{ delay: index * 0.06, duration: 0.7, ease: [0.34, 1.56, 0.64, 1] }}
+                    whileHover={{ x: 12, backgroundColor: "rgba(255,255,255,0.9)", transition: { duration: 0.25, ease: "easeOut" } }}
                  >
                     {/* Date Column */}
                     <div className="col-span-12 sm:col-span-2 md:col-span-1 text-left sm:text-center md:text-left mb-2 sm:mb-0">

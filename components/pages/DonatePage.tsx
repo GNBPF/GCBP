@@ -24,9 +24,9 @@ export const DonatePage: React.FC = () => {
       {/* Hero Section */}
       <section className="text-center py-10 sm:py-12 md:py-16 px-4">
         <motion.div
-           initial={{ opacity: 0, y: 20 }}
+           initial={{ opacity: 0, y: 40 }}
            animate={{ opacity: 1, y: 0 }}
-           transition={{ duration: 0.8 }}
+           transition={{ duration: 1.1, ease: [0.22, 1, 0.36, 1] }}
         >
           <span className="inline-block py-1 px-3 sm:px-4 border border-ngo-navy/20 rounded-full text-ngo-navy text-[10px] sm:text-xs font-bold uppercase tracking-widest mb-4 sm:mb-6">
             Invest in Humanity
@@ -70,9 +70,9 @@ export const DonatePage: React.FC = () => {
                         <motion.button
                            key={tier.amount}
                            onClick={() => setAmount(tier.amount)}
-                           whileHover={{ scale: 1.05 }}
-                           whileTap={{ scale: 0.95 }}
-                           className={`py-3 sm:py-4 rounded-lg sm:rounded-xl border-2 font-bold text-sm sm:text-base md:text-lg transition-all duration-200 ${amount === tier.amount ? 'border-ngo-accent bg-ngo-accent text-ngo-navy' : 'border-white/20 text-white hover:border-white/50'}`}
+                           whileHover={{ scale: 1.08, y: -3, transition: { duration: 0.2, ease: "easeOut" } }}
+                           whileTap={{ scale: 0.96 }}
+                           className={`py-3 sm:py-4 rounded-lg sm:rounded-xl border-2 font-bold text-sm sm:text-base md:text-lg transition-all duration-200 ${amount === tier.amount ? 'border-ngo-accent bg-ngo-accent text-ngo-navy shadow-lg' : 'border-white/20 text-white hover:border-white/50'}`}
                         >
                            ₹{tier.amount}
                         </motion.button>

@@ -50,11 +50,11 @@ export const Impact: React.FC = () => {
           <motion.div 
             key={metric.id}
             className="text-center md:text-left"
-            initial={{ opacity: 0, y: 30, scale: 0.8 }}
+            initial={{ opacity: 0, y: 40, scale: 0.85 }}
             whileInView={{ opacity: 1, y: 0, scale: 1 }}
             viewport={{ once: true, amount: 0.3 }}
-            transition={{ delay: index * 0.15, duration: 0.6, type: "spring" }}
-            whileHover={{ scale: 1.05, y: -5 }}
+            transition={{ delay: index * 0.12, duration: 0.8, ease: [0.34, 1.56, 0.64, 1] }}
+            whileHover={{ scale: 1.08, y: -8, transition: { duration: 0.25, ease: "easeOut" } }}
           >
             <div className="font-serif text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-1 sm:mb-2">
               <Counter value={metric.value} suffix={metric.suffix} delay={0.2 + index * 0.15} />
